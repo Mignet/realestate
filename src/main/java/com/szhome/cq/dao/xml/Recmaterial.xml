@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>Register</comment>
+	
+	<!--  通过登记编号 reg_code 查询接件材料配置信息 -->
+	<sql sqlId="getRecmaterialMapListByRegId" author="Joyon" function=""><![CDATA[
+	         select * from BUS_RECEIVAL where bus_id=(select bus_id from bus_main where reg_code=:reg_code) 
+				 ]]>
+	</sql>
+	<!--  通过登记编号 reg_code 查询接件材料配置信息 -->
+	<sql sqlId="getScannerListMapByProcId" author="Joyon" function=""><![CDATA[
+	         select * from BUS_SCANNER where bus_id=(select bus_id from bus_main where proc_id=:proc_id) 
+				 ]]>
+	</sql>
+	
+	<!--  通过登记编号 reg_code 查询接件材料ID列表 -->
+	<sql sqlId="getRecIdMapListByRegId" author="Sam" function=""><![CDATA[
+	         select receival_id from BUS_RECEIVAL where bus_id=(select bus_id from bus_main where reg_code=:reg_code)
+				 ]]>
+	</sql>
+
+	
+	
+	
+	
+</sqlList>

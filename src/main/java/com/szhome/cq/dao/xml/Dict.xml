@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>Applicant</comment>
+	
+	<!-- 获取字典项通过 code -->
+	<sql sqlId="getDictByCode" author="Joyon" function=""><![CDATA[
+	           select name, value from plat_dict_item pdi left join plat_dict_class pdc on (pdi.class_id = pdc.class_id) where pdc.class_code =:class_code and valid_flag = 1 order by turn
+	            ]]>
+	</sql>
+	
+	<!-- 模糊获取字典项类型 -->
+	<sql sqlId="searchDictClass" author="Joyon" function=""><![CDATA[
+	         
+	           select pdc.* from plat_dict_class pdc where (pdc.class_name like :searchStr or pdc.class_code like :searchStr)
+	            ]]>
+	</sql>
+	
+	<!-- 获取所有字典项类型 -->
+	<sql sqlId="searchAllDictClass" author="Joyon" function=""><![CDATA[
+	         
+	           select pdc.* from plat_dict_class pdc where (pdc.class_name like '%%' or pdc.class_code like '%%')
+	            ]]>
+	</sql>
+	
+	<!-- 获取某个字典类型下的所有字典项 -->
+	<sql sqlId="getItemsByClassId" author="Joyon" function=""><![CDATA[
+	         
+	           select pdi.*, pdc.class_name, pdc.class_code from plat_dict_item pdi left join plat_dict_class pdc on (pdi.class_id = pdc.class_id) where pdi.class_id = :class_id order by turn
+	            ]]>
+	</sql>
+	
+	
+	<!-- 模糊获取字典项类型 -->
+	<sql sqlId="searchDictType" author="Joyon" function=""><![CDATA[
+	         
+	           select pdc.* from CFIG_DIC_TYPE pdc where (pdc.DIC_TYPE_VALUE like :searchStr or pdc.DIC_TYPE_CODE like :searchStr) order by DIC_TYPE_CODE
+	            ]]>
+	</sql>
+	
+	<!-- 模糊获取字典项类型 -->
+	<sql sqlId="getItemsByTypeId" author="Joyon" function=""><![CDATA[
+	         	select pdi.*, pdc.DIC_TYPE_CODE, pdc.DIC_TYPE_VALUE from CFIG_DIC_ITEM pdi left join CFIG_DIC_TYPE pdc on (pdi.DIC_TYPE_ID = pdc.DIC_TYPE_ID) where pdi.DIC_TYPE_ID=:type_id order by pdi.DIC_ITEM_CODE
+	            ]]>
+	</sql>
+	
+	
+	<!-- 获取字典项通过 code -->
+	<sql sqlId="getNewDictByCode" author="Joyon" function=""><![CDATA[
+	           select pdi.DIC_ITEM_CODE as value, pdi.DIC_ITEM_VALUE as name from CFIG_DIC_ITEM pdi left join CFIG_DIC_TYPE pdc on (pdi.DIC_TYPE_ID = pdc.DIC_TYPE_ID) where pdc.DIC_TYPE_CODE =:dic_type_code and pdi.B_DELETEFLAG = 1 order by DIC_ITEM_CODE
+	            ]]>
+	</sql>
+	
+	
+</sqlList>

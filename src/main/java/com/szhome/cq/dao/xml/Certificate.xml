@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>所有公共sql语句  放在此处   ,  sqlId 不能重复</comment>
+	<!-- 根据流程实例表id   查询领证人信息 -->
+	<sql sqlId="getCertificateByid" author="xuzz" function="根据流程实例表id   查询领证人信息"><![CDATA[
+	           	select * from BUS_EST_CERTIFICATE where bus_id=:busid
+	            ]]>
+	</sql>
+	<!-- 根据流程实例表id   查询领证人信息 -->
+	<sql sqlId="getCertificate" author="xuzz" function="根据流程实例表id   查询领证人信息"><![CDATA[
+	           	select cer.* from BUS_EST_CERTIFICATE cer
+	            ]]>
+	</sql>
+	
+	<!-- 根据流程实例表id   查询领证人信息 -->
+	<sql sqlId="getCertificateMapByProcId" author="xuzz" function="根据流程实例表id   查询领证人信息"><![CDATA[
+	           	select * from BUS_EST_CERTIFICATE where bus_id=(select bus_id from bus_main where proc_id=:proc_id)
+	            ]]>
+	</sql>
+	<!-- 获取缮证 自然信息 不查楼宇信息表 -->
+	<sql sqlId="getCertificateNatural" author="Joyon" function="根据流程实例表id   查询领证人信息"><![CDATA[
+	           	select *
+				  from bus_regunitrel r
+				  left join bus_est_certificate c on r.bus_id = c.bus_id and r.reg_unit_code=c.reg_unit_code
+				  left join est_house h on r.reg_unit_code = h.adv_house_code
+				  left join est_parcel p on r.reg_unit_code = p.parcel_code
+	            ]]>
+	</sql>
+	</sqlList>

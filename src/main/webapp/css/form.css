@@ -1,0 +1,64 @@
+@charset "GBK";
+/* CSS Document */
+.formtable td, .formtable input, .formtable textarea, .formtable select{
+	margin-left:0;
+	margin-right:0;
+	padding-left:0;
+	padding-right:0;
+	border-collapse:collapse;
+}
+.formtable input, .formtable select, .formtable textarea, .formtable .combo{
+	margin-top:5px;
+	margin-bottom:5px;
+}
+.formtable textarea{
+	overflow:hidden;
+}
+.formtable  .title{
+	text-align:right;
+	width:150px;
+	font-size:13px;				
+}
+.formtable .text, .formtable .textarea{
+	text-align:left;				
+	font-size:13px;
+}
+.formtable .text{
+	width:250px;
+}
+.formtable textarea{
+	width:603px;
+}
+.formtable input, .formtable select{
+	border:solid #95B8E7;				
+	border-width:0 0 1px 0;
+	height:20px;
+	width:200px;
+}
+.formtable textarea{
+	border:solid 1px #95B8E7;
+}
+.formtable .combo{
+	border-width: 0 0 1px 0;
+}
+.formtable .title{
+	padding-right:10px;
+}
+
+.formtable{
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom:25px;
+	margin-top:18px;	
+}
+
+.searchrow .combo{
+	width:80px;
+	height:20px;
+}
+
+.searchrow {
+	margin:5px 0 5px 0;
+	text-align:left;
+	font-size:12px;
+}

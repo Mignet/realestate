@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="1000" pageHeight="600" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="4e51917c-e259-4730-9fef-0cd37a08363b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="category" class="java.lang.String"/>
+	<field name="class" class="java.lang.Class"/>
+	<field name="serieas" class="java.lang.String"/>
+	<field name="value" class="java.lang.Float"/>
+	<title>
+		<band height="1"/>
+	</title>
+	<summary>
+		<band height="484">
+			<bar3DChart>
+				<chart>
+					<reportElement x="0" y="0" width="960" height="484" uuid="59389530-6591-4745-822c-73f275b8c6aa"/>
+					<chartTitle color="#000000">
+						<font fontName="微软雅黑" size="24"/>
+						<titleExpression><![CDATA["督办统计"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{serieas}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{category}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{value}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot labelRotation="90.0"/>
+					<itemLabel/>
+					<categoryAxisFormat labelRotation="90.0">
+						<axisFormat verticalTickLabels="true">
+							<labelFont>
+								<font fontName="微软雅黑" size="12" isBold="true"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="微软雅黑" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>PreAutit</comment>
+	<!-- 查询宗地表，房屋表，和楼宇表三张表信息 -->
+	<sql sqlId="getAuditInfo" author="xuzz" function=""><![CDATA[
+	            select l.BUILDING_NAME buildname,l.BUILD_NO buildnum,f.ADV_HOUSE_CODE housecode,l.BUILDING_CODE buildcode,f.HOUSE_LOCATION houselocation,l.PARCEL_CODE parcelcode,f.FLATLET_USAGE useyear,f.PRO_NAME proname,f.FT_BUILD_LD_AREA ftbuildarea,l.BUILD_LD_AREA buildarea from EST_PARCEL z,EST_BUILDING l,EST_HOUSE f where z.PARCEL_CODE = L.PARCEL_CODE and l.BUILDING_CODE = f.BUILDING_CODE
+	            ]]>
+	</sql>
+	<!--检查该房屋是否可以办理房屋初始登记业务  -->
+	<sql sqlId="checkData" author="xuzz" function=""><![CDATA[
+	            select f.OWNERSHIP_ID from BK_BASEINFO j, BK_OWNERSHIP f where  j.BOOK_CODE=f.BOOK_CODE
+	            ]]>
+	</sql>
+	<!--根据房屋编码查询房屋相关信息  -->
+	<sql sqlId="getHouse" author="xuzz" function=""><![CDATA[
+	            select *  from EST_PARCEL ,EST_BUILDING ,EST_HOUSE where z.PARCEL_CODE = L.PARCEL_CODE and l.BUILDING_CODE = f.BUILDING_CODE
+	            ]]>
+	</sql>
+		<!--根据业务类型查询规则表里信息  -->
+	<sql sqlId="selectRule" author="xuzz" function=""><![CDATA[
+	            select *  from CFIG_ACCEPT_RULE  
+	            ]]>
+	</sql>
+	<!--查询登记簿基本信息  -->
+	<sql sqlId="selectBaseInfo" author="xuzz" function=""><![CDATA[
+	            select *  from BK_BASEINFO  
+	            ]]>
+	</sql>
+	
+</sqlList>

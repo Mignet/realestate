@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>Applicant</comment>
+	
+	<!-- 获取流程实例ID获取变更记录 -->
+	<sql sqlId="getChangeReccordByProcId" author="Joyon" function=""><![CDATA[
+	          select * from BUS_CHANGE_RECORD where bus_id=(select bus_id from bus_main where proc_id=:proc_id)
+	            ]]>
+	</sql>
+	
+	
+	
+	
+	
+</sqlList>

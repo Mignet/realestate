@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>Menu</comment>
+
+	<sql sqlId="allMenus" author="Mignet" function=""><![CDATA[
+	            select menu_id,parent_id,url,menu_name,icon from T_MENU order by menu_order
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getMenuByParentId" author="Mignet" function=""><![CDATA[
+	           select menu_id id,parent_id,url,menu_name text from T_MENU where parent_id=:parent_id
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getMenuByTreeId" author="Mignet" function=""><![CDATA[
+	           select menu_id id,parent_id,url,menu_name text from T_MENU where menu_id=:menu_id
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getBusTypeByTreeId" author="Mignet" function=""><![CDATA[
+	           select bus_type_id id,parent_id,bus_name text from cfig_bus_type where parent_id=:parent_id
+	            ]]>
+	</sql>
+	<sql sqlId="deleteAllRoleMenus" author="Mignet" function=""><![CDATA[
+	           delete from t_role_r_menu t where t.roleid=:roleid
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getMenusByUserId" author="Mignet" function=""><![CDATA[
+	            select menu_id,parent_id,url,menu_name,icon
+			     from t_menu t
+			    where exists
+			    (select 1
+			             from t_role_r_menu m
+			            where m.roleid in
+			                  (select roleid from t_role_r_user where userid = :userid)
+			              and m.menuid = t.menu_id)
+			              order by menu_order
+	            ]]>
+	</sql>
+	<sql sqlId="getMenusByRoleId" author="Mignet" function=""><![CDATA[
+	             select menu_id,
+				        parent_id,
+				        url,
+				        menu_name,
+				        icon,
+				        (case
+				          when t.menu_id in
+				               (select m.menuid
+				                  from t_role_r_menu m
+				                 where m.roleid = :roleid) then
+				           'true'
+				          else
+				           'false'
+				        end) checkflag
+				   from t_menu t order by menu_order
+	            ]]>
+	</sql>
+	
+</sqlList>

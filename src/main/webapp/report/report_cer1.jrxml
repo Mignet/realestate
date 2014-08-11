@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report3" pageWidth="386" pageHeight="20" whenNoDataType="AllSectionsNoDetail" columnWidth="386" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="05d4f768-a0be-4bf0-9bae-f12355e5035f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REG_CODE" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Joyon\\Desktop\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from bk_holder where right_rel_id=
+(
+ select right_rel_id from BK_RIGHT_REL where reg_code=$P{REG_CODE}
+)]]>
+	</queryString>
+	<field name="HOLDER_ID" class="java.lang.String"/>
+	<field name="RIGHT_REL_ID" class="java.lang.String"/>
+	<field name="B_DELETEFLAG" class="java.lang.String"/>
+	<field name="HOL_TYPE" class="java.lang.String"/>
+	<field name="HOL_NAME" class="java.lang.String"/>
+	<field name="HOL_CER_TYPE" class="java.lang.String"/>
+	<field name="HOL_CER_NO" class="java.lang.String"/>
+	<field name="HOL_ADDRESS" class="java.lang.String"/>
+	<field name="DEPART_TYPE" class="java.lang.String"/>
+	<field name="LEGAL_NAME" class="java.lang.String"/>
+	<field name="LEGAL_CER" class="java.lang.String"/>
+	<field name="AGENT_NAME" class="java.lang.String"/>
+	<field name="AGENT_CER" class="java.lang.String"/>
+	<field name="AGENT_TEL" class="java.lang.String"/>
+	<field name="PORTION" class="java.lang.String"/>
+	<field name="HIS_HOLDER_ID" class="java.lang.String"/>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="384" height="20" uuid="31e556e5-b7b3-4a88-bf2d-abca5b5c9892"/>
+				<box>
+					<pen lineWidth="3.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HOL_NAME}+"("+$F{HOL_CER_NO}+")["+$F{PORTION}+"]"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

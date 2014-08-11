@@ -1,0 +1,13 @@
+/**
+公用 Css  主要用 定义公用css样式  
+*/
+
+/*设置body样式*/ 
+.body_set{	
+	width:800px;
+	height:500px;
+    overflow:auto;
+}
+.page_con{
+}
+

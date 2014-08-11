@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>Applicant</comment>
+  
+	<sql sqlId="queryInfoById" author="panda" function="查询权利人信息集合"><![CDATA[
+	           select *  from BUS_APPLICANT
+	            ]]>
+	</sql>
+	
+	
+	<sql sqlId="queryAppByIdcaid" author="panda" function="根据申请人身份证号查询信息"><![CDATA[
+	           select * from BUS_APPLICANT where APP_CER_NO = :id
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getDisByid" author="panda" function="根据业务id查询房地产证附记 "><![CDATA[
+	           select * from BUS_EST_CERTIFICATE where BUS_ID = :id
+	            ]]>
+	</sql>
+	<sql sqlId="getDisItemByid" author="xuzz" function="根据注销异议登记编号查询异议事项 "><![CDATA[
+	           select distinct(reg_code) ,diss_item from  BK_DEMURRER where  reg_code in (select last_reg_code from BUS_REGUNITREL where reg_code =:reg_code) 
+	            ]]>
+	</sql>
+	<sql sqlId="getRemarkByRegCode" author="xuzz" function="根据注销异议登记编号查询异议事项 "><![CDATA[
+	           select * from  BUS_REMARK_INFO where  reg_code in (select last_reg_code from BUS_REGUNITREL where reg_code =:reg_code) 
+	            ]]>
+	</sql>
+	
+		<sql sqlId="getDistrainByid" author="xuzz" function="根据解封登记编号查询查封信息 "><![CDATA[
+	          SELECT DISTINCT (reg_code),
+                REG_DATE,
+                CER_NO,
+                RECORDER,
+                PROCDEF_ID,
+                LIM_HOLDER,
+                DIS_OFF,
+                LAW_DOC,
+                DIS_NO,
+                to_char(START_DATE,'YYYY-MM-DD HH24:MI:SS') as
+                START_DATE,
+                to_char(END_DATE,'YYYY-MM-DD HH24:MI:SS') as
+                END_DATE,
+                to_char(DIS_DATE,'YYYY-MM-DD HH24:MI:SS') as
+                DIS_DATE,
+                DIS_LIMIT,
+                SERVICE_NAME,
+                to_char(SERVICE_DATE,'YYYY-MM-DD HH24:MI:SS') as
+                SERVICE_DATE,
+                WORKID,DIS_PER_TEL,PRE_CON_NO,DIS_RANGE
+                FROM BK_DISTRAIN WHERE reg_code IN (SELECT last_reg_code
+                      FROM BUS_REGUNITREL
+                     WHERE reg_code =:reg_code) 
+	            ]]>
+	</sql>
+	<sql sqlId="getReAttachByRegCode" author="xuzz" function="根据登记编号查询要解除的轮候查封 "><![CDATA[
+	         SELECT 
+                     reg_code,
+                REG_DATE,
+                CER_NO,
+                RECORDER,
+                PROCDEF_ID,
+                LIM_HOLDER,
+                DIS_OFF,
+                LAW_DOC,
+                DIS_NO,
+                to_char(START_DATE,'YYYY-MM-DD HH24:MI:SS') as
+                START_DATE,
+                to_char(END_DATE,'YYYY-MM-DD HH24:MI:SS') as
+                END_DATE,
+                to_char(DIS_DATE,'YYYY-MM-DD HH24:MI:SS') as
+                DIS_DATE,
+                DIS_LIMIT,
+                SERVICE_NAME,
+                to_char(SERVICE_DATE,'YYYY-MM-DD HH24:MI:SS') as
+                SERVICE_DATE,
+                WORKID,DIS_PER_TEL,PRE_CON_NO,DIS_RANGE
+                FROM BK_DISTRAIN WHERE reg_code =:reg_code
+	            ]]>
+	</sql>
+	<sql sqlId="getReAttachByRegUnitCode" author="xuzz" function="根据登记编号查询轮候查封以及续封的查封记录 "><![CDATA[
+	        SELECT reg_code,
+                REG_DATE,
+                CER_NO,
+                RECORDER,
+                PROCDEF_ID,
+                LIM_HOLDER,
+                DIS_OFF,
+                LAW_DOC,
+                DIS_NO,
+                to_char(START_DATE,'YYYY-MM-DD HH24:MI:SS') as
+                START_DATE,
+                to_char(END_DATE,'YYYY-MM-DD HH24:MI:SS') as
+                END_DATE,
+                to_char(DIS_DATE,'YYYY-MM-DD HH24:MI:SS') as
+                DIS_DATE,
+                DIS_LIMIT,
+                SERVICE_NAME,
+                to_char(SERVICE_DATE,'YYYY-MM-DD HH24:MI:SS') as
+                SERVICE_DATE,
+                WORKID,DIS_PER_TEL,PRE_CON_NO,DIS_RANGE,DIS_TYPE
+                FROM BK_DISTRAIN WHERE book_code IN (select book_code from BK_BASEINFO where REG_UNIT_CODE in(select REG_UNIT_CODE from BUS_REGUNITREL where reg_code=:reg_code))
+	            ]]>
+	</sql>
+	<sql sqlId="getHouseByid" author="panda" function="根据流程实例id获取登记簿房屋信息"><![CDATA[
+	           select * from BUS_REGUNITREL r,EST_HOUSE h where  r.HOUSE_ID=h.HOUSE_ID and r.BUS_ID = :id
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getRegRelation" author="xuzz" function="根据登记编号获取登记单元关联表信息"><![CDATA[
+	           select * from BUS_REGUNITREL
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getOwnershipByid" author="panda" function="根据流程实例id获取房屋所有权登记信息"><![CDATA[
+	           select OWNER_REG_ID,REASON,REG_VALUE,GET_MODE,LU_TERM,to_char(START_DATE,'YYYY-MM-DD HH24:MI:SS') as START_DATE,
+	           to_char(END_DATE,'YYYY-MM-DD HH24:MI:SS') as END_DATE,HOUSE_USAGE,HOUSE_ATTR,EXCURSUS from BUS_OWNERSHIP
+	           where bus_id =:id
+	            ]]>
+	</sql>
+	
+		<sql sqlId="getuserightByid" author="xuzz" function="根据流程实例id获取土地使用权登记信息"><![CDATA[
+	           select USERIGHT_REG_ID,REASON,useright_type,GET_PRICE,USE_LIMIT,to_char(START_DATE,'YYYY-MM-DD HH24:MI:SS') as START_DATE,
+	           to_char(END_DATE,'YYYY-MM-DD HH24:MI:SS') as END_DATE,LAND_USE,EXCURSUS from BUS_USERIGHT_REG
+	           where bus_id =:id
+	            ]]>
+	</sql>
+	<sql sqlId="getdemurrerByid" author="xuzz" function="根据流程实例id获取异议登记信息"><![CDATA[
+	           select * from BUS_DEMURRER_REG
+	           where bus_id =:id
+	            ]]>
+	</sql>
+	
+		<sql sqlId="getRevokeapprovalByid" author="xuzz" function="根据流程实例id获取撤销核准信息"><![CDATA[
+	           select * from BUS_REVOKEAPPROVAL
+	           where bus_id =:id
+	            ]]>
+	</sql>
+		<sql sqlId="getRemarkByid" author="xuzz" function="根据流程实例id获取备注登记信息"><![CDATA[
+	           select * from BUS_REMARK_INFO
+	           where bus_id =:id
+	            ]]>
+	</sql>
+	<sql sqlId="getRegInfoByProid" author="xuzz" function="根据流程实例id获取登记信息"><![CDATA[
+	           SELECT r.bus_id,
+       b.reg_type,
+       b.reg_station,
+       r.reg_code,
+       b.proc_name,r.last_reg_code,b.pro_def_id,r.reg_unit_code
+  FROM BUS_REGUNITREL r, BUS_MAIN b
+ WHERE     r.BUS_ID = b.bus_id
+       AND r.bus_id = (SELECT bus_id
+                         FROM BUS_MAIN
+                        WHERE proc_id = :proc_id)
+	            ]]>
+	</sql>
+	
+	
+	<sql sqlId="getattachByid" author="xuzz" function="根据流程实例id获取查封登记信息"><![CDATA[
+	           select  BUS_ID, 
+   DIS_NO, DIS_OFF, LIM_HOLDER, 
+   LAW_DOC, DIS_LIMIT, REMARK, 
+   SERVICE_NAME, DIS_PER_TEL,DIS_TYPE,DIS_RANGE,PRE_CON_NO,
+   WORKID,to_char(START_DATE,'YYYY-MM-DD HH24:MI:SS') as START_DATE,
+   to_char(END_DATE,'YYYY-MM-DD HH24:MI:SS') as END_DATE,
+   to_char(DIS_DATE,'YYYY-MM-DD HH24:MI:SS') as DIS_DATE,
+   to_char(SERVICE_DATE,'YYYY-MM-DD HH24:MI:SS') as SERVICE_DATE from BUS_DISTRAIN_REG where bus_id =:id
+	            ]]>
+	</sql>
+</sqlList>

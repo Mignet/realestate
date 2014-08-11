@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<systemProperties>
+	 
+	 <BusinessWebServiceURL>http://168.68.167.54:8001/bizservice/BusinessWebService?WSDL</BusinessWebServiceURL>
+	 
+    <!-- === 设置BizFacade的配置文件名（可多个，以","分隔） ===================-->
+    <!-- <appContextCfgFiles>bean-context.xml</appContextCfgFiles> -->
+    <!-- === 设置权限控制的配置文件名===================-->
+    <!-- <PermissionSuitXml>PermmisonSuit.xml</PermissionSuitXml> -->
+    <!-- =============上传文件参数配置============= -->
+    <!-- 上传文件保存到指定目录,注意为绝对路径-->
+    <uploaddir>/upload</uploaddir>
+    
+	<!-- 上传文件数量限制 -->
+    <maxFileNum>50</maxFileNum>
+    
+	<!-- 上传文件总大小限制 -->
+    <maxFileSize>50000000</maxFileSize>
+
+    <!-- 是否使用连接池 -->
+    <isUsePool>true</isUsePool>    
+    <!-- 数据连接模式 ，有三种方式：1、nopool： 不使用连接池，2、poolman： 使用poolman的连接池，3、wlsPool：使用weblogic的连接池-->
+    <connMode>poolman</connMode> 
+    <!-- 默认JNDI_NAME -->
+    <defaultJndiName>oracledb</defaultJndiName> 
+    <!-- =============报告异常============= -->
+    <!-- 1、发送邮件 -->
+    <sendMail>false</sendMail>
+    <!-- 2、记录到数据库中 -->
+    <saveToDB>false</saveToDB>   
+</systemProperties>

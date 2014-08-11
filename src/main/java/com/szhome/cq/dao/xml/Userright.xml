@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>Userright</comment>
+   
+	<sql sqlId="getAllO" author="Sam" function="获得所有产权信息"><![CDATA[
+	               select tab.* from (select bur.reg_code,
+                        to_char(bur.reg_date,'YYYY-MM-dd') areg_date,bur.excursus,
+                        (select bus_name from cfig_bus_type where bus_type_id = bur.procdef_id) bus_name,
+                        (select dic_item_value from CFIG_DIC_ITEM where dic_item_code =  bur.land_use) aland_use,
+                        (select dic_item_value from CFIG_DIC_ITEM where dic_item_code =  bur.useright_type) auseright_type,
+                        (select dic_item_value from CFIG_DIC_ITEM where dic_item_code =  bur.effective) aeffective,
+                        bur.cer_no,bur.reg_pri,bbi.reg_unit_type,bbi.reg_unit_code,epl.parcel_code,
+                        epl.glebe_area,epl.parcel_area,epl.land_address,epl.land_grade,
+                        (select dic_item_value from CFIG_DIC_ITEM where dic_item_code =  epl.real_usage) areal_usage,
+                        (select dic_item_value from CFIG_DIC_ITEM where dic_item_code =  epl.use_right_type) ause_right_type,
+                        '从 '||to_char(bur.start_date,'YYYY-MM-dd')||' 至 '||to_char(bur.end_date,'YYYY-MM-dd') period_str, 
+                        bur.lu_term,epl.land_attribute,bur.useright_id
+                        from bk_useright bur,bk_baseinfo bbi,est_parcel epl
+                        where bur.book_code = bbi.book_code
+                        and bbi.reg_unit_code = epl.parcel_code
+                        and bbi.reg_unit_type = '009003')  tab
+	            ]]>
+	</sql>
+	
+     <sql sqlId="getHolderUserightLst" author="Sam" function="">
+        <![CDATA[
+                  select tab.* from (select bh.hol_name,(select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bh.hol_cer_type) hol_cer_type,
+                  bh.hol_cer_no,bh.hol_address,bur.cer_no,bh.depart_type,bh.legal_name,bh.portion,
+                  bur.useright_id,brr.right_rel_id,bh.holder_id
+		          from BK_HOLDER bh,BK_RIGHT_REL brr,BK_BASEINFO bbi,BK_USERIGHT bur
+		          where bbi.book_code = brr.book_code
+		          and bur.book_code = brr.book_code
+		          and bur.reg_code = brr.reg_code
+		          and bh.right_rel_id = brr.right_rel_id) tab
+        ]]>
+    </sql>
+	
+</sqlList>

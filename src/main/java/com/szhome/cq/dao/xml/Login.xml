@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>Tree</comment>
+
+	<sql sqlId="login" author="Joyon" function=""><![CDATA[
+	            select * from platt_users where account = :account and password=:password
+	            ]]>
+	</sql>
+	
+</sqlList>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+    <comment>SpeSuspendInfo</comment>
+	<sql sqlId="querySpeSuspendInfoListBy" author="sam" function=""><![CDATA[
+				select * from spe_suspend_info
+				]]>
+	</sql>
+	<sql sqlId="getSpeSuspendInfoDataBySuspendId" author="sam" function=""><![CDATA[
+				select * from spe_suspend_info where sus_id = :sus_id 
+				]]>
+	</sql>
+	<sql sqlId="getSpeSuspendInfoDataBySuspendNo" author="sam" function=""><![CDATA[
+				select * from spe_suspend_info where sus_no = :sus_no 
+				]]>
+	</sql>
+	<sql sqlId="getSpeSuspendInfoDataBybusIdownerNo" author="sam" function=""><![CDATA[
+				select * from spe_suspend_info where bus_id = :bus_id and sus_no = :sus_no
+				]]>
+	</sql>
+</sqlList>

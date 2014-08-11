@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="houseright_data_selectrpt_subreport1" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="bdb02cd4-6700-4624-a79d-7990359d582e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ownership.identity_card" class="java.lang.String"/>
+	<parameter name="holder.obligee" class="java.lang.String"/>
+	<parameter name="holder.corporation" class="java.lang.String"/>
+	<parameter name="register.share" class="java.lang.String"/>
+	<field name="HOL_NAME" class="java.lang.String"/>
+	<field name="HOL_CER_NO" class="java.lang.String"/>
+	<field name="LEGAL_NAME" class="java.lang.String"/>
+	<field name="PORTION" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="1" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="46" splitType="Stretch">
+			<textField>
+				<reportElement x="5" y="0" width="40" height="23" uuid="3c4e3d3d-e69d-460e-8f6d-d0f4c145fa4a"/>
+				<textElement markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{holder.obligee}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="0" width="8" height="23" uuid="bedbb4db-ca4b-4a58-a322-c643153518e8"/>
+				<textElement markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="23" width="8" height="23" uuid="d5a357d7-3a94-486b-bfdc-28ff5044def6"/>
+				<textElement markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="18" y="23" width="27" height="23" uuid="5dfcc8af-2a24-4ea4-94de-7f2bfd843fc5"/>
+				<textElement markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{holder.corporation}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="288" y="0" width="27" height="23" uuid="e91828ca-5bc8-466f-b6b7-eaebca764094"/>
+				<textElement markup="none">
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{register.share}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="315" y="0" width="8" height="23" uuid="44f31d64-d1a6-48b6-b851-a9c1e02cf919"/>
+				<textElement markup="none">
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="23" width="8" height="23" uuid="84dd8993-08f3-44b8-b296-4502b74af162"/>
+				<textElement markup="none">
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="262" y="23" width="53" height="23" uuid="b74401f0-4b08-4724-8e2c-8f824a63cc40"/>
+				<textElement markup="none">
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ownership.identity_card}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="52" y="0" width="210" height="23" uuid="713491bb-9eaa-48eb-a61f-b381247bfc59"/>
+				<textElement textAlignment="Left">
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HOL_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="52" y="23" width="210" height="23" uuid="e2748b8b-692d-4c75-8f3e-a2c4ddafe500"/>
+				<textElement textAlignment="Left">
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LEGAL_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="322" y="0" width="210" height="23" uuid="11e87dd8-39a9-4571-93e1-bd7731303f6b"/>
+				<textElement textAlignment="Left">
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PORTION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="322" y="23" width="210" height="23" uuid="9d3fc031-1e5c-420e-ae72-fe0c3f54afc1"/>
+				<textElement textAlignment="Left">
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HOL_CER_NO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

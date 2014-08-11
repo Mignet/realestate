@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ownership_mortgage_selectrpt" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3a6007db-092c-453b-9d99-4db3b5baa061">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="17"/>
+	<parameter name="mortgage.caption" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="271" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="16" width="555" height="47" uuid="5e24d1a2-d094-48b2-b9c6-d494646822e1"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="28" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mortgage.caption}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="78" width="555" height="1" uuid="d8b28ce0-3af9-4b6a-a71e-d6dec8e7d600"/>
+			</line>
+			<staticText>
+				<reportElement x="152" y="182" width="100" height="20" uuid="bab53871-8907-47ad-a0ce-4624a47bc483"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[世世代代]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="152" y="233" width="100" height="20" uuid="e286c0e8-9997-4617-ad04-901ff09826a2"/>
+				<text><![CDATA[xxxxccccceeeee]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="462" splitType="Stretch"/>
+	</detail>
+	<pageFooter>
+		<band height="29" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="2" width="555" height="1" uuid="90739c2f-eef0-4458-8ec2-4449e3e6ed0c"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

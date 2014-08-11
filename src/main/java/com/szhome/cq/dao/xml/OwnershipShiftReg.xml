@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>OwnershipShiftReg</comment>
+	
+	<!-- 通过流程实例ID获取登记信息 -->
+	<sql sqlId="getRegInfoMapByProcId" author="Joyon" function=""><![CDATA[
+	         
+	          select bus.*, house.*
+  from (select * from bus_main where proc_id = :proc_id) bus,
+       (select *
+          from EST_HOUSE
+         where ADV_HOUSE_CODE =
+               (select REG_UNIT_CODE
+                  from BUS_REGUNITREL
+                 where bus_id =
+                       (select bus_id from bus_main where proc_id = :proc_id))) house
+                      
+	            ]]>
+	</sql>
+	<!-- 通过流程实例ID获取所有权登记信息 -->
+	<sql sqlId="getOwnershipInfoMapByProcId" author="Joyon" function=""><![CDATA[
+	         select * from BUS_OWNERSHIP where bus_id=(select bus_id from bus_main where proc_id=:proc_id)
+	         
+                      
+	            ]]>
+	</sql>
+	<!-- 通过流程实例ID获取所有权登记信息 -->
+	<sql sqlId="getUserightInfoMapByProcId" author="Joyon" function=""><![CDATA[
+	         select * from bus_useright_reg where bus_id=(select bus_id from bus_main where proc_id=:proc_id)
+	         
+                      
+	            ]]>
+	</sql>
+	 
+	
+	
+</sqlList>

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportSltzs" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="427ccef8-26f8-48a9-b537-470d42ceaee7">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="338"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="902a57bc-9a45-4409-9ad4-2ce1f6136003">
+		<parameter name="proc_id" class="java.lang.String">
+			<defaultValueExpression><![CDATA[1000015675]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select rec.*,(select DIC_ITEM_value from CFIG_DIC_ITEM where DIC_ITEM_CODE=rec.re_style and dic_type_id=(select DIC_TYPE_ID from CFIG_DIC_TYPE where DIC_TYPE_CODE='025'))as re_style_name from bus_receival rec where bus_id=(select bus_id from bus_main where proc_id=$P{proc_id}) and rec_type_flag='0' order by receival_id]]>
+		</queryString>
+		<field name="RECEIVAL_ID" class="java.lang.String"/>
+		<field name="BUS_ID" class="java.lang.String"/>
+		<field name="B_DELETEFLAG" class="java.lang.String"/>
+		<field name="RE_NAME" class="java.lang.String"/>
+		<field name="RE_TYPE" class="java.lang.String"/>
+		<field name="RE_STYLE" class="java.lang.String"/>
+		<field name="RE_PAGE" class="java.lang.String"/>
+		<field name="RE_COPY" class="java.lang.String"/>
+		<field name="RE_PERSON" class="java.lang.String"/>
+		<field name="RE_DATE" class="java.sql.Timestamp"/>
+		<field name="REC_TYPE_FLAG" class="java.lang.String"/>
+		<field name="RE_STYLE_NAME" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="dataset1" uuid="d2d18c1c-ae01-41c3-b4e4-d8c1de67596c">
+		<parameter name="proc_id" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select app_name from bus_applicant where bus_id=(select bus_id from bus_main where proc_id=$P{proc_id})]]>
+		</queryString>
+		<field name="APP_NAME" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="proc_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Workspace\\oracleEcplise\\jasperReportDemo\\WebRoot\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="date_rec" class="java.lang.String"/>
+	<parameter name="date_end" class="java.lang.String"/>
+	<parameter name="number" class="java.lang.String"/>
+	<parameter name="date_limit" class="java.lang.String"/>
+	<parameter name="serial_number" class="java.lang.String"/>
+	<parameter name="bus_type" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from BUS_APPLICANT where bus_id=(select bus_id from bus_main where proc_id=$P{proc_id})]]>
+	</queryString>
+	<field name="APPLICANT_ID" class="java.lang.String"/>
+	<field name="BUS_ID" class="java.lang.String"/>
+	<field name="B_DELETEFLAG" class="java.lang.String"/>
+	<field name="APP_NAME" class="java.lang.String"/>
+	<field name="APP_TYPE" class="java.lang.String"/>
+	<field name="APP_PORT" class="java.lang.String"/>
+	<field name="APP_CER_TYPE" class="java.lang.String"/>
+	<field name="APP_CER_NO" class="java.lang.String"/>
+	<field name="APP_ADDRESS" class="java.lang.String"/>
+	<field name="APP_TEL" class="java.lang.String"/>
+	<field name="DEPART_TYPE" class="java.lang.String"/>
+	<field name="LEGAL_NAME" class="java.lang.String"/>
+	<field name="AGENT_NAME" class="java.lang.String"/>
+	<field name="AGENT_TEL" class="java.lang.String"/>
+	<field name="AGENT_CER" class="java.lang.String"/>
+	<field name="AGENT_CER_TYPE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="98" splitType="Stretch">
+			<staticText>
+				<reportElement x="30" y="19" width="512" height="57" uuid="06a3d9d6-4eff-4180-bcf3-30eae6764fba"/>
+				<textElement textAlignment="Center">
+					<font size="36" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[房地产登记业务受理通知书]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="357" y="76" width="185" height="20" uuid="7c47295b-1a56-40f4-b144-363539008340"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["文号:"+$P{number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="76" width="246" height="20" uuid="4ec2db84-1890-4838-94fa-9c7e337fc306"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["申报流水号："+$P{serial_number}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="331">
+			<staticText>
+				<reportElement x="30" y="239" width="512" height="20" uuid="c254c251-78d5-490b-bbd6-8a2aa9f011d8"/>
+				<textElement textAlignment="Center">
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[材料提交情况]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table 1" style="table 1" stretchType="RelativeToBandHeight" mode="Transparent" x="30" y="259" width="512" height="72" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="3ffbac80-1a5f-46d1-b162-f51bc4760592"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="Table Dataset 1" uuid="ab2ea2a8-8ab6-4726-9964-ca91cbfa2074">
+						<datasetParameter name="proc_id">
+							<datasetParameterExpression><![CDATA[$P{proc_id}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="231" uuid="f70049a3-2554-462f-8bca-6d38aff82543">
+						<jr:columnHeader style="table 1_CH" height="33" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="3" width="231" height="30" uuid="db57976f-0ef6-435a-88a2-87bc4066f4ec"/>
+								<textElement textAlignment="Center">
+									<font size="14" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[己接材料名称]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="27" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="231" height="27" uuid="ddb30c4d-daf9-4604-b04b-844cbe234e51"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{RE_NAME}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="281" uuid="d63dfe95-3c24-4ca6-892a-00dbdab3798b">
+						<jr:columnHeader style="table 1_CH" height="33" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="281" height="33" uuid="8b57d290-7f1d-4f26-aac9-df795a44ee9d"/>
+								<textElement textAlignment="Center">
+									<font size="14" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[数量]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="27" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="281" height="27" uuid="9f288bc7-dcd1-4808-9e07-1403d2f14320"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{RE_STYLE_NAME}+" "+$F{RE_COPY}+" 份"]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement stretchType="RelativeToTallestObject" x="30" y="11" width="50" height="26" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="f06cdfbf-a226-47d2-a1c4-1c9aff985feb"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Horizontal" ignoreWidth="true">
+					<datasetRun subDataset="dataset1" uuid="edaaa362-c47e-44f7-ad08-f464e2c7de52">
+						<datasetParameter name="proc_id">
+							<datasetParameterExpression><![CDATA[$P{proc_id}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="26" width="50">
+						<textField>
+							<reportElement x="0" y="10" width="40" height="16" uuid="507414b0-c3b8-4eec-9dfe-33be8a469af8"/>
+							<textElement>
+								<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{APP_NAME}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<textField>
+				<reportElement x="30" y="37" width="512" height="103" uuid="186149cd-b474-4fa7-810a-eb6cfed6a487"/>
+				<textElement>
+					<font size="18" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["    "+$P{date_rec}+"，我中心收到你（单位）申请的"+$P{bus_type}+"事项的申请材料，现予受理。本申请事项办理时限为"+$P{date_limit}+"个自然日（自受理之日起至"+$P{date_end}+"）。"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="30" y="140" width="512" height="86" forecolor="#FF0033" uuid="49f3b740-092d-49e2-acd0-844d10c470d4"/>
+				<textElement>
+					<font size="18" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[     除另有通知,纳税、领证日期为自受理之日起的第五个工作日, 申请人凭本受理通知书及身份证明领取办理结果。未在办理时限内提交缴税证明的，将按规定予以退文。]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="92">
+			<textField>
+				<reportElement x="294" y="4" width="248" height="27" uuid="94e68f64-7fa9-4541-967d-979be3d058e6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="18" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{date_rec}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="294" y="31" width="248" height="32" uuid="91de4ca8-9389-49e5-9b60-5cc2e418e118"/>
+				<textElement textAlignment="Right">
+					<font size="18" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["（登记中心业务受理章）"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="63" width="100" height="29" uuid="e6e91157-8bad-4c07-a635-00fa2a09e9d8"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["领证人："]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="63" width="260" height="29" uuid="978c2e2f-4ea4-4d18-bf53-a197de1b191a"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["身份证号："]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="63" width="152" height="29" uuid="f5832183-ecd6-4407-8c61-f85da9ae863a"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["日期："]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band/>
+	</detail>
+</jasperReport>

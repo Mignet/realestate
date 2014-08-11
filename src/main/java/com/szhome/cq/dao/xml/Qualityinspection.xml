@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>Tree</comment>
+	<!-- 获取当前月目标 -->
+	<sql sqlId="getMonthtarget" author="Joyon" function=""><![CDATA[
+	             select count(*) as month_target from platform.wf_process_inst pi, bus_main b where pi.proc_id = b.proc_id 
+	            ]]>
+	</sql>
+	<!-- 获取当前月己完成的抽检数量 -->
+	<sql sqlId="getInspectioned" author="Joyon" function=""><![CDATA[
+	             select count(*) as inspectioned from CHK_BASE where to_char(CHE_DATE, 'YYYY-MM') = to_char(add_months(SYSDATE, 0), 'YYYY-MM')
+	            ]]>
+	</sql>
+	
+	<!--
+		           select  pi.proc_id,
+			         pi.proc_name,
+			         pi.duration/60/24 as duration,
+			         pi.remain_days/60/24 as remain_days,
+			         pi.principal_name,
+			         to_char(pi.create_date,'yyyy-mm-dd') as create_date,
+			         pi.end_date,
+			         b.reg_code,
+			         b.bus_id
+			    from platform.wf_process_inst pi,bus_main b where  pi.proc_id = b.proc_id and to_char(pi.create_date, 'YYYY-MM') = to_char(SYSDATE, 'YYYY-MM') order by remain_days
+	            --> 
+	<!-- 获取当前月份办过的所有业务 -->
+	<sql sqlId="getCurMonthBusiness" author="Joyon" function="">
+	<![CDATA[
+	            select  pi.proc_id,
+			         pi.proc_name,
+			         pi.duration/60/24 as duration,
+			         pi.remain_days/60/24 as remain_days,
+			         pi.principal_name,
+			         to_char(pi.create_date,'yyyy-mm-dd') as create_date,
+			         pi.end_date,
+			         b.reg_code,
+			         b.bus_id,
+			         a.name,
+			         to_char(c.CHE_DATE,'yyyy-mm-dd') as che_date
+			    from bus_main b inner join platform.wf_process_inst pi
+				     on   b.proc_id= pi.proc_id   left join platform.wf_activity a 
+				     on pi.proc_id = a.proc_id and a.state='1' left join CHK_BASE c 
+				     on b.bus_id = c.bus_id
+			    where to_char(pi.create_date, 'YYYY-MM') = to_char(SYSDATE, 'YYYY-MM')
+	            ]]>
+	</sql>
+	
+	<!-- 获取未检查的的抽检样本-->
+	<sql sqlId="getUncheckSample" author="Joyon" function="">
+			<![CDATA[
+					select b.proc_id,
+					       b.bus_id,
+					       b.reg_code,
+					       c.batch_no,
+					       c.che_id,
+					       to_char(c.CHE_DATE, 'yyyy-mm-dd') as che_date
+					  from bus_main b inner join CHK_BASE c on b.bus_id = c.bus_id 
+	             ]]>
+	</sql>
+	
+	<sql sqlId="getCheckcedbusdata" author="Joyon" function="">
+			<![CDATA[
+					select  pi.proc_id,
+			         pi.proc_name,
+			         pi.duration/60/24 as duration,
+			         pi.remain_days/60/24 as remain_days,
+			         pi.principal_name,
+			         to_char(pi.create_date,'yyyy-mm-dd') as create_date,
+			         pi.procdef_id,
+			         pi.end_date,
+			         b.reg_code,
+			         b.bus_id,
+               		 c.batch_no,
+              		 c.che_id,
+			         a.name,
+            		 a.activdef_id,
+			         to_char(c.CHE_DATE,'yyyy-mm-dd') as che_date,
+           		     w.url_specify,
+             		 w.wi_id
+			     from bus_main b inner join platform.wf_process_inst pi
+			    	 on   b.proc_id= pi.proc_id and b.bus_id=:bus_id  left join platform.wf_activity a 
+			    	 on pi.proc_id = a.proc_id and a.state='5' left join platform.wf_work_item w
+          			 on  pi.proc_id=w.proc_id and w.state ='1'   inner join CHK_BASE c 
+			   		 on b.bus_id = c.bus_id  and c.che_date is null
+			     		--and pi.state = 1
+			     where to_char(pi.create_date, 'YYYY-MM') = to_char(SYSDATE, 'YYYY-MM')
+	             ]]>
+	</sql>
+	
+	
+	<!-- 获取业务类型配置    -->
+	<sql sqlId="getCfigbustype" author="joyon" function=""><![CDATA[
+	select * from cfig_bus_type  
+	            ]]>
+	</sql>
+	<!-- 按部门名登记类型  统计当前月的抽检数据   -->
+	<sql sqlId="getCurMonthStatisticsBak" author="joyon" function=""><![CDATA[
+			 select
+   dept_name,reg_type_name,   count(*)  total,sum(is_error) error_num
+   from chk_base where to_char(CHE_DATE, 'YYYY-MM') = to_char(add_months(SYSDATE, 0), 'YYYY-MM')
+  group by dept_name,reg_type_name order by dept_name
+	            ]]>
+	</sql>
+	
+		<!-- 按部门名登记类型  统计当前月的抽检数据   -->
+	<sql sqlId="getCurMonthStatistics" author="joyon" function=""><![CDATA[
+		 select distinct dept_id,dept_name,reg_type,reg_type_name, 
+		   count(is_error) over(partition by dept_id) dept_all_total,         --这个月每个部门总抽检量
+		   sum(is_error) over(partition by dept_id) dept_all_error,           --这个月每个部门总差错量
+		   count('X') over(partition by dept_id) dept_count,                  --每个部门总办理量
+		   count('X') over(partition by dept_id, reg_type) total,             --每个部门每个业务总办理量
+		   sum(is_error) over(partition by dept_id, reg_type) error_num,      --每个部门每个业务出错量
+		   count('x') over(partition by reg_type) bus_total,                  --每个业务总办理量
+		   sum(is_error) over(partition by reg_type) bus_total_error,         --每个业务总出错量
+		   count(is_error) over() all_total,sum(is_error) over() all_error    --这个月总抽检量 总差错量
+		   from chk_base 
+	            ]]>
+	</sql>
+		<!--   统计当前月每天的抽检业务详细数据   -->
+	<sql sqlId="getDaydetailStatistics" author="joyon" function=""><![CDATA[
+		  select  distinct  c_date, reg_type,reg_type_name,
+		   count('X') over(partition by c_date) day_total,                  --每天总办理量
+       	   sum(is_error) over(partition by c_date) day_error_num,           --每天出错量
+		   count('X') over(partition by c_date, reg_type) total,             --每天每个业务总办理量
+		   sum(is_error) over(partition by c_date, reg_type) error_num,      --每天每个业务出错量
+		   count('x') over(partition by reg_type) bus_total,                  --每个业务总办理量
+		   sum(is_error) over(partition by reg_type) bus_total_error,         --每个业务总出错量
+		   count(is_error) over() all_total,sum(is_error) over() all_error    --这个月总抽检量 总差错量
+		   from 
+	       (
+	         select c.*,to_char(c.che_date,'yyyy-mm-dd')c_date from chk_base  c
+	       )
+	            ]]>
+	</sql>
+	<!--  统计督办数据-->
+	<sql sqlId="getUrgeStatistics" author="joyon" function=""><![CDATA[
+		select
+	      distinct reg_type,
+	      bus_type_name, 
+	      count(bus_id) over(partition by reg_type) acc_count, 												                                          --受理数量
+	      count(case when reg_state='053002' then 1 else null end ) over(partition by reg_type) app_count, 											--核准数量
+	      count(arch_date) over(partition by reg_type) arch_count,											                                        --归档数量
+	      count(refund_id) over(partition by reg_type) re_count, 											                                          --退文数量
+	       count(case when remain_days<0 then 1 else null end) over(partition by reg_type) to_count 		                        --超时数量
+	      from
+	      (
+	        select 
+	        distinct b.bus_id,       --业务主表ID
+	        b.reg_type,                   
+	        (select c.bus_name from cfig_bus_type c where bus_type_id=b.reg_type) bus_type_name ,--业务类型名
+	        b.proc_id,              --流程实例ID
+	        r.reg_state,            --登记状态
+	        a.arch_date,            --归档日期
+	        pi.remain_days,         --流程剩余时间
+	        s.refund_id             --退文
+	         from
+	               bus_main b left join BUS_REGUNITREL r
+	                 on b.bus_id = r.bus_id 
+	                   left join BUS_ARCHIVES a
+	                        on b.bus_id=a.bus_id
+	                        left join platform.wf_process_inst pi
+	                             on b.proc_id = pi.proc_id
+	                           left join SPE_REFUND_INFO s
+	                              on b.bus_id = s.bus_id
+	                                  order by b.bus_id
+	         )
+	            ]]>
+	</sql>
+	<!--  统计督办数据  后面添加条件-->
+	<sql sqlId="getUrgeStatisticsCondition" author="joyon" function=""><![CDATA[
+		select
+	      distinct reg_type,
+	      bus_type_name, 
+	      count(bus_id) over(partition by reg_type) acc_count, 												                                          --受理数量
+	      count(case when reg_state='053002' then 1 else null end ) over(partition by reg_type) app_count, 											--核准数量
+	      count(arch_date) over(partition by reg_type) arch_count,											                                        --归档数量
+	      count(refund_id) over(partition by reg_type) re_count, 											                                          --退文数量
+	       count(case when remain_days<0 then 1 else null end) over(partition by reg_type) to_count 		                        --超时数量
+	      from
+	      ( 
+	        select 
+	        distinct b.bus_id,       --业务主表ID
+	        b.reg_type,                   
+	        (select c.bus_name from cfig_bus_type c where bus_type_id=b.reg_type) bus_type_name ,--业务类型名
+	        b.proc_id,              --流程实例ID
+	        r.reg_state,            --登记状态
+	        a.arch_date,            --归档日期
+	        pi.remain_days,         --流程剩余时间
+	        s.refund_id             --退文
+	         from
+	              bus_main b  left join BUS_REGUNITREL r
+	                 on  b.bus_id = r.bus_id 
+	                   left join BUS_ARCHIVES a
+	                        on b.bus_id=a.bus_id 
+	                        left join platform.wf_process_inst pi
+	                             on b.proc_id = pi.proc_id
+	                           left join SPE_REFUND_INFO s
+	                              on b.bus_id = s.bus_id
+	                              	left join platform.WF_WORK_ITEM w
+                                          on b.proc_id=w.proc_id and w.name='核准'
+	                 
+	            ]]>
+	</sql>
+	
+	<!-- 获取checkBase  检查基本信息 -->
+	<sql sqlId="getCheckBase" author="joyon" function=""><![CDATA[
+	                	select * from chk_base t 
+	            ]]>
+	</sql>
+	
+	
+          
+      <!-- 获取需要督办的流程 -->
+	<sql sqlId="getRemindersBusiness" author="joyon" function=""><![CDATA[
+	                	select b.reg_type,b.reg_code,b.bus_id,b.reg_station,b.location_reg_unit,wi.*,pi.state PI_STATE, pi.duration PI_DURATION,to_char(wi.start_date,'yyyy-mm-dd') start_date_str from bus_main b left join platform.WF_PROCESS_INST pi
+  							on b.proc_id = pi.proc_id
+						       inner join platform.wf_process_task wi on pi.proc_id=wi.proc_id 
+	            ]]>
+	</sql>
+	   <!-- 获取需要督办的流程 -->
+	<sql sqlId="getdeptuser" author="joyon" function=""><![CDATA[
+			select * from platform.platt_depts dep inner join platform.platt_dept_user_rel rel 
+			        on dep.DEPT_ID=rel.DEPT_ID
+			          inner join platform.platt_users us
+			                on rel.USER_ID=us.USER_ID    where us.user_id='10009316'	           
+			                 ]]>
+	</sql>
+	
+	   <!-- 获取需要督办的流程 -->
+	<sql sqlId="getDeptbusinessBymonth" author="joyon" function=""><![CDATA[
+		select 
+	       distinct starter_dept_name,starter_dept_id,
+	       min(dept_count*0.03) over(partition by starter_dept_id) per_count,--当月每个部门办文量*0.03
+	        dept_count, --当月每个部门办文量
+	        all_count   --总办文量
+	       from
+	       (
+	          select 
+	                 distinct starter_dept_name,starter_dept_id,
+	                 count(*) over(partition by starter_dept_id) dept_count, --当月每个部门办文量
+	                 count(*) over() all_count                               --总办文量
+	                 from
+	                 (
+	                  select * from bus_main b inner join platform.wf_process_inst pi
+	                        on b.proc_id=pi.proc_id
+	                            and to_char(pi.create_date, 'YYYY-MM') = :monthStr
+                  )
+                )
+		 ]]>
+	</sql>
+	
+	<sql sqlId="getDepttargetBymonth" author="joyon" function=""><![CDATA[
+	                   select 
+			               distinct starter_dept_name,starter_dept_id,
+			               count(*) over(partition by starter_dept_id) dept_target_count, --当月每个部门抽检量
+			               count(*)  over() target_count                       --当月总抽检量
+			               from
+			               (
+			                 select *  from platform.wf_process_inst pi, bus_main b where pi.proc_id = b.proc_id 
+			                        and to_char(pi.create_date, 'YYYY-MM') = to_char(add_months(to_date(:monthStr,'yyyy-mm'),-1),'yyyy-mm')
+			                ) 
+		 ]]>
+	</sql>
+	
+	
+	
+</sqlList>
+

@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ownership_mortgage_selectrpt" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3a6007db-092c-453b-9d99-4db3b5baa061">
+	<property name="ireport.zoom" value="0.8264462809917354"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="mortgage.caption" class="java.lang.String"/>
+	<parameter name="mortgage.reg_code" class="java.lang.String"/>
+	<parameter name="mortgage.mort_no" class="java.lang.String"/>
+	<parameter name="mortgage.pre_reg_code" class="java.lang.String"/>
+	<parameter name="mortgage.borrower" class="java.lang.String"/>
+	<parameter name="mortgage.full_address" class="java.lang.String"/>
+	<parameter name="mortgage.contractno" class="java.lang.String"/>
+	<parameter name="mortgage.mortgagee" class="java.lang.String"/>
+	<parameter name="mortgage.mortgager" class="java.lang.String"/>
+	<parameter name="mortgage.start_date" class="java.lang.String"/>
+	<parameter name="mortgage.build_area" class="java.lang.String"/>
+	<parameter name="register.cer_type" class="java.lang.String"/>
+	<parameter name="register.cer_no" class="java.lang.String"/>
+	<parameter name="register.house_deal_contractno" class="java.lang.String"/>
+	<parameter name="register.file_no" class="java.lang.String"/>
+	<parameter name="register.reg_date" class="java.lang.String"/>
+	<parameter name="register.contract_date" class="java.lang.String"/>
+	<parameter name="register.cancel_date" class="java.lang.String"/>
+	<parameter name="register.cancel_note" class="java.lang.String"/>
+	<parameter name="register.identity_card" class="java.lang.String"/>
+	<parameter name="register.loan_purpose" class="java.lang.String"/>
+	<parameter name="register.loan" class="java.lang.String"/>
+	<parameter name="register.suggest_price" class="java.lang.String"/>
+	<parameter name="parcel.parcel_code" class="java.lang.String"/>
+	<parameter name="building.location" class="java.lang.String"/>
+	<parameter name="common.colon" class="java.lang.String"/>
+	<parameter name="common.left_parentheses" class="java.lang.String"/>
+	<parameter name="common.right_parentheses" class="java.lang.String"/>
+	<parameter name="common.centiare" class="java.lang.String"/>
+	<parameter name="common.rmb" class="java.lang.String"/>
+	<parameter name="common.hkd" class="java.lang.String"/>
+	<parameter name="common.usd" class="java.lang.String"/>
+	<parameter name="common.print_date" class="java.lang.String"/>
+	<parameter name="printdatetime" class="java.lang.String"/>
+	<parameter name="mortgage.money" class="java.lang.String"/>
+	<field name="CER_NO" class="java.lang.String"/>
+	<field name="CON_NO" class="java.lang.String"/>
+	<field name="ID" class="java.lang.String"/>
+	<field name="CON_TYPE" class="java.lang.String"/>
+	<field name="CON_DATE" class="java.lang.String"/>
+	<field name="CON_AREA" class="java.lang.String"/>
+	<field name="PRE_SALE_NO" class="java.lang.String"/>
+	<field name="CON_AREAS" class="java.lang.String"/>
+	<field name="CON_UNIT_PRICE" class="java.lang.String"/>
+	<field name="CON_PRIC" class="java.lang.String"/>
+	<field name="CON_PRICE_CN" class="java.lang.String"/>
+	<field name="CON_SIGN_DATE" class="java.lang.String"/>
+	<field name="IS_MORTGAGE" class="java.lang.String"/>
+	<field name="IS_NOTA" class="java.lang.String"/>
+	<field name="CURRENCY" class="java.lang.String"/>
+	<field name="EXCHANGE_RATE" class="java.lang.String"/>
+	<field name="DOWN_PAYMENT" class="java.lang.String"/>
+	<field name="PAYMENT_METHOD" class="java.lang.String"/>
+	<field name="MORTGAGE_YEARS" class="java.lang.String"/>
+	<field name="CANCELLATION_MANAGERS" class="java.lang.String"/>
+	<field name="CANCELLATION_DATE" class="java.lang.String"/>
+	<field name="CANCELLATION_REASON" class="java.lang.String"/>
+	<field name="REG_CODE" class="java.lang.String"/>
+	<field name="MORT_TYPE_NAME" class="java.lang.String"/>
+	<field name="GEN_MORT" class="java.lang.String"/>
+	<field name="MAX_MORT" class="java.lang.String"/>
+	<field name="ASSURE_AMOUNT" class="java.lang.String"/>
+	<field name="ASSUER_RANGE" class="java.lang.String"/>
+	<field name="MORTGAGEE" class="java.lang.String"/>
+	<field name="MORTGAGER" class="java.lang.String"/>
+	<field name="DEBT_DIS_LIMIT" class="java.lang.String"/>
+	<field name="MORT_NO" class="java.lang.String"/>
+	<field name="MORT_SEQ" class="java.lang.String"/>
+	<field name="ALIAS_REG_DATE" class="java.lang.String"/>
+	<field name="RECORDER" class="java.lang.String"/>
+	<field name="MAX_AMOUNT" class="java.lang.String"/>
+	<field name="SURE_AMOUNT" class="java.lang.String"/>
+	<field name="PRE_REG_CODE" class="java.lang.String"/>
+	<field name="BUS_NAME" class="java.lang.String"/>
+	<field name="BORROWER" class="java.lang.String"/>
+	<field name="CON_PROGRESS" class="java.lang.String"/>
+	<field name="REG_UNIT_TYPE" class="java.lang.String"/>
+	<field name="REG_UNIT_CODE" class="java.lang.String"/>
+	<field name="LAND_ADDRESS" class="java.lang.String"/>
+	<field name="PARCEL_AREA" class="java.lang.String"/>
+	<field name="MORTGAGERID" class="java.lang.String"/>
+	<field name="BUILDING_NAME" class="java.lang.String"/>
+	<field name="BUILD_NO" class="java.lang.String"/>
+	<field name="ROOMNAME" class="java.lang.String"/>
+	<field name="BUILD_AREA" class="java.lang.String"/>
+	<field name="PARCEL_CODE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="50">
+			<line>
+				<reportElement x="0" y="49" width="555" height="1" uuid="d8b28ce0-3af9-4b6a-a71e-d6dec8e7d600"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="18" width="555" height="31" uuid="5e24d1a2-d094-48b2-b9c6-d494646822e1"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="18" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mortgage.caption}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="714" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="10" width="53" height="23" uuid="fcf5a9ad-11eb-486d-bc2c-7269ca4f7ae8"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{register.cer_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="234" y="10" width="66" height="23" uuid="80534778-c097-4ccb-ab37-cb12079b38b9"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{register.cer_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="35" width="80" height="23" uuid="e7fa2d55-e879-4e77-8638-468754a5193d"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mortgage.reg_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="234" y="35" width="53" height="23" uuid="b91ffd8f-cd79-456a-bb9c-7d50e0745bfc"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{register.file_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="60" width="53" height="23" uuid="893090b4-a05d-4c1b-9b05-a67921a6c94c"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mortgage.mort_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="211" y="60" width="81" height="23" uuid="37e1deaa-32cc-4027-87a7-e5e8e295ebd9"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mortgage.start_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="404" y="35" width="53" height="23" uuid="dd5aed89-0dda-4de9-b69a-55bb04b6ede5"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{register.reg_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="10" width="8" height="23" uuid="6af25183-67c4-4733-a787-a53f4d5edf51"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="35" width="8" height="23" uuid="b2841151-22b4-4476-b602-10d79753b325"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="60" width="8" height="23" uuid="76dfc4fd-0513-4471-b98b-40f36ff52e03"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="408" y="10" width="8" height="23" uuid="09cd50e5-2d70-42ee-a28d-5f1f3155289e"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="287" y="35" width="8" height="23" uuid="3bc9ddfd-a436-4bd7-a80a-36694a1b339c"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="292" y="60" width="8" height="23" uuid="85ea9f03-83b4-41fc-a81f-7dc7be5f847d"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="457" y="35" width="8" height="23" uuid="2d54f130-ebf6-4a93-9e7e-5e92f54b4771"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="86" width="68" height="23" uuid="c5ab8edf-1299-49ca-8948-c39f2a17c04a"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mortgage.contractno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="78" y="86" width="8" height="23" uuid="df3c685c-2811-42a0-a80f-bb0c199cc2e5"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="404" y="86" width="53" height="23" uuid="911c7e45-2800-4353-a0dc-4e2ce4d1f221"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{register.contract_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="457" y="86" width="8" height="23" uuid="c224031b-f9ca-4a9c-a41a-ed9bb0bff292"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="111" width="53" height="23" uuid="ac56d1d9-aac2-40d8-86d3-1a9d10ec7968"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{register.cancel_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="111" width="8" height="23" uuid="e162539a-78cf-465e-83e3-6c175e93feb0"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="111" width="53" height="23" uuid="d146aed8-f9db-4f83-a18c-cc73c924476d"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{register.cancel_note}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="253" y="111" width="8" height="23" uuid="ae31122b-9a7e-426e-af8b-ff4caaa882eb"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="9" y="160" width="40" height="23" uuid="224f5a04-55d7-4463-8cc6-5eff4ecc1b2c"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mortgage.mortgager}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="49" y="160" width="8" height="23" uuid="4a521649-9037-4cc0-b28d-de9c68a323dc"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="352" y="160" width="40" height="23" uuid="a08e1175-a7f9-4404-83f7-fd17014b45e5"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{register.identity_card}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="160" width="8" height="23" uuid="08ea2d88-6a28-4639-b7e5-38ab831f9ad0"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="185" width="8" height="23" uuid="bd6a6718-4b55-4ce9-8058-c75fe812f1ba"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="9" y="185" width="40" height="23" uuid="0fc3976d-2476-4944-916b-44e11eb23b2f"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mortgage.borrower}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="49" y="185" width="8" height="23" uuid="4dc60c40-2e2f-4a87-bf8b-782ed7945490"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="352" y="185" width="40" height="23" uuid="f72d14ae-0df0-4752-84cd-c0e00b6ea0f8"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{register.identity_card}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="9" y="237" width="53" height="23" uuid="81a9389e-ea6e-4685-9bac-3af1ddce5486"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mortgage.mortgagee}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="237" width="8" height="23" uuid="ae06441c-c4bf-4185-a9d7-24c6ca49d649"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="10" width="7" height="23" uuid="b98f75a6-5ca7-4be0-84a2-3a28104ed4dc"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.left_parentheses}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="401" y="10" width="7" height="23" uuid="bab7a1d4-3c6c-4abb-8187-2ebdc02f3f91"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.right_parentheses}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="307" y="10" width="94" height="23" uuid="29919754-c4db-4800-ac01-4d7831624e7f"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{register.house_deal_contractno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="9" y="295" width="120" height="23" uuid="32d22cb0-c961-42d7-9204-4923cfa59488"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mortgage.full_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="129" y="295" width="8" height="23" uuid="9dd44fc6-d37a-4a0f-99fd-778759087049"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="51" y="321" width="8" height="23" uuid="f776e155-4275-44df-bd3b-a3f51f47ca0c"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="9" y="321" width="42" height="23" uuid="132e2228-8fec-4a3f-ae1c-555baf9347d3"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{parcel.parcel_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="307" y="321" width="8" height="23" uuid="a6e792db-9434-4095-a229-c6b4b58e0ac4"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="321" width="68" height="23" uuid="714183f5-f3c5-4b24-ad83-0e9bc033e3ba"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{building.location}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="89" y="347" width="8" height="23" uuid="2851dc3f-dbde-40c3-b9e2-accd1be7aef4"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="347" width="53" height="23" uuid="81391125-f127-4e1f-af18-d9507c53280f"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{register.loan_purpose}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="9" y="347" width="80" height="23" uuid="62cf8948-5e96-4c35-abdf-f2d598cffdf7"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mortgage.build_area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="292" y="347" width="8" height="23" uuid="b19a8371-1233-4fdd-beb7-bc808a1193e3"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="83" y="373" width="8" height="23" uuid="d0c1890a-f74b-42a5-a1e4-0676cefeca84"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="9" y="373" width="40" height="23" uuid="0a0d6299-5450-4976-8e98-13c6b3c1fa1c"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{register.suggest_price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="55" y="373" width="28" height="23" uuid="6a2de0fc-05f1-41e1-9c98-26bff28f40c4"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.rmb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="55" y="399" width="28" height="23" uuid="a3367cea-349a-4a54-ab71-0f4546c46f65"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.hkd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="83" y="399" width="8" height="23" uuid="23696259-ec7f-4c8a-8edd-03a6c7d63c8a"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="55" y="426" width="28" height="23" uuid="5b8e20ea-ab9c-4fa4-aad4-97aafc6815a6"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.usd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="83" y="426" width="8" height="23" uuid="2c5bf3ee-1acc-417a-83d8-7d7b5bdb9299"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="373" width="27" height="23" uuid="8f5fc239-5d29-4f2d-a064-331aa1330ab3"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{register.loan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="192" y="347" width="42" height="23" uuid="d5539eab-5826-4462-935f-3f7179ff4260"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.centiare}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="458" width="53" height="23" uuid="5fa6557a-42d3-44c6-9900-9f5047d051e7"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mortgage.money}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="272" y="373" width="28" height="23" uuid="84965fcd-b2e4-42a1-a3b8-6d8c7253f745"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.rmb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="272" y="399" width="28" height="23" uuid="1338ff7b-2d1a-4836-a98c-92b22636b73c"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.hkd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="399" width="8" height="23" uuid="2b9f978e-8bc8-41d2-8086-67f9578eeae5"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="426" width="8" height="23" uuid="b01094db-9e4c-47e3-96e6-b93a8601d89f"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="272" y="426" width="28" height="23" uuid="05f19a8e-a902-488f-b3f7-f6b7beeb6590"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.usd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="373" width="8" height="23" uuid="e705d1c7-772c-4293-a2ae-a0640da6eafc"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="485" width="28" height="23" uuid="3f5417be-fd64-416b-af37-528772224832"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.hkd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="97" y="512" width="8" height="23" uuid="0e6875d5-0716-4646-bce2-51d7a80164bb"/>
+				<textElement>
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="458" width="28" height="23" uuid="314f138d-6aaa-488e-ae81-22a3c3d5bdb9"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.rmb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="97" y="485" width="8" height="23" uuid="382422bd-a8c4-4d1c-968a-069566591e27"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="97" y="458" width="8" height="23" uuid="2a3a44ca-ed17-4b3a-86a2-ee28617c4d20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="512" width="28" height="23" uuid="bb5e25b1-ef83-47df-9318-bfae01ebbd74"/>
+				<textElement>
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.usd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="10" width="130" height="23" uuid="3f41a3d7-a730-4a58-a4cf-1956e148563d"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{CER_NO} == null ||  $F{CER_NO}.equals("")) ? "合同" : "产权证"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="416" y="10" width="139" height="23" uuid="cf591bc5-974b-4888-bafe-eca44cc3ad95"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{CER_NO} == null ||  $F{CER_NO}.equals("")) ? $F{CON_NO} : $F{CER_NO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="98" y="35" width="130" height="23" uuid="e25d53c8-b066-48bc-8391-ed800d498c4e"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{REG_CODE}==null?"":$F{REG_CODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="465" y="35" width="90" height="23" uuid="9d34aad6-b8d2-4e72-a0e2-481404d66f3f"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ALIAS_REG_DATE}==null?"":$F{ALIAS_REG_DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="60" width="271" height="23" uuid="60d8f41d-7e35-490b-b3dd-3e08fe728446"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEBT_DIS_LIMIT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="60" width="130" height="23" uuid="e57a4723-1fe5-41a6-9569-a493bae63bae"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MORT_NO}==null?"":$F{MORT_NO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="465" y="86" width="90" height="23" uuid="59b731d4-6aeb-4516-baaf-cae315816b08"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CON_DATE}==null?"":$F{CON_DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="86" y="86" width="183" height="23" uuid="22cffa73-633d-41d0-ac92-07b00d2700e7"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CON_NO}==null?"无":$F{CON_NO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="111" width="129" height="23" uuid="556678d6-85ac-4998-b601-517984dfb6fa"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CANCELLATION_DATE}==null?"":$F{CANCELLATION_DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="261" y="111" width="129" height="23" uuid="c03df7cb-f3f8-4204-ade0-61f6f2f6f80e"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CANCELLATION_REASON}==null?"":$F{CANCELLATION_REASON}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="160" width="196" height="23" uuid="11b77235-dd5b-4dee-bab0-3cc232856aed"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MORTGAGER}==null?"":$F{MORTGAGER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="160" width="171" height="23" uuid="addf4831-61ec-47d7-a0f9-7321ec9331b0"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MORTGAGERID}==null?"":$F{MORTGAGERID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="185" width="196" height="23" uuid="49b75086-f143-4604-9878-08c107a918f3"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BORROWER}==null?"":$F{BORROWER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="237" width="196" height="23" uuid="f11c8ec8-a4db-4f1f-9702-4b2b38fc609c"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MORTGAGEE}==null?"":$F{MORTGAGEE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="295" width="418" height="23" uuid="11099f08-94aa-45a3-9699-05a05ce46dc5"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BUILDING_NAME}==null?"":($F{BUILDING_NAME}+$F{BUILD_NO}+$F{ROOMNAME})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="59" y="321" width="175" height="23" uuid="e62ee965-2eb1-486a-b21e-24516a997c6f"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PARCEL_CODE}==null?"":$F{PARCEL_CODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="315" y="321" width="256" height="23" uuid="c77b0824-dcc6-41cf-abf0-00aac16b2218"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LAND_ADDRESS}==null?"":$F{LAND_ADDRESS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="97" y="347" width="95" height="23" uuid="bfa42b6c-9410-4ffc-93e6-9498a20cd7ec"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{REG_UNIT_TYPE}==null && $F{REG_UNIT_TYPE}.equals("009003"))?($F{PARCEL_AREA}==null?"":$F{PARCEL_AREA}):($F{BUILD_AREA}==null?"":$F{BUILD_AREA})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="38" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="0" width="555" height="1" uuid="90739c2f-eef0-4458-8ec2-4449e3e6ed0c"/>
+			</line>
+			<textField>
+				<reportElement x="329" y="1" width="42" height="23" uuid="f9cfb028-94a2-4797-a6d2-54c1f1aaf5c7"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.print_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="371" y="1" width="8" height="23" uuid="28daeafd-8eb4-4817-a212-cbe4f5f4f94b"/>
+				<textElement>
+					<font fontName="SansSerif" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="1" width="144" height="23" uuid="3b3b71a1-26be-4721-b998-22c737b693ed"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{printdatetime}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

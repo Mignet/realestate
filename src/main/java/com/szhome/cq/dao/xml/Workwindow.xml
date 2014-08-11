@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<sqlList>
+
+	<comment>Workwindow</comment>
+	
+	<!-- 获取表单及报表配置好的节点树 -->
+	<sql sqlId="getOfficeByNodeid" author="xuzz" function=""><![CDATA[
+	           select * from CFIG_OFFICE o,CFIG_NODE_OFI_REL n,CFIG_PROC_NODE p where P.NODE_ID=N.NODE_ID and N.OFFICE_ID=O.OFFICE_ID
+	            ]]>
+	</sql>
+	
+
+</sqlList>

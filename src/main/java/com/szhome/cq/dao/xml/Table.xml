@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+    <comment>Domain对象生成</comment>
+    
+	<sql sqlId="selectSomeTables" author="" function=""><![CDATA[
+				select lower(table_name) table_name from user_all_tables where table_name = upper(:table_name)
+				]]>
+	</sql>
+   
+    
+	<sql sqlId="selectAllTables" author="" function=""><![CDATA[
+				select lower(table_name) table_name from user_all_tables
+				]]>
+	</sql>
+		
+	<sql sqlId="selectPrimaryKey" author="" function=""><![CDATA[
+				select lower(column_name)  from all_cons_columns a, all_constraints b  
+				where a.constraint_name = b.constraint_name  
+					  and b.constraint_type = 'P' 
+					  and b.table_name = upper(:table_name)
+				]]>
+	</sql>
+	
+	<sql sqlId="selectColumn" author="" function=""><![CDATA[
+				select lower(table_name) table_name,lower(column_name) column_name,lower(data_type) data_type 
+				from user_tab_columns where table_name = upper(:table_name)
+				]]>
+	</sql>
+
+	<sql sqlId="ajaxParent" author="" function=""><![CDATA[
+				select b.organiseid,b.organisename
+				  from t_organise b
+				 where b.organiseid in 
+				 (
+				       select 
+				       distinct parentid 
+				       from t_organise a
+				 )
+				]]>
+	</sql>	
+	
+	<sql sqlId="ajaxSub" author="" function=""><![CDATA[
+				select a.organiseid, a.organisename 
+				from t_organise a
+				where a.parentid = :parentid
+				]]>
+	</sql>	
+	
+	<sql sqlId="ajaxAutoComplete" author="" function=""><![CDATA[
+		        select b.organisename
+		        from t_organise b
+		        where b.organisename like '%'|| :organisename ||'%' 
+				]]>
+	</sql>
+	
+	<sql sqlId="firstLevelTree" author="" function=""><![CDATA[
+		        select a.menuid, a.menuname 
+				from t_menu a 
+				where a.fatherid is null
+				]]>
+	</sql>
+	
+	<sql sqlId="menuLevelTree" author="" function=""><![CDATA[
+			    select a.menuid,a.menuname
+			    from t_menu a 
+			    where a.fatherid = :fatherid
+				]]>
+	</sql>
+	
+	<sql sqlId="buttonLevelTree" author="" function=""><![CDATA[
+				select a.buttonid,a.buttonname 
+				from t_button a 
+				where a.menuid = :menuid
+				]]>
+	</sql>
+</sqlList>

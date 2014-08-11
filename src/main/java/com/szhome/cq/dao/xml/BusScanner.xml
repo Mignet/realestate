@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+	<comment>BusScanner</comment>
+	<!--  通过业务ID(bus_id),材料ID(receival_id) 获取扫描纪录信息-->
+	<sql sqlId="selectBusScannersby" author="Sam" function=""><![CDATA[
+	         select * from BUS_SCANNER where bus_id = :bus_id and receival_id = :receival_id
+			 ]]>
+	</sql>	
+</sqlList>

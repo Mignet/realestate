@@ -1,0 +1,20 @@
+﻿[{  
+    "id": 1,  
+    "text": "办文抽检"
+    
+},{  
+    "id": 2,  
+    "text": "检查意见",
+    "attributes":{  
+            "url":"/qualityinspection/examine.action"
+        }
+       
+},{  
+    "id": 3,  
+    "text": "质量检查记录表",
+    "attributes":{  
+            "url":"/qualityinspection/inspection-record.action"
+       }
+       
+}
+]  

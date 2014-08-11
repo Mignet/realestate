@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_tax_return_tax" pageWidth="900" pageHeight="20" whenNoDataType="AllSectionsNoDetail" columnWidth="900" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="ad35936d-86a6-4a59-95e6-ee4ef56ab5d2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="157"/>
+	<property name="ireport.y" value="0"/>
+	<field name="p_type" class="java.lang.String">
+		<fieldDescription><![CDATA[p_type]]></fieldDescription>
+	</field>
+	<field name="p_name" class="java.lang.String">
+		<fieldDescription><![CDATA[p_name]]></fieldDescription>
+	</field>
+	<field name="p_cer_type" class="java.lang.String"/>
+	<field name="p_cer_no" class="java.lang.String"/>
+	<field name="p_tax_type" class="java.lang.String"/>
+	<field name="p_tax_item" class="java.lang.String"/>
+	<field name="p_price" class="java.lang.String"/>
+	<field name="p_deducted_price" class="java.lang.String"/>
+	<field name="p_tax_rate" class="java.lang.String"/>
+	<field name="p_tax" class="java.lang.String"/>
+	<field name="p_deducted_tax" class="java.lang.String"/>
+	<field name="p_payment_tax" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="19" y="0" width="64" height="20" uuid="c5da682c-1c3e-42e6-84e9-853c316d1022"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="83" y="0" width="68" height="20" uuid="02f981b2-6658-419c-8bc2-799fce23eda1"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="151" y="0" width="58" height="20" uuid="3bea22b6-e75f-4302-b512-5e65da60d5d2"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_cer_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="209" y="0" width="106" height="20" uuid="d2fb597f-bfb7-4c98-bbb5-e843171066fe"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_cer_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="315" y="0" width="63" height="20" uuid="e47b9d47-8cec-49bb-ac11-c62f154e80e2"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_tax_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="378" y="0" width="63" height="20" uuid="ea5a193d-b662-4f68-ad17-598e82492292"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_tax_item}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="441" y="0" width="63" height="20" uuid="d610bf41-ca7e-43db-b31c-153844211ccf"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="504" y="0" width="60" height="20" uuid="11344354-eda7-4c83-954c-9f4596d83ad8"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_deducted_price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="564" y="0" width="61" height="20" uuid="d8f5af8b-eac7-4d73-a798-c303be7e7588"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_tax_rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="625" y="0" width="91" height="20" uuid="c66caf12-b254-4042-8479-6c5e3be31b70"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_tax}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="716" y="0" width="100" height="20" uuid="57ed8e09-5d85-45d1-a460-004f43497541"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_deducted_tax}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="816" y="0" width="61" height="20" uuid="c25ea570-9732-44dc-ad49-18802dd670ca"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_payment_tax}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

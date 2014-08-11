@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>所有公共sql语句  放在此处   ,  sqlId 不能重复</comment>
+
+	<sql sqlId="getIDSeq" author="Mignet" function="获得表主键SQL"><![CDATA[
+	            select to_char(sysdate, 'yyyymmdd') || lpad(seq_global_id.nextval, 12, '0') as globalid from dual
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getCustomerID" author="Mignet" function="获得客户编码的SQL"><![CDATA[
+	            select lpad(seq_customer_code.nextval, 10, '0') as customerid from dual
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getProductCode" author="Mignet" function="获得产品代码的SQL"><![CDATA[
+	            select lpad(seq_product_code.nextval, 8, '0') as productcode from dual
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getSystemTime" author="Mignet" function="获取系统时间"><![CDATA[
+	           select sysdate from dual 
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getToSingleByte" author="Mignet" function="全角的数字/字母/标点符号转半角"><![CDATA[
+	           select to_single_byte(:srcStr) from dual 
+	            ]]>
+	</sql>
+	<!-- 获取表单及报表树 -->
+	<sql sqlId="getFormTree" author="xuzz" function="获取表单及报表树 "><![CDATA[
+	           select form_id,parent_id,url,busnode,form_name,icon from FORM_REPORT_ADDRESS
+	            ]]>
+	</sql>
+	<!-- 根据父级ID获取表单及报表树 -->
+	<sql sqlId="getFormByParentId" author="xuzz" function="根据父级ID获取表单及报表树 "><![CDATA[
+	           select form_id,busnode ,form_name ,url,creator,create_date,decode((select count(1) from FORM_REPORT_ADDRESS sp where sp.parent_id = p.form_id), 0, 'open', 'closed') as state from FORM_REPORT_ADDRESS p
+	            ]]>
+	</sql>
+	<!-- 根据流程实例ID获取宗地楼宇房屋表数据 -->
+	<sql sqlId="getBuildById" author="xuzz" function="根据流程实例ID获取宗地楼宇房屋表数据"><![CDATA[
+	           select b.building_name,b.build_no,b.layer_count,b.floor_area,b.build_ld_area, to_char(b.compleion_date,'YYYY-MM-DD HH24:MI:SS') as compleion_date, 
+	           b.building_code,b.layer_count,b.common_area,b.apportion_common_area,b.noapportion_common_area from EST_BUILDING b,
+(select distinct building_code from EST_HOUSE h, BUS_REGUNITREL r where h.house_id = r.house_id and
+	            ]]>
+	</sql>
+	<!-- 根据流程实例Id获取分户汇总表数据 -->
+	<sql sqlId="getHouseById" author="xuzz" function="根据流程实例Id获取分户汇总表数据"><![CDATA[
+	           select p.parcel_code,b.build_no,e.build_area,e.fentan_area,e.taonei_area,e.ft_glebe_area,e.flatlet_usage,e.roomname,e.ft_glebe_area from EST_HOUSE e, BUS_REGUNITREL r,EST_BUILDING b,EST_PARCEL p 
+	           where e.house_id=r.house_id and b.building_code = (select distinct building_code from EST_HOUSE where house_id = r.house_id )
+	           and p.parcel_id = (select distinct parcel_id from EST_BUILDING where building_code = b.building_code)  and
+	            ]]>
+	     </sql>       
+	            <!-- 根据流程实例Id获取宗地表数据 -->
+	<sql sqlId="getLandById" author="xuzz" function="根据流程实例Id获取宗地表数据"><![CDATA[
+	           select p.*,u.REG_PRI,u.CER_NO from EST_PARCEL p,BK_BASEINFO ba,BK_USERIGHT u, 
+   ( select distinct b.PARCEL_ID,b.PARCEL_CODE from  EST_BUILDING b,
+ (select distinct building_code from EST_HOUSE h, BUS_REGUNITREL r where h.house_id = r.house_id and
+	            ]]>
+	            
+	</sql>
+	<!-- 根据流程实例表id   查询接件材料表信息 -->
+	<sql sqlId="getRecmatConByid" author="panda" function=""><![CDATA[
+	           	select CFIG_RECEIVAL_ID,CFIG_REC_NAME,CFIG_REC_TYPE,CFIG_REC_STYLE,CFIG_REC_COPY,CFIG_PERSON,
+	           	CFIG_PAGE,to_char(CFIG_DATE,'YYYY-MM-DD HH24:MI:SS') as CFIG_DATE from CFIG_RECEIVAL 
+	            ]]>
+	</sql>
+	
+	<!-- 查询常用语 -->
+	<sql sqlId="getComLanByid" author="panda" function=""><![CDATA[
+	           	select * from CFIG_DOC_TEMP  
+	            ]]>
+	</sql>
+	
+	<!--按条件，获取子节点-->
+	<sql sqlId="getMenuChildList" author="panda" function=""><![CDATA[
+	           	select menu_name,menu_id,menu_order from T_MENU  
+	            ]]>
+	</sql>
+	
+	<!--按条件，获取菜单列表集合-->
+	<sql sqlId="getMenuList" author="panda" function=""><![CDATA[
+	           	select menu_id,parent_id,menu_name ,menu_order,url,creator,to_char(create_date,'YYYY-MM-DD HH24:MI:SS') as create_date,decode((select count(1) from T_MENU sp where sp.parent_id = p.menu_id), 0, 'open', 'closed') as state
+	           	 from T_MENU p 
+	     ]]>
+	</sql> 	
+	      <!--按条件，获取本地业务定义表集合-->
+	<sql sqlId="getBusProcList" author="xuzz" function="按条件，获取本地业务定义表集合"><![CDATA[
+	      SELECT bus_type_id as id,
+       parent_id,
+       bus_name as name,
+       proc_id as procdefid,
+       to_char(create_date,'YYYY-MM-DD HH24:MI:SS') as create_date,
+       to_char(change_date,'YYYY-MM-DD HH24:MI:SS') as change_date,
+       DECODE ( (SELECT COUNT (1)
+                   FROM BUS_PROC sp
+                  WHERE sp.parent_id = p.bus_type_id),
+               0, 'open',
+               'closed')
+          AS state
+  FROM BUS_PROC p
+	      ]]>
+	</sql> 	
+	          
+	<!-- 根据流程定义节点查询表单及报表列表 -->
+	<sql sqlId="getFormById" author="xuzz" function=""><![CDATA[
+	           	select n.Node_ofi_rel,c.* from CFIG_OFFICE c join  CFIG_NODE_OFI_REL n on C.OFFICE_ID=N.OFFICE_ID join CFIG_PROC_NODE p on N.NODE_ID=P.NODE_ID
+	            ]]>
+	</sql>
+	<!-- 根据流程定义节点以及流程定义ID查询关联表是否包含节点表单 -->
+	<sql sqlId="getNode" author="xuzz" function=""><![CDATA[
+	           	select * from CFIG_NODE_OFI_REL
+	            ]]>
+	</sql>
+			<!-- 查询流程定义以及流程定义，用于配置表单及报表配置 -->
+	<sql sqlId="getProcName" author="xuzz" function=""><![CDATA[
+	           	select * from CFIG_BUS_TYPE
+	            ]]>
+	</sql>
+	
+		<sql sqlId="getProMatter" author="xuzz" function="查询业务事项，用于配置业务事项"><![CDATA[
+	           	select * from CFIG_BUS_MATTER
+	            ]]>
+	</sql>
+	<sql sqlId="getChildMatter" author="xuzz" function="查询业务事项是否存在子节点"><![CDATA[
+	           	SELECT *
+  FROM CFIG_BUS_MATTER
+ WHERE parent_id IN (SELECT bus_type_id
+                       FROM CFIG_BUS_MATTER
+                      WHERE id = :id)
+	            ]]>
+	</sql>
+
+	<sql sqlId="getCerCode" author="Sam" function="获得产权证号通过登记编号"><![CDATA[
+	            select cer_code from BK_CERTIFICATE where reg_code = :REG_CODE
+	            ]]>
+	</sql>
+
+    <sql sqlId="getBusName" author="Sam" function="获得流程名通过业务类型ID"><![CDATA[
+	           	select bus_name from CFIG_BUS_TYPE where bus_type_id = :BUS_TYPE_ID
+	            ]]>
+	</sql>
+	
+	<!-- 查询流程定义以及流程定义节点，用于配置表单及报表配置 -->
+	<sql sqlId="getProcNode" author="xuzz" function=""><![CDATA[
+	           	select * from   CFIG_PROC_NODE where BUS_TYPE_ID in (select BUS_TYPE_ID from CFIG_BUS_TYPE)  order by order_id asc
+	            ]]>
+	</sql>
+		<!-- 查询流程单个定义节点，用于展示流程节点 -->
+	<sql sqlId="getProcNodeById" author="xuzz" function=""><![CDATA[
+	           	select * from   CFIG_PROC_NODE p where BUS_TYPE_ID=(select BUS_TYPE_ID from CFIG_BUS_TYPE b  
+	            ]]>
+	</sql>
+			<!-- 查询表单及报表 -->
+	<sql sqlId="getFrom" author="xuzz" function=""><![CDATA[
+	           	select * from CFIG_OFFICE
+	            ]]>
+	</sql>
+	
+	<!-- 查询业务主表  通过登记编号 -->
+	<sql sqlId="getBusMainInfoByRegCode" author="Joyon" function=""><![CDATA[
+	           	select b.*,(select bus_name from cfig_bus_type where bus_type_id=(select reg_type from bus_main where reg_code=:reg_code)) as REG_TYPE_NAME from bus_main b where reg_code=:reg_code
+	            ]]>
+	</sql>
+	
+	<!-- 查询所有业务主表信息 -->
+	<sql sqlId="getBusMain" author="Joyon" function=""><![CDATA[
+	           	select * from bus_main
+	            ]]>
+	</sql>
+	
+	<!-- 查询表单及报表 -->
+	<sql sqlId="getCertificateInfoByRegCode" author="Joyon" function=""><![CDATA[
+	           select * from BUS_EST_CERTIFICATE where bus_id=(select bus_id from bus_main where reg_code=:reg_code)
+	            ]]>
+	</sql>
+	
+	<!-- 获取不动产登记下面的所有业务 -->
+	<sql sqlId="getqueryProcessdef" author="xuzz" function="获取不动产登记下面的所有业务"><![CDATA[
+	           select * from platform.WF_SYSMODULE where parent_module_id=1043
+	            ]]>
+	</sql>
+	
+	<!-- 通过业务Id获取合同信息 -->
+	<sql sqlId="getContractInfoByBusId" author="xuzz" function="获取不动产登记下面的所有业务"><![CDATA[
+	           select c.*,to_char(c.CON_DATE, 'YYYY-MM-DD') as CON_DATE,to_char(c.CON_SIGN_DATE, 'YYYY-MM-DD') as CON_SIGN_DATE,to_char(c.OCCUPATION_DATE, 'YYYY-MM-DD') as OCCUPATION_DATE,to_char(c.HOME_BUYERS_CER_DATE, 'YYYY-MM-DD') as HOME_BUYERS_CER_DATE from BDC_CONTRACT_INFO c where house_id=(select house_id from bus_regunitrel where bus_id=:bus_id)
+	            ]]>
+	</sql>
+	
+	<!-- 获取登记簿所有权部分Map通过登记编号 -->
+	<sql sqlId="getReg_ownershipMapByRegCode" author="xuzz" function="获取不动产登记下面的所有业务"><![CDATA[
+	           select * from bk_ownership where reg_code=:reg_code
+	            ]]>
+	</sql>
+	
+	<!-- 获取申请人信息 -->
+	<sql sqlId="getAppcaliant" author="xuzz" function="获取不动产登记下面的所有业务"><![CDATA[
+	           select *  from BUS_APPLICANT
+	            ]]>
+	</sql>
+	
+	<!-- 获取申请人信息 -->
+	<sql sqlId="getDeclarationForm" author="xuzz" function="获取不动产登记下面的所有业务"><![CDATA[
+	           select *  from BDC_TAX_REPORT_INFO
+	            ]]>
+	</sql>
+	<!-- 获取父id为特定值得菜单总记录-->
+	<sql sqlId="getMenucount" author="panda" function=""><![CDATA[
+	           select max(menu_order) as count  from t_menu where parent_id=:id
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getBusMainDataBy" author="panda" function=""><![CDATA[
+	           select * from bus_main 
+	            ]]>
+	</sql>
+	
+	
+	
+	
+</sqlList>

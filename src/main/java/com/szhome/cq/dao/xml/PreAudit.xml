@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>PreAudit</comment>
+	<!-- 查询宗地表，房屋表，和楼宇表三张表信息用于查询房屋信息 -->
+	<sql sqlId="getAuditInfo" author="xuzz" function=""><![CDATA[
+	            select l.BUILDING_NAME buildname,'009001' as reg_type,'房屋' as reg_typename,l.BUILD_NO buildnum,f.ADV_HOUSE_CODE code,l.building_id buildingid,f.house_id houseid,z.parcel_id parcelid,l.BUILDING_CODE buildcode,f.HOUSE_LOCATION houselocation,l.PARCEL_CODE parcelcode,f.FLATLET_USAGE usage,f.PRO_NAME proname,f.FT_BUILD_LD_AREA ftbuildarea,l.BUILD_LD_AREA buildarea,f.roomname roomno from EST_PARCEL z join EST_BUILDING l on z.PARCEL_CODE = L.PARCEL_CODE join EST_HOUSE f on l.BUILDING_CODE = f.BUILDING_CODE where 
+	            ]]>
+	</sql>
+		<!-- 查询所有宗地信息 -->
+	<sql sqlId="getAllLandInfo" author="xuzz" function=""><![CDATA[
+	            select '009003' as reg_type,'宗地' as reg_typename,PARCEL_CODE code,REAL_USAGE usage,'安业鑫源' as proname,PARCEL_AREA parcelarea,LAND_ADDRESS location from EST_PARCEL
+	            ]]>
+	</sql>
+	<!-- 查询所有建筑物信息 -->
+	<sql sqlId="getAllBuildInfo" author="xuzz" function=""><![CDATA[
+	            select l.BUILDING_NAME buildname,z.REAL_USAGE  usage,l.COMMUNITY_NAME  proname ,'009002' as reg_type,'楼宇' as reg_typename,l.BUILD_NO buildnum,l.building_id buildingid,z.parcel_id parcelid,l.BUILDING_CODE code,l.PARCEL_CODE parcelcode,l.BUILD_LD_AREA buildarea from EST_PARCEL z join EST_BUILDING l on z.PARCEL_CODE = L.PARCEL_CODE
+	            ]]>
+	</sql>	
+	<!--检查该房屋是否可以办理房屋初始登记业务  -->
+	<sql sqlId="checkData" author="xuzz" function=""><![CDATA[
+	            select f.OWNERSHIP_ID from BK_BASEINFO j, BK_OWNERSHIP f where  j.BOOK_CODE=f.BOOK_CODE
+	            ]]>
+	</sql>
+	<!--根据房屋编码查询房屋相关信息  -->
+	<sql sqlId="getHouse" author="xuzz" function=""><![CDATA[
+	            select *  from EST_PARCEL ,EST_BUILDING ,EST_HOUSE where z.PARCEL_CODE = L.PARCEL_CODE and l.BUILDING_CODE = f.BUILDING_CODE
+	            ]]>
+	</sql>
+		<!--根据业务类型查询规则表里信息  -->
+	<sql sqlId="selectRule" author="xuzz" function=""><![CDATA[
+	            select *  from CFIG_ACCEPT_RULE  
+	            ]]>
+	</sql>
+
+	
+</sqlList>

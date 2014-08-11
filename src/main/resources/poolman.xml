@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<poolman>
+
+	<!-- ========================================================== -->
+	<!-- 数据源连接参数配置说明：程序根据系统属性的					      -->
+	<!-- weblogic.ProductionModeEnabled=XXXX来确定连接的方式，当XXXX为 -->
+	<!-- true时，使用连接池取得连接，为false的时候，使用JDBC取得连接。对应 -->
+	<!-- 就是修改weblogc 7.0中的startweblogic.cmd中的startmode=XXXX   -->
+	<!-- 参数说明：（使用JDBC连接的使用，仅使用jndiNmae,driver,url,     -->
+	<!-- username,password 5个参数）                                 -->
+	<!--  每个数据源的配置元素都在<datasourc> </datasource> 之间        -->
+	<!--  <dbname> 数据源的说明，在使用连接池的使用也可以作为参数         -->
+	<!--  <jndiName> 数据源的jndi名称，获取连接的参数名，推荐使用        -->
+	<!--  <driver> 数据库驱动程序名                                   -->
+	<!--  <url> 数据库连接的url                                       -->
+	<!--  <username>连接的帐号                                       -->
+	<!--  <password>连接的密码                                       -->
+	<!--  <minimumSize> 缓冲池中的最小连接数                           -->
+	<!--  <maximumSize> 缓冲池中的最大连接数                           -->
+	<!-- <initialConnections> 初始化连接池的时候建立几个连接            -->
+	<!--  <logFile> 日志文件，可以使用unix或者windows格式的命名         -->
+	<!--   如： /bea/db.log 或者c:\bea\db.log,缺省为System.out        -->
+	<!--  <connectionTimeout> 连接超时的时间 ,秒为单位                -->
+	<!-- ========================================================== -->
+
+
+	<!-- 最小的数据连接配置信息 -->
+	<datasource>
+		<dbname>oracledb</dbname>
+		<jndiName>oracledb</jndiName>
+		<driver>oracle.jdbc.driver.OracleDriver</driver>
+		<url>jdbc:oracle:thin:@192.168.110.2:1521:oraplan</url>
+		<username>supplan</username>
+		<password>plansup</password>
+		<minimumSize>2</minimumSize>
+		<maximumSize>5</maximumSize>
+		<logFile>logs\oracledb.log</logFile>
+	</datasource>
+	<datasource>
+		<dbname>platform</dbname>
+		<jndiName>platform</jndiName>
+		<driver>oracle.jdbc.driver.OracleDriver</driver>
+		<url>jdbc:oracle:thin:@192.168.110.2:1521:oraplan</url>
+		<username>platform</username>
+		<password>formplat</password>
+		<minimumSize>10</minimumSize>
+		<maximumSize>50</maximumSize>
+		<logFile>logs\platform.log</logFile>
+	</datasource>
+
+
+</poolman>

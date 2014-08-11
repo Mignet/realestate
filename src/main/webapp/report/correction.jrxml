@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="correction" language="groovy" pageWidth="466" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="426" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="cebf9a6f-b835-4411-a185-f73e5724cfd6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="ListRec" uuid="8b53864c-bc4f-4bc4-bc59-de4c73738f01">
+		<parameter name="bus_id" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select rownum,rec.*,(select DIC_ITEM_value from CFIG_DIC_ITEM where DIC_ITEM_CODE=rec.re_style and dic_type_id=(select DIC_TYPE_ID from CFIG_DIC_TYPE where DIC_TYPE_CODE='025'))as re_style_name from bus_receival rec where  rec.bus_id=$P{bus_id} and rec.rec_type_flag='2']]>
+		</queryString>
+		<field name="ROWNUM" class="java.math.BigDecimal"/>
+		<field name="RECEIVAL_ID" class="java.lang.String"/>
+		<field name="BUS_ID" class="java.lang.String"/>
+		<field name="B_DELETEFLAG" class="java.lang.String"/>
+		<field name="RE_NAME" class="java.lang.String"/>
+		<field name="RE_TYPE" class="java.lang.String"/>
+		<field name="RE_STYLE" class="java.lang.String"/>
+		<field name="RE_PAGE" class="java.lang.String"/>
+		<field name="RE_COPY" class="java.lang.String"/>
+		<field name="RE_PERSON" class="java.lang.String"/>
+		<field name="RE_DATE" class="java.sql.Timestamp"/>
+		<field name="REC_TYPE_FLAG" class="java.lang.String"/>
+		<field name="RE_STYLE_NAME" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="REC_DATE" class="java.lang.String"/>
+	<parameter name="APPS_NAME" class="java.lang.String"/>
+	<parameter name="REASON" class="java.lang.String"/>
+	<parameter name="REG_TYPE" class="java.lang.String"/>
+	<parameter name="bus_id" class="java.lang.String"/>
+	<parameter name="REG_CODE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="116" splitType="Stretch">
+			<staticText>
+				<reportElement x="28" y="18" width="371" height="38" uuid="ebc323a0-a363-4b92-a4b2-992980f7fdc8"/>
+				<textElement textAlignment="Center">
+					<font size="22" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[深圳市房地产权登记中心]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="56" width="371" height="32" uuid="7100f8f4-3586-443e-b499-1aed08dcc6e1"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[房地产登记补正材料通知书]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="254" y="88" width="145" height="20" uuid="01aa4656-f65f-43ac-9acd-59fe62aff2a7"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["编号："+$P{REG_CODE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="55" splitType="Stretch">
+			<textField>
+				<reportElement x="28" y="0" width="371" height="32" uuid="58eb3ab9-8cfe-40fb-9a85-fe62861c1b3b"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["    "+$P{REC_DATE}+",收到"+$P{APPS_NAME}+"提出"+$P{REG_TYPE}+"申请。经核查，所提交材料:"+$P{REASON}+"。请补正如下申请登记材料："]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="28" y="33" width="371" height="22" uuid="9a14b9a9-b37e-46a5-84d5-391db0be7d51"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="ListRec" uuid="67dce368-bea6-4608-9cf8-64ac44dd240a">
+						<datasetParameter name="bus_id">
+							<datasetParameterExpression><![CDATA[$P{bus_id}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="22" width="371">
+						<textField>
+							<reportElement x="45" y="0" width="315" height="21" uuid="7cfed0dd-4ebf-43a2-8a8a-3db1f9361848"/>
+							<textElement>
+								<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{ROWNUM}+"、"+$F{RE_NAME}+"("+$F{RE_COPY}+"份)"]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band height="49" splitType="Stretch">
+			<staticText>
+				<reportElement x="28" y="0" width="371" height="49" uuid="a89bd252-96ff-4f8a-b5a9-6da6d139cc2a"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[    请在收到本通知书之日起五日内按照上述要求补正申请登记材料送我中心，逾期未补正申请登记材料 的，视为自动放弃申请。
+]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="66" splitType="Stretch">
+			<staticText>
+				<reportElement x="299" y="11" width="100" height="20" uuid="c1866a96-16c6-4c61-ad93-ac5641ea6e6b"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[（印  章）]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="299" y="46" width="100" height="20" uuid="1de9320d-7835-48ce-9320-cf9546b5866c"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[年    月    日]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

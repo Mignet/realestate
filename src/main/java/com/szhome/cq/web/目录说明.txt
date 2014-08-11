@@ -1,0 +1,60 @@
+﻿目录说明:
+1.web下用于放置所有的Action。
+2.domain.model用于放置实体。
+4.dao.xml用于放置数据库相关的sql配置文件。
+5.business用于放置基于model实现的服务抽象。
+3.business.impl用于放置所有服务的实现类。
+6.utils 用于存放工具类。
+7.filter 用于放置过滤器。
+Action命名规则：
+1.用户发起请求的动作都需要有Action
+2.不是用户发起的请求动作原则上不需要Action
+3.同源的动作归为同一Action下，但职能太多的Action不需要合并
+4.从Action需要的功能点出发，归并出公共的服务实体
+5.掌握规则优于配置的原理，充分利用jsp、js和action的对应关系
+业务部分：
+landuseright		土地权属
+	土地使用权						查询及保存土地使用权、登记信息、申请人信息
+	InitialregAction	初始登记
+houseownership		房屋权属
+	房屋所有权
+	InitialregAction	初始登记
+	ShiftregAction		转移登记
+	ChangeregAction		变更登记
+	CorrectionAction	更正登记
+mortgage			抵押权
+	MorsetupAction		抵押权设立	获取申请人信息
+	MorcancelAction		抵押权注销
+sealup				查封
+	SealupAction	查封/解封
+dissent				异议
+	DissentAction	异议登记和注销
+revokeapproval		撤销核准
+	RevokeAction	
+reissue 			补换证件
+	ReissueAction	补发换发
+backup				备案
+	PresaleAction		解除/预售备案
+remark				备注
+	JudicialdecisionAction 	司法文书裁定过户备注/注销司法文书裁定过户备注
+	TipsAction				内部提示性备注/注销内部提示性备注
+tools			辅助功能
+	DistributeAction	分文相关
+	ReceivedfileAction	收文模版
+	CertificateAction	房地产证留存管理
+workflow	         流程共有
+	PreauditAction		受理前审核
+	WorkwindowAction	结点主窗口
+stat		           统计分析
+basedata		楼盘表相关
+bookmanage		登记薄管理
+	地役权		easement
+
+sysmanage		系统管理
+
+技术部分：
+login		         系统登录
+ajax		         异步调用
+common		         公共
+
+注：建立完成之后，此处不允许新建和修改目录

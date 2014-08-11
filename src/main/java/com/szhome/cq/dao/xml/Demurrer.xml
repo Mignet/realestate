@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>Demurrer</comment>
+	<sql sqlId="getAllDemurrerInfos" author="Sam" function="获得所有异议登记信息"><![CDATA[
+	               select tab.* from ( select comb.*,cb2.address from (select bdr.*,
+                      to_char(bdr.reg_date,'YYYY-MM-DD') areg_date,
+                      (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bbi.reg_unit_type ) reg_type,
+                      (select vbhr.r_coll_names from V_BOOK_HOLDER_REL vbhr where vbhr.right_rel_id = brr.right_rel_id) holder_name,
+                      (select vbhr.r_coll_cerno from V_BOOK_HOLDER_REL vbhr where vbhr.right_rel_id = brr.right_rel_id) holder_no,
+                      bbi.reg_unit_type,bbi.reg_unit_code,bbi.reg_unit_code where_code
+                      from 
+                      bk_demurrer bdr,
+                      bk_baseinfo bbi,
+                      bk_right_rel brr
+                      where bdr.book_code = bbi.book_code
+                      and bdr.reg_code = brr.reg_code
+                      and bbi.reg_unit_type = '009001'
+                      and bdr.procdef_id = '1061') comb
+                      left join (select ehe.adv_house_code,ehe.house_location address from est_building ebg,est_house ehe where ebg.building_code = ehe.building_code) cb2 on cb2.adv_house_code = comb.reg_unit_code
+                      union
+                      select comb.*,cb1.address from (select bdr.*,
+                      to_char(bdr.reg_date,'YYYY-MM-DD') areg_date,
+                      (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bbi.reg_unit_type ) reg_type,
+                      (select vbhr.r_coll_names from V_BOOK_HOLDER_REL vbhr where vbhr.right_rel_id = brr.right_rel_id) holder_name,
+                      (select vbhr.r_coll_cerno from V_BOOK_HOLDER_REL vbhr where vbhr.right_rel_id = brr.right_rel_id) holder_no,
+                      bbi.reg_unit_type,bbi.reg_unit_code,bbi.reg_unit_code where_code
+                      from 
+                      bk_demurrer bdr,
+                      bk_baseinfo bbi,
+                      bk_right_rel brr
+                      where bdr.book_code = bbi.book_code
+                      and bdr.reg_code = brr.reg_code
+                      and bbi.reg_unit_type = '009003'
+                      and bdr.procdef_id = '1061') comb
+                      left join (select epl.parcel_code,epl.land_address address from est_parcel epl left join est_building ebg on ebg.parcel_code = epl.parcel_code) cb1 on cb1.parcel_code = comb.reg_unit_code) tab
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getAllO" author="Sam" function="获得所有查封登记信息"><![CDATA[
+	                select distinct tab.* from (select bdr.*,bbi.reg_unit_type,bbi.reg_unit_code,
+                       (select vbhh.r_coll_names from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063004') demu_applier,
+                       (select vbhh.r_coll_names from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063003') demued_applier,
+                       (select vbhh.r_coll_cerno from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063004') demu_applierid,
+                       (select vbhh.r_coll_cerno from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063003') demued_applierid,
+                    (select bus_name from cfig_bus_type where bus_type_id = bdr.procdef_id) bus_name,
+                    to_char(bdr.reg_date,'YYYY-MM-DD') areg_date
+                    from bk_demurrer bdr,bk_baseinfo bbi,bk_right_rel brr
+                    where bdr.book_code = bbi.book_code 
+                    and bdr.reg_code = brr.reg_code
+                    and bdr.procdef_id = '1061') tab
+	            ]]>
+	</sql>
+	
+</sqlList>

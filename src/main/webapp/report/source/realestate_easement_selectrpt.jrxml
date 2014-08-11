@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ownership_mortgage_selectrpt" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3a6007db-092c-453b-9d99-4db3b5baa061">
+	<property name="ireport.zoom" value="0.8264462809917354"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="printdatetime" class="java.lang.String"/>
+	<parameter name="common.printor" class="java.lang.String"/>
+	<parameter name="common.colon" class="java.lang.String"/>
+	<parameter name="common.print_date" class="java.lang.String"/>
+	<parameter name="easement.caption" class="java.lang.String"/>
+	<parameter name="printor" class="java.lang.String"/>
+	<field name="DESCRIPTION" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="72">
+			<line>
+				<reportElement x="0" y="71" width="555" height="1" uuid="d8b28ce0-3af9-4b6a-a71e-d6dec8e7d600"/>
+			</line>
+			<rectangle radius="15">
+				<reportElement x="118" y="18" width="312" height="27" backcolor="#FFFFFF" uuid="8b332ac7-cbc5-4cd1-87de-b754714da33c"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="155" y="18" width="245" height="27" uuid="9ea6a1d5-bb1b-4573-b42f-0e9a0992f953"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{easement.caption}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="54" width="40" height="16" uuid="fbaf5865-57e9-4d59-baf9-7c1d212077a2"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.printor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="51" y="54" width="8" height="16" uuid="54231939-023c-4254-a919-c8ee69d2902d"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="404" y="54" width="42" height="16" uuid="f9cfb028-94a2-4797-a6d2-54c1f1aaf5c7"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.print_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="446" y="54" width="8" height="16" uuid="28daeafd-8eb4-4817-a212-cbe4f5f4f94b"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="454" y="54" width="100" height="16" uuid="3b3b71a1-26be-4721-b998-22c737b693ed"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{printdatetime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="59" y="54" width="71" height="16" uuid="8c4a07a6-03f8-49bb-99b7-ec7ec8622d86"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{printor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="692" splitType="Stretch">
+			<ellipse>
+				<reportElement x="155" y="133" width="230" height="118" uuid="60e787ca-e8d0-4b1e-94f8-ca285e123a62"/>
+			</ellipse>
+			<staticText>
+				<reportElement x="16" y="676" width="530" height="16" uuid="9ccae783-5fdc-4bd0-90c2-07c9551364ad"/>
+				<textElement>
+					<font size="10" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[注：《中华人民共和国物权法》第十九条规定：登记机构予以异议登记的，申请人在异议登记之日起十五日内不起诉，]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="189" y="179" width="156" height="26" isRemoveLineWhenBlank="true" uuid="ff64af5e-80e7-44b7-b9b9-82dff1163f0b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESCRIPTION}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="38" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="0" width="555" height="1" uuid="90739c2f-eef0-4458-8ec2-4449e3e6ed0c"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

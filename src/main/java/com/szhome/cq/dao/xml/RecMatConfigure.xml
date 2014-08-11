@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>Register</comment>
+	
+	<!--  通过登记编号 reg_id 查询接件材料配置信息 -->
+	<sql sqlId="getRecMatConMapListByRegCode" author="Joyon" function=""><![CDATA[
+	          select * from CFIG_RECEIVAL where bus_type_id = (
+				       select reg_type from bus_main where bus_id=(select bus_id from bus_main where reg_code=:reg_code)
+				)
+				 ]]>
+	</sql>
+	
+	<!--  通过登记编号 reg_id 查询接件材料配置信息 As 接件材料-->
+	<sql sqlId="getRecMatConAsRecMapListByRegCode" author="Joyon" function=""><![CDATA[
+	          select CFIG_REC_NAME as RE_NAME,CFIG_REC_TYPE as RE_TYPE,CFIG_REC_STYLE as RE_STYLE,CFIG_REC_COPY as RE_COPY,CFIG_PERSON as RE_PERSON,CFIG_PAGE as RE_PAGE,CFIG_DATE as RE_DATE  from CFIG_RECEIVAL where bus_type_id = (
+				       select reg_type from bus_main where bus_id=(select bus_id from bus_main where reg_code=:reg_code)
+				)
+				 ]]>
+	</sql>
+	
+	
+	
+
+	
+	
+	
+	
+</sqlList>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+    <comment>SpeDelay</comment>
+	<sql sqlId="querySpeDelayInfoListBy" author="sam" function=""><![CDATA[
+				select * from spe_delay
+				]]>
+	</sql>
+	<sql sqlId="getSpeDelayInfoDataByDelayId" author="sam" function=""><![CDATA[
+				select * from spe_delay where delay_id = :delay_id 
+				]]>
+	</sql>
+	<sql sqlId="getSpeDelayInfoDataByDelayNo" author="sam" function=""><![CDATA[
+				select * from spe_delay where delay_no = :delay_no 
+				]]>
+	</sql>
+	<sql sqlId="getSpeDelayInfoDataBybusIdownerNo" author="sam" function=""><![CDATA[
+				select * from spe_delay where bus_id = :bus_id and delay_no = :delay_no
+				]]>
+	</sql>
+</sqlList>

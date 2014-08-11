@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ownership_mortgage_selectrpt" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3a6007db-092c-453b-9d99-4db3b5baa061">
+	<property name="ireport.zoom" value="0.8264462809917354"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="printdatetime" class="java.lang.String"/>
+	<parameter name="register.cancel_date" class="java.lang.String"/>
+	<parameter name="register.reg_date" class="java.lang.String"/>
+	<parameter name="common.printor" class="java.lang.String"/>
+	<parameter name="common.colon" class="java.lang.String"/>
+	<parameter name="common.print_date" class="java.lang.String"/>
+	<parameter name="house.itself" class="java.lang.String"/>
+	<parameter name="register.applicantname" class="java.lang.String"/>
+	<parameter name="parcel.land_address" class="java.lang.String"/>
+	<parameter name="demurrer.caption" class="java.lang.String"/>
+	<parameter name="demurrer.reg_info" class="java.lang.String"/>
+	<parameter name="demurrer.applicantinfo" class="java.lang.String"/>
+	<parameter name="demurrer.inofobjection" class="java.lang.String"/>
+	<parameter name="demurrer.remark" class="java.lang.String"/>
+	<parameter name="demurrer.reg_code" class="java.lang.String"/>
+	<parameter name="demurrer.diss_item" class="java.lang.String"/>
+	<parameter name="demurrer.identity_card" class="java.lang.String"/>
+	<parameter name="demurrer.inofobjectionname" class="java.lang.String"/>
+	<parameter name="demurrer.realestateidtype" class="java.lang.String"/>
+	<parameter name="demurrer.id_code" class="java.lang.String"/>
+	<parameter name="demurrer.cq_reg_code" class="java.lang.String"/>
+	<parameter name="demurrer.ioo_realestate_nameandroom" class="java.lang.String"/>
+	<parameter name="printor" class="java.lang.String"/>
+	<parameter name="parcel.itself" class="java.lang.String"/>
+	<field name="REG_CODE" class="java.lang.String"/>
+	<field name="REG_UNIT_TYPE" class="java.lang.String"/>
+	<field name="AREG_DATE" class="java.lang.String"/>
+	<field name="DISS_ITEM" class="java.lang.String"/>
+	<field name="DEMU_APPLIER" class="java.lang.String"/>
+	<field name="DEMUED_APPLIER" class="java.lang.String"/>
+	<field name="DEMU_APPLIERID" class="java.lang.String"/>
+	<field name="DEMUED_APPLIERID" class="java.lang.String"/>
+	<field name="EXCURSUS" class="java.lang.String"/>
+	<field name="BOOK_CODE" class="java.lang.String"/>
+	<field name="CER_NO" class="java.lang.String"/>
+	<field name="LAND_ADDRESS" class="java.lang.String"/>
+	<field name="UR_REG_CODE" class="java.lang.String"/>
+	<field name="OS_REG_CODE" class="java.lang.String"/>
+	<field name="BUILDING_NAME" class="java.lang.String"/>
+	<field name="BUILD_NO" class="java.lang.String"/>
+	<field name="ROOMNAME" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="72">
+			<line>
+				<reportElement x="0" y="71" width="555" height="1" uuid="d8b28ce0-3af9-4b6a-a71e-d6dec8e7d600"/>
+			</line>
+			<rectangle radius="15">
+				<reportElement x="118" y="18" width="312" height="27" backcolor="#FFFFFF" uuid="8b332ac7-cbc5-4cd1-87de-b754714da33c"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="155" y="18" width="245" height="27" uuid="9ea6a1d5-bb1b-4573-b42f-0e9a0992f953"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{demurrer.caption}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="54" width="40" height="16" uuid="fbaf5865-57e9-4d59-baf9-7c1d212077a2"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.printor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="51" y="54" width="8" height="16" uuid="54231939-023c-4254-a919-c8ee69d2902d"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="404" y="54" width="42" height="16" uuid="f9cfb028-94a2-4797-a6d2-54c1f1aaf5c7"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.print_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="446" y="54" width="8" height="16" uuid="28daeafd-8eb4-4817-a212-cbe4f5f4f94b"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="454" y="54" width="100" height="16" uuid="3b3b71a1-26be-4721-b998-22c737b693ed"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{printdatetime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="59" y="54" width="71" height="16" uuid="8c4a07a6-03f8-49bb-99b7-ec7ec8622d86"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{printor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="692" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="47" width="80" height="23" uuid="fcf5a9ad-11eb-486d-bc2c-7269ca4f7ae8"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{demurrer.reg_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="47" width="8" height="23" uuid="6af25183-67c4-4733-a787-a53f4d5edf51"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="194" width="67" height="23" uuid="224f5a04-55d7-4463-8cc6-5eff4ecc1b2c"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{register.applicantname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="78" y="194" width="8" height="23" uuid="4a521649-9037-4cc0-b28d-de9c68a323dc"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="97" y="33" width="113" height="1" uuid="fb057fdc-8a3f-4aa2-bc9c-abb650f28440"/>
+			</line>
+			<line>
+				<reportElement x="343" y="34" width="113" height="1" uuid="7815af4a-d9fe-4233-8130-c5e8bf7901c1"/>
+			</line>
+			<textField>
+				<reportElement x="210" y="22" width="133" height="23" uuid="934a4ffa-3ae9-4c13-8e20-b58a2b6cb27e"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{demurrer.reg_info}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="327" y="47" width="8" height="23" uuid="36ffe5a9-1ca3-4871-be88-44bc65ab8f2e"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="274" y="47" width="53" height="23" uuid="31471702-e806-4855-ba7a-58ea015e8629"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{register.reg_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="72" width="8" height="23" uuid="15f6a616-599a-4f6a-aea4-41381c0ce04c"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="98" width="8" height="23" uuid="1ce470b8-a3a9-48e0-98f4-f603f7fa6628"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="98" width="53" height="23" uuid="892f79e4-0bb3-4ae3-8c9d-fe309f470b1e"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{demurrer.diss_item}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="72" width="53" height="23" uuid="477d03cc-1eb5-482e-bd71-b347353e4c9d"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{register.cancel_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="170" width="133" height="23" uuid="1e5e174f-50af-4d2b-91a3-691a1ef11a26"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{demurrer.applicantinfo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="97" y="181" width="113" height="1" uuid="9ef1d02f-3e51-4918-b1fb-5c7fabbdb44a"/>
+			</line>
+			<line>
+				<reportElement x="343" y="182" width="113" height="1" uuid="9df6c5e6-c3b6-4333-bb1a-2f5870fa9bd2"/>
+			</line>
+			<textField>
+				<reportElement x="210" y="315" width="133" height="23" uuid="5080ba1c-560b-4d6f-bd43-20922144baf5"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{REG_UNIT_TYPE}!=null && $F{REG_UNIT_TYPE}.equals("009001")?$P{house.itself}:$P{parcel.itself}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="97" y="326" width="113" height="1" uuid="c3326e17-0bb3-49fe-93d6-861a2c96a5f0"/>
+			</line>
+			<line>
+				<reportElement x="343" y="327" width="113" height="1" uuid="63b8f7d9-6703-40fb-b0b3-47d9a43f3bc6"/>
+			</line>
+			<textField>
+				<reportElement x="210" y="489" width="133" height="23" uuid="1260c891-45f1-4fc1-8d35-699dacf26970"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{demurrer.remark}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="343" y="501" width="113" height="1" uuid="6a406496-658f-4387-8839-199df9cc115e"/>
+			</line>
+			<line>
+				<reportElement x="97" y="500" width="113" height="1" uuid="eb85d224-0756-4152-acd6-d47d4b0493da"/>
+			</line>
+			<textField>
+				<reportElement x="210" y="219" width="133" height="23" uuid="61cf3d81-ab12-4f1f-91ec-b7129f9b169e"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{demurrer.inofobjection}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="343" y="231" width="113" height="1" uuid="e23ac7c4-e6b2-441b-abbf-789fa86a16e3"/>
+			</line>
+			<line>
+				<reportElement x="97" y="230" width="113" height="1" uuid="5e895d15-6eb6-4c6e-8ab7-6e225c9fd57b"/>
+			</line>
+			<textField>
+				<reportElement x="327" y="194" width="8" height="23" uuid="39b0eab4-d3fc-4ecf-9283-f30265d56ee5"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="274" y="194" width="53" height="23" uuid="aa267a59-38e1-4633-9f0e-af9afe7cfc3c"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{demurrer.identity_card}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="274" y="243" width="53" height="23" uuid="85bb9abb-1ce8-4c32-8ffe-079f9662012e"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{demurrer.identity_card}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="327" y="243" width="8" height="23" uuid="ebeb45e4-244c-452a-a95c-476ad25c8e59"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="243" width="80" height="23" uuid="fef71887-fadf-42f1-98c2-2ff1fc42c9ec"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{demurrer.inofobjectionname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="243" width="8" height="23" uuid="1c8cfcc8-61e8-4fe5-bfb8-f8f4636270b7"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="274" y="342" width="53" height="23" uuid="7ddaef8b-af32-4cf7-8076-ff9fd479de4f"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{demurrer.id_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="369" width="8" height="23" uuid="87cb890a-f0b7-4abd-9d1c-99588f659c22"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="327" y="342" width="8" height="23" uuid="2e18f063-8a80-45f4-82a4-93629be7ae6c"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="369" width="80" height="23" uuid="2701b6e1-c8ec-42c5-8ced-7d3516fe6715"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{demurrer.cq_reg_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="395" width="53" height="23" uuid="8a567e77-49ba-469c-8bd8-9fc5cec39cbb"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{parcel.land_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="395" width="8" height="23" uuid="c121e6fd-1d26-431a-ae31-5d50073b96b3"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="342" width="67" height="23" uuid="ab712fb8-d3cf-4e02-93a8-b53ad5dd7d36"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{demurrer.realestateidtype}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="78" y="342" width="8" height="23" uuid="79a8014c-e3ed-4bf5-bc2a-b5adbb573740"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="11" y="422" width="80" height="36" isRemoveLineWhenBlank="true" uuid="54027a3a-037f-4a4d-8346-6987fd77017c">
+					<printWhenExpression><![CDATA[$F{BUILDING_NAME}!=null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{demurrer.ioo_realestate_nameandroom}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="91" y="441" width="8" height="17" isRemoveLineWhenBlank="true" uuid="8637caf0-1985-40b4-a96d-060a41986838">
+					<printWhenExpression><![CDATA[$F{BUILDING_NAME}!=null]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="512" width="27" height="23" uuid="1ab4f243-d733-417b-ac12-e0681c72a99d"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{demurrer.remark}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="38" y="512" width="8" height="23" uuid="6a3795ca-dfbc-4247-91ea-600514d869a3"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="676" width="530" height="16" uuid="9ccae783-5fdc-4bd0-90c2-07c9551364ad"/>
+				<textElement>
+					<font size="10" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[注：《中华人民共和国物权法》第十九条规定：登记机构予以异议登记的，申请人在异议登记之日起十五日内不起诉，]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="99" y="47" width="139" height="23" uuid="1fb4b75a-5412-4a95-8b0c-e114687c84f0"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{REG_CODE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="335" y="47" width="139" height="23" uuid="025bce2e-a088-4664-8dda-0aba3f67b163"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AREG_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="38" y="121" width="472" height="49" isPrintWhenDetailOverflows="true" uuid="e0501961-45d6-4546-b1c8-442d05c2de33"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DISS_ITEM}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="86" y="194" width="139" height="23" uuid="18da8ca0-1a6d-471e-a625-16c3106a1794"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEMU_APPLIER}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="335" y="194" width="139" height="23" uuid="e9fd5aa3-a06a-43d3-b09d-6cb61a0716ac"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEMU_APPLIERID}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="99" y="243" width="139" height="23" uuid="351c6577-aaa5-4107-ae73-f0f5f2bfdb32"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEMUED_APPLIER}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="335" y="243" width="139" height="23" uuid="ed653957-e977-4bc6-87b7-f5a4de0c6d88"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEMUED_APPLIERID}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="46" y="512" width="447" height="142" uuid="99353cb1-f2c9-46b3-ba9a-6cdc4ee68ee9"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EXCURSUS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="86" y="342" width="139" height="23" uuid="e9e12fc2-5c73-4a06-a60a-d73c07495d55"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{REG_UNIT_TYPE}!=null && $F{REG_UNIT_TYPE}.equals("009001")?"产权证":"土地证"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="335" y="342" width="139" height="23" uuid="43b770f2-02cd-41e9-9180-247a808cc60f"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CER_NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="97" y="369" width="139" height="23" uuid="15d6d601-1924-4659-8709-37772f17dba7"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{REG_UNIT_TYPE}!=null && $F{REG_UNIT_TYPE}.equals("009001")?$F{OS_REG_CODE}:$F{UR_REG_CODE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="71" y="395" width="422" height="23" uuid="9ba0a0ef-9e3a-4113-8c1f-bf654e2141e0"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LAND_ADDRESS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="99" y="435" width="375" height="23" isRemoveLineWhenBlank="true" uuid="f9f8f874-028e-44f2-8517-2ea847308dc9">
+					<printWhenExpression><![CDATA[$F{BUILDING_NAME}!=null]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BUILDING_NAME}+$F{BUILD_NO}+$F{ROOMNAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="38" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="0" width="555" height="1" uuid="90739c2f-eef0-4458-8ec2-4449e3e6ed0c"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

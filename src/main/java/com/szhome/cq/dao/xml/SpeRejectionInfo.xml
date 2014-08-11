@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+    <comment>SpeRejectionInfo</comment>
+	<sql sqlId="querySpeRejectionInfoListBy" author="sam" function=""><![CDATA[
+				select * from spe_rejection_info
+				]]>
+	</sql>
+	<sql sqlId="getSpeRejectionInfoDataByRejId" author="sam" function=""><![CDATA[
+				select * from spe_rejection_info where rej_id = :rej_id 
+				]]>
+	</sql>
+	<sql sqlId="getSpeRejectionInfoDataByRejNo" author="sam" function=""><![CDATA[
+				select * from spe_rejection_info where rej_no = :rej_no 
+				]]>
+	</sql>
+	<sql sqlId="getSpeRejectionInfoDataBybusIdownerNo" author="sam" function=""><![CDATA[
+				select * from spe_rejection_info where bus_id = :bus_id and rej_no = :rej_no
+				]]>
+	</sql>
+</sqlList>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+
+<!-- 平台支撑配置定义  ..................................................................  -->
+
+	
+	
+<!-- 从这里开始对楼盘表进行配置 .................................................................. -->
+
+	<!-- 包装了事务的建筑物代理 -->	
+	<bean id="building" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.basedata.BuildingAction" >
+				<property name="planSupportDao" ref="planSupportDao"/>
+			</bean>
+		</property>
+	</bean>
+	<!-- 包装了事务的房屋代理 -->	
+	<bean id="house" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.basedata.HouseAction" >
+				<property name="planSupportDao" ref="planSupportDao"/>
+			</bean>
+		</property>
+	</bean>
+	<!-- 包装了事务的建筑物项目代理 -->	
+	<bean id="project" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.basedata.ProjectAction" >
+				<property name="planSupportDao" ref="planSupportDao"/>
+			</bean>
+		</property>
+	</bean>
+	
+</beans>

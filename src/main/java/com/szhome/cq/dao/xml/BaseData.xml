@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>楼盘表sql语句  放在此处   ,  sqlId 不能重复</comment>
+
+	<sql sqlId="getBuildingBySearch" author="Mignet" function="获取建筑物信息"><![CDATA[
+	            select *
+				  from bd_building t
+				 where (bldg_name_no like '%' || :searchStr || '%' or
+				       project_name like '%' || :searchStr || '%' or
+				       location like '%' || :searchStr || '%')
+	            ]]>
+	</sql>
+	<sql sqlId="getProjectBySearch" author="Sam" function="获取建设项目信息"><![CDATA[
+	            select *
+				  from bd_project t
+				 where (project_no like '%' || :searchStr || '%' or
+				       project_name like '%' || :searchStr || '%' or
+				       location like '%' || :searchStr || '%')
+	            ]]>
+	</sql>
+	<sql sqlId="getHouseBySearch" author="xuzz" function="获取房屋信息"><![CDATA[
+	            select *
+				  from bd_house t
+				 where (ho_id like '%' || :searchStr || '%' or
+				       house_no_num like '%' || :searchStr || '%' or
+				       seat_no like '%' || :searchStr || '%')
+	            ]]>
+	</sql>
+	
+</sqlList>

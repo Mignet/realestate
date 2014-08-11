@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+    <comment>SpeRefundInfo</comment>
+	<sql sqlId="querySpeRefundInfoListBy" author="sam" function=""><![CDATA[
+				select * from spe_refund_info
+				]]>
+	</sql>
+	<sql sqlId="getSpeRefundInfoDataByRefundId" author="sam" function=""><![CDATA[
+				select * from spe_refund_info where refund_id = :refund_id 
+				]]>
+	</sql>
+	<sql sqlId="getSpeRefundInfoDataByRefundNo" author="sam" function=""><![CDATA[
+				select * from spe_refund_info where refund_no = :refund_no 
+				]]>
+	</sql>
+	<sql sqlId="getSpeRefundInfoDataBybusIdownerNo" author="sam" function=""><![CDATA[
+				select * from spe_refund_info where bus_id = :bus_id and refund_no = :refund_no
+				]]>
+	</sql>
+</sqlList>

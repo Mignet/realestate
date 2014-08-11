@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_ayment_otice" language="groovy" pageWidth="595" pageHeight="650" whenNoDataType="AllSectionsNoDetail" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="72701156-9416-49d0-950f-999a3ed7658f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="99"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Workspace\\oracleEcplise\\dxtx_re\\src\\main\\webapp\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="price_list" class="java.util.List"/>
+	<queryString>
+		<![CDATA[select * from BDC_TAX_REPORT_INFO where dec_id='19']]>
+	</queryString>
+	<field name="DEC_ID" class="java.lang.String"/>
+	<field name="B_DELETEFLAG" class="java.lang.String"/>
+	<field name="PAYER_TYPE" class="java.lang.String"/>
+	<field name="CER_TYPE" class="java.lang.String"/>
+	<field name="CER_NO" class="java.lang.String"/>
+	<field name="TRANSFEREE_NAME" class="java.lang.String"/>
+	<field name="TRANSFEREE_ADDRESS" class="java.lang.String"/>
+	<field name="TRANSFEREE_PHONENUM" class="java.lang.String"/>
+	<field name="UNIQUE_HOUSE" class="java.lang.String"/>
+	<field name="TRANSFEROR_NAME" class="java.lang.String"/>
+	<field name="TRANSFEROR_ADDRESS" class="java.lang.String"/>
+	<field name="TRANSFEROR_PHONENUM" class="java.lang.String"/>
+	<field name="ORIG_CER_NO" class="java.lang.String"/>
+	<field name="CON_NO" class="java.lang.String"/>
+	<field name="SFGM5NYS" class="java.lang.String"/>
+	<field name="PARCEL_NO" class="java.lang.String"/>
+	<field name="LOCATION" class="java.lang.String"/>
+	<field name="LAND_LOCATION" class="java.lang.String"/>
+	<field name="UNIT_NO" class="java.lang.String"/>
+	<field name="BUILDING_NO" class="java.lang.String"/>
+	<field name="USE" class="java.lang.String"/>
+	<field name="HOUSE_ID" class="java.lang.String"/>
+	<field name="TRANSEFER_TYPE" class="java.lang.String"/>
+	<field name="RJLSFDY1" class="java.lang.String"/>
+	<field name="GENERAL_HOUSE" class="java.lang.String"/>
+	<field name="INTAX_CHARGE_TYPE" class="java.lang.String"/>
+	<field name="LAND_INCARMENT_TAX_CHARGE_TYPE" class="java.lang.String"/>
+	<field name="JSJGLY" class="java.lang.String"/>
+	<field name="ORIG_GET_MODE" class="java.lang.String"/>
+	<field name="TAX_ITEMS" class="java.lang.String"/>
+	<field name="CHARGE_KIND" class="java.lang.String"/>
+	<field name="DECLARE_NO" class="java.lang.String"/>
+	<field name="BUS_ID" class="java.lang.String"/>
+	<field name="TRANSFEREE_SHARE" class="java.math.BigDecimal"/>
+	<field name="TRANSFEROR_SHARE" class="java.math.BigDecimal"/>
+	<field name="BUILD_AREA" class="java.math.BigDecimal"/>
+	<field name="INSIDE_SPACE" class="java.math.BigDecimal"/>
+	<field name="AVERAGE_PRICE" class="java.math.BigDecimal"/>
+	<field name="TRANSACTION_PRICE" class="java.math.BigDecimal"/>
+	<field name="ORIG_REG_PRICE" class="java.math.BigDecimal"/>
+	<field name="REFERENCE_PRICE" class="java.math.BigDecimal"/>
+	<field name="RELIEF_FILE_NO" class="java.math.BigDecimal"/>
+	<field name="INTAX_CHE_FILENO" class="java.math.BigDecimal"/>
+	<field name="TZSHSWSH" class="java.math.BigDecimal"/>
+	<field name="JSJGFHTZSWH" class="java.math.BigDecimal"/>
+	<field name="FHJG" class="java.math.BigDecimal"/>
+	<field name="APPLICABLE_TAXRATE" class="java.math.BigDecimal"/>
+	<field name="CALTAX_PRICE" class="java.math.BigDecimal"/>
+	<field name="DEDUCT_MONEY" class="java.math.BigDecimal"/>
+	<field name="PAYABLE_TAX" class="java.math.BigDecimal"/>
+	<field name="RELIEF_TAX" class="java.math.BigDecimal"/>
+	<field name="PAIDIN_TAX" class="java.math.BigDecimal"/>
+	<field name="DECLARE_PROOF_NO" class="java.math.BigDecimal"/>
+	<field name="ORIG_BUY_DATE" class="java.sql.Timestamp"/>
+	<field name="CON_DATE" class="java.sql.Timestamp"/>
+	<field name="TRANSEFER_ACCDATE" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="107" splitType="Stretch">
+			<line>
+				<reportElement x="29" y="94" width="502" height="1" uuid="e75331ba-eeaf-4272-9e69-f3a9136a8820"/>
+			</line>
+			<staticText>
+				<reportElement x="38" y="69" width="40" height="20" uuid="5ebb38b2-669f-4fee-9691-71e4b4022965"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[打印者：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="78" y="69" width="100" height="20" uuid="f5e91910-522d-4a8a-9930-74f69e41eaec"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="351" y="69" width="55" height="20" uuid="1b364305-5a69-4670-8598-f9411a517c8c"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[打印日期：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="406" y="69" width="100" height="20" uuid="f7eda628-565e-4854-bc99-12bac4c463b7"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="468" splitType="Stretch">
+			<staticText>
+				<reportElement x="45" y="15" width="54" height="20" uuid="0e28cc60-33aa-4137-a311-49f83ed61dc4"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[办文编号：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="15" width="100" height="20" uuid="04b9af43-2fcf-40ea-b755-883e34a93c44"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="222" y="46" width="100" height="20" forecolor="#0033CC" uuid="850bed78-51a5-4475-9fb2-2357498bd397"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[产权登记]]></text>
+			</staticText>
+			<line>
+				<reportElement x="106" y="57" width="100" height="1" forecolor="#0033CC" uuid="40911098-63e5-4a19-9aa1-fac686a125e8"/>
+			</line>
+			<line>
+				<reportElement x="351" y="58" width="100" height="1" forecolor="#0033CC" uuid="1bcdd458-2d46-4f6f-99c7-8b004976414b"/>
+			</line>
+			<staticText>
+				<reportElement x="45" y="77" width="54" height="20" uuid="ea48a6c4-1784-4c1d-81e9-9dc8dfb26ec7"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[登记编号：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="77" width="100" height="20" uuid="46998897-5a75-430c-b2ae-84b9d4bf6377"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="206" y="77" width="50" height="20" uuid="25f89691-1467-40b6-b495-3894a33bb89a"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[机构代码：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="256" y="77" width="79" height="20" uuid="1ec1c548-f238-4223-9310-d329e21d7652"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="77" width="53" height="20" uuid="ac02a35d-931b-4dcf-a87e-df12d3be39d9"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[登记类型：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="433" y="77" width="100" height="20" uuid="07d8e31b-0779-4365-9960-6b00f86a7ba2"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="97" width="54" height="20" uuid="584afe0a-bbbe-453a-a29c-8703637c205e"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[登记日期：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="97" width="100" height="20" uuid="86faa523-36d2-4c32-af27-713f916200c8"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="206" y="97" width="50" height="20" uuid="c08b6d37-a4a3-4e2c-a111-a55a75fc6689"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[合同日期：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="256" y="97" width="79" height="20" uuid="5a997a10-d7cf-44f2-8585-bb794fd3262f"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="97" width="53" height="20" uuid="cbbafb0e-7045-42cb-b0e3-00b9af24bd30"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[转移方式：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="433" y="97" width="100" height="20" uuid="2a59ebda-476e-4e23-a754-0574657b0337"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="223" y="130" width="100" height="20" forecolor="#0033CC" uuid="cd6c6350-3eea-491c-9e7a-848e4f4e3867"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[转让方权利人]]></text>
+			</staticText>
+			<line>
+				<reportElement x="352" y="142" width="100" height="1" forecolor="#0033CC" uuid="bbb9222d-334d-4b01-8bc2-87730776c07e"/>
+			</line>
+			<line>
+				<reportElement x="107" y="141" width="100" height="1" forecolor="#0033CC" uuid="f8f9720c-7937-4de3-a402-48fa6fe976f3"/>
+			</line>
+			<staticText>
+				<reportElement x="45" y="150" width="54" height="20" uuid="e23cc9f0-c165-4d64-8699-c73c5d182491"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[权利人：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="150" width="100" height="20" uuid="0c25e3e0-e182-47f0-9d6c-b2c7da148b71"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="150" width="53" height="20" uuid="3fbe04a4-1806-4527-a64d-4818572b3635"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[份额：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="431" y="150" width="100" height="20" uuid="a3e3156c-2342-47d2-8d6b-7a93b7fb4f0b"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<textField>
+				<reportElement x="433" y="195" width="100" height="20" uuid="89eaaf82-7a05-4be5-9fcf-9e9afff98909"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="382" y="195" width="53" height="20" uuid="37aaddd9-d112-456e-b77d-6035ed6b8e80"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[份额：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="195" width="54" height="20" uuid="6ec4bcb9-6b0c-439f-b657-0c4c6de6ceb3"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[权利人：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="225" y="175" width="100" height="20" forecolor="#0033CC" uuid="288cdcbe-ebb1-4d87-8224-eb22ba05c080"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[受让方权利人]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="101" y="195" width="100" height="20" uuid="e28874dd-32d1-4a16-a00c-4d2eb96cda9b"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<line>
+				<reportElement x="109" y="186" width="100" height="1" forecolor="#0033CC" uuid="7b1df44f-5d83-451b-a285-bba8cb876fc4"/>
+			</line>
+			<line>
+				<reportElement x="354" y="187" width="100" height="1" forecolor="#0033CC" uuid="0dc513ca-f7c7-400b-ac62-50628566750b"/>
+			</line>
+			<staticText>
+				<reportElement x="225" y="238" width="100" height="20" forecolor="#0033CC" uuid="f9391004-5ef1-406e-97b2-66630c31422d"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[登记价款、税费清单]]></text>
+			</staticText>
+			<line>
+				<reportElement x="351" y="250" width="100" height="1" forecolor="#0033CC" uuid="790bb7c9-9fa4-40b6-9448-4dbd4bcff6ae"/>
+			</line>
+			<line>
+				<reportElement x="106" y="249" width="100" height="1" forecolor="#0033CC" uuid="e3e0461b-1c24-4c9d-938b-555a92545926"/>
+			</line>
+			<staticText>
+				<reportElement x="45" y="264" width="54" height="20" uuid="09118b9f-1cf9-4734-a485-3cd948a50ab1"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[宗地号：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="264" width="100" height="20" uuid="c3440e00-4815-4a0f-a615-b1a8030da28d"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PARCEL_NO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="206" y="264" width="50" height="20" uuid="3b441114-b6a6-41ab-974f-73b34fa395a1"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[土地等级：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="256" y="264" width="100" height="20" uuid="2e5ae06b-8efd-490e-9df2-57aa4ce57a4e"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="264" width="53" height="20" uuid="290e6986-5754-4a4d-afdb-6721e4c0d5f3"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[所在区域：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="433" y="264" width="100" height="20" uuid="224ad387-faf7-4567-bc5b-fb5d83bc6e29"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="284" width="54" height="20" uuid="6403c52e-7390-42fa-9177-09c5eadb28ca"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[土地坐落：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="284" width="307" height="20" uuid="0a8a3297-8882-4729-9c06-f9f053c2e6d6"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="304" width="54" height="20" uuid="28624c27-2854-435e-ac09-647a15b40e79"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[楼及栋号：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="304" width="307" height="20" uuid="1f5fe8e7-9ab0-42ce-8437-57aa5a99f0d6"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="324" width="54" height="20" uuid="8faa387e-1f25-46c2-8960-9d2c04debc82"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[房号：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="324" width="100" height="20" uuid="afa49f3e-adb6-401f-9fb5-64072e2b26f3"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="206" y="324" width="50" height="20" uuid="7943f697-70bb-4acb-a5bf-13d44d9ec550"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[建筑面积：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="256" y="324" width="100" height="20" uuid="422f6929-762c-44e5-8772-ff29213b70a8"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="324" width="53" height="20" uuid="c022f684-e0fb-45da-8b94-f27f68986ae1"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[房屋类型：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="433" y="324" width="100" height="20" uuid="00ec8641-d20a-4d6d-a2d4-1fc00e5df0c2"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="344" width="54" height="20" uuid="1b68e133-03e3-479d-a565-e3e576ed7fe4"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[原购价]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="199" y="344" width="100" height="20" uuid="be95982a-5b9d-4e67-93db-efa9ca01386c"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="99" y="344" width="100" height="20" uuid="35a5ca29-6dbe-4d68-bada-6052810b6d3a"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[人民币：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="299" y="344" width="57" height="20" uuid="8c7121e0-ffa9-4da9-9f10-cab1a40ac62b"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元 港币：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="356" y="344" width="77" height="20" uuid="495f9cf6-27ac-41ac-8812-05eca489b76a"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="431" y="344" width="48" height="20" uuid="b93fbc45-da60-4846-b7ea-ad52cb1a043e"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元  美元：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="479" y="344" width="83" height="20" uuid="28a3d488-ba9c-4dd2-a669-1328f379297c"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="562" y="344" width="14" height="20" uuid="df94e4d7-5363-49e6-ac75-a4a61fad8e67"/>
+				<text><![CDATA[元]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="479" y="363" width="83" height="20" uuid="cbb688cf-fcb8-46d9-b472-480c71aedad5"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="562" y="363" width="14" height="20" uuid="f34f8fab-d802-45ad-bb81-1081273c9c2c"/>
+				<text><![CDATA[元]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="299" y="363" width="57" height="20" uuid="91c8527b-cf85-4185-a94d-411cd8131fdc"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元 港币：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="363" width="100" height="20" uuid="fedd36b8-3e84-4f71-a5ef-0d4874b7c4f1"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[人民币：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="363" width="48" height="20" uuid="720ddc69-e9b3-4e86-8535-985f1a8576e4"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元  美元：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="356" y="363" width="77" height="20" uuid="59fec5fd-e808-4a67-ba2f-3ba590dcfac0"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="363" width="54" height="20" uuid="8d8651d0-5602-4d31-8d90-134256ee3fbd"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[交易价]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="199" y="363" width="100" height="20" uuid="a5be3612-dded-4220-9ab8-c3e57307d71b"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="99" y="383" width="100" height="20" uuid="566087e4-1642-4a54-a8e5-4af7135e3aa5"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[人民币：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="383" width="48" height="20" uuid="c692999e-c4a4-47ec-98c4-16ed6becd7db"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元  美元：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="356" y="383" width="77" height="20" uuid="a5d748b8-bf05-4807-b15c-c8461103b841"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="383" width="54" height="20" uuid="965caebc-d106-4dab-ac85-7edd42ebe4a3"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[登记价]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="199" y="383" width="100" height="20" uuid="7129b41c-131d-4964-8c5f-88d8140c856e"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="295" y="383" width="57" height="20" uuid="314270ec-2232-4783-b53e-bd204e662e86"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[元 港币：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="479" y="383" width="83" height="20" uuid="1695eb60-8d36-4d83-a4db-35145e5c4ea4"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="562" y="383" width="14" height="20" uuid="4b65c635-cf63-4a1b-a749-4d3b6a5198ac"/>
+				<text><![CDATA[元]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="306" y="441" width="100" height="20" uuid="4b652cab-3966-42eb-854d-7fc2d7b9e1f9"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[港元汇率：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="462" y="441" width="100" height="20" uuid="275cbeba-a6ca-48cd-b765-29de6593c1fb"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[美元汇率]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<subreport>
+				<reportElement x="-6" y="0" width="200" height="20" uuid="a6ded3e8-3aa7-4e2d-819a-dc857738df9b"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{price_list})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "\\report_payment_notice_price_list.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="454" y="14" width="100" height="20" uuid="7375fbe5-fb9d-4b18-b271-82942027b0c5"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["元"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="94" y="14" width="100" height="20" forecolor="#0033CC" uuid="e3006c39-27c9-4547-a023-0e0fb99d5c1e"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[合计]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement x="295" y="14" width="100" height="20" uuid="68b0dae8-8d31-4372-b61b-0008da6fa3ca"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["人民币"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

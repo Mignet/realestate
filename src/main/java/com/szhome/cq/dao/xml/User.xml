@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+    <comment>User</comment>
+    
+	<sql sqlId="getAllUsers" author="" function=""><![CDATA[
+			select user_id,
+				user_name,
+				nick_name,
+				account,
+				gender,
+				weight 
+				from PLATT_USERS
+				]]>
+	</sql>
+</sqlList>

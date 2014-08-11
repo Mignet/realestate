@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>Distrain</comment>
+	<sql sqlId="getAllAttachInfos" author="Sam" function="获得所有查封登记信息"><![CDATA[
+	                select tab.* from ( select comb.*,cb2.address from (select bdn.*,
+                       to_char(bdn.reg_date,'YYYY-MM-DD') areg_date,
+                       (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bbi.reg_unit_type ) reg_type,
+                       bbi.reg_unit_type,bbi.reg_unit_code,bbi.reg_unit_code where_code
+                       from 
+                       bk_distrain bdn,
+                       bk_baseinfo bbi,
+                       bk_right_rel brr
+                       where bdn.book_code = bbi.book_code
+                       and bdn.reg_code = brr.reg_code
+                       and bbi.reg_unit_type = '009001'
+                       and bdn.procdef_id='1071') comb
+                       left join (select ehe.adv_house_code,ehe.house_location address from est_building ebg,est_house ehe where ebg.building_code = ehe.building_code) cb2 on cb2.adv_house_code = comb.reg_unit_code
+                       union
+                       select comb.*,cb1.address from (select bdn.*,
+                       to_char(bdn.reg_date,'YYYY-MM-DD') areg_date,
+                       (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bbi.reg_unit_type ) reg_type,
+                       bbi.reg_unit_type,bbi.reg_unit_code,bbi.reg_unit_code where_code
+                       from 
+                       bk_distrain bdn,
+                       bk_baseinfo bbi,
+                       bk_right_rel brr
+                       where bdn.book_code = bbi.book_code
+                       and bdn.reg_code = brr.reg_code
+                       and bbi.reg_unit_type = '009003'
+                       and bdn.procdef_id='1071') comb
+                       left join (select epl.parcel_code,epl.land_address address from est_parcel epl left join est_building ebg on ebg.parcel_code = epl.parcel_code) cb1 on cb1.parcel_code = comb.reg_unit_code) tab
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getAllO" author="Sam" function="获得所有查封登记信息"><![CDATA[
+	                   select distinct tab.* from (select bdn.*,bbi.reg_unit_type,bbi.reg_unit_code,
+	                   to_char(bdn.dis_date,'YYYY-MM-DD') adis_date, to_char(bdn.service_date,'YYYY-MM-DD') aservice_date,
+	                   '从' || to_char(bdn.start_date,'YYYY-MM-DD') || '到' || to_char(bdn.end_date,'YYYY-MM-DD') attach_limit, 
+	                   (select vbhr.r_coll_names from V_BOOK_HOLDER_REL vbhr where vbhr.right_rel_id = brr.right_rel_id) holder_name,
+	                  (select bus_name from cfig_bus_type where bus_type_id = bdn.procdef_id) bus_name,
+	      			       to_char(bdn.reg_date,'YYYY-MM-DD') areg_date
+	                   from bk_baseinfo bbi,bk_distrain bdn,bk_right_rel brr
+	                   where bbi.book_code = bdn.book_code 
+	                   and bdn.reg_code = brr.reg_code
+	                   and bdn.procdef_id = '1071') tab
+	            ]]>
+	</sql>
+	
+</sqlList>

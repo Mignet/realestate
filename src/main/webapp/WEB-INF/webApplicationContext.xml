@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="GBK"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd  
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd  
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd  
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-2.5.xsd">  
+   
+   	<!-- 公共控制器，处理项目中所有的从后台提取数据的交换接口 -->
+	<bean name="/**/*.action" id="BaseController" class="com.szhome.cq.web.BaseController" >
+		<property name="jsonParser" ref="jsonParser"/>
+		<!-- <property name="exceptionStatusMap">
+    		<map>
+    			<entry key="java.lang.Exception" value="500"/>
+    			<entry key="com.szhome.cq.exceptions.TestException0" value="500"/>
+    			<entry key="com.szhome.cq.exceptions.TestException1" value="600"/>
+    			<entry key="com.szhome.cq.exceptions.TestException2" value="700"/>
+    			<entry key="com.szhome.cq.exceptions.TestException3" value="901"/>
+    		</map>
+    	</property> -->
+	</bean>  
+	<!-- Json解析器，将用于解析流程数据. -->
+	<bean id="jsonParser" class="com.plan.util.json.JsonParserJsonlibImpl">
+		<property name="propertyFilter" ref="jsonPropertyFilter"></property>
+	</bean>
+	
+	<!-- Json解析器内部属性过滤器 -->
+	<bean id="jsonPropertyFilter" class="com.plan.util.json.PropertyFilter4Process">
+		<!-- 设置过滤字符串长度，超过长度的字符串不予解析 -->
+		<property name="lengthLimit" value="30000000"></property>
+	</bean>
+   
+	<!-- 消息处理. 国际化 -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename"><value>messages</value></property>
+    </bean>
+    
+	<!-- 报表 -->
+	<!-- <bean name="reportView" class="com.szhome.cq.ireport.ReportView" /> -->
+	<bean id="reportViewResolver" class="com.szhome.cq.ireport.ReportViewResolver">
+        <property name="reportSuffix" value=".report"/>
+        <property name="reportView">
+            <bean class="com.szhome.cq.ireport.ReportView"/>
+        </property>
+        <property name="imageSuffix" value=".image"/>
+        <property name="imageView">
+            <bean class="com.szhome.cq.ireport.ImageView"/>
+        </property>
+	</bean>
+	
+	<!--注意viewResolver应放在最后，让自定义的优先执行 -->
+    <!-- 视图转换器，Action中只需要返回JSP名称，而不需要加后缀 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/jsp/" /> 
+		<property name="suffix" value=".jsp" /> 
+	</bean> 
+	
+	<!-- 主键代理 -->	
+	<bean id="seqDelegate" class="com.szhome.cq.delegate.SeqDelegate"  >
+		<property name="planSupportDao" ref="planSupportDao"/>
+	</bean>
+	
+	<bean id="baseAction" class="com.plan.web.BaseAction" abstract="true" >
+		<property name="jsonParser" ref="jsonParser"/>
+	</bean>
+	
+	<!-- 数据源定义 独立环境 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@192.168.110.2:1521:oraplan" />
+		<property name="username" value="platform" />
+		<property name="password" value="formplat" />
+		<!-- <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@192.168.110.2:1521:oraplan" />
+		<property name="username" value="DEV_FW40_APP2" />
+		<property name="password" value="dev0805" /> -->
+	</bean>
+	
+	<!-- 服务器环境中使用的JNDI数据源 
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="oracledb"/>
+	</bean>
+	-->
+	
+	<!-- Transaction manager for a single JDBC DataSource -->
+	<bean id="jdbcTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<!-- 普通JDBC事务 -->
+	<bean id="jdbcTransactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" abstract="true">
+		<property name="transactionManager" ref="jdbcTransactionManager"/>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="dele*">PROPAGATION_REQUIRED</prop>
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="findEntitiesForPag*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 楼盘表 -->
+	<import resource="basedata.xml"/>
+	
+    <!-- 包装了事务的登陆代理 -->	
+	<bean id="login" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.login.LoginAction" >
+			</bean>
+		</property>
+	</bean>
+    <!-- 包装了事务的菜单代理 -->	
+	<bean id="menu" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.leftmenu.MenuAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="monitor" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.sysmanage.MonitorAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="menu-manage" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.sysmanage.MenuManageAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="configur" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.common.ConfigurAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="presale" parent="jdbcTransactionProxy">
+	<property name="target">
+		<bean class="com.szhome.cq.web.backup.PresaleAction" >
+		</bean>
+	</property>
+	</bean>
+	<bean id="book-manage" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.bookmanage.BookManageAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="certificate" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.common.CertificateAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="dict" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.common.DictAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="exam" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.common.ExamAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="filerel" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.common.FilerelAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="identifier" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.common.IdentifierAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="preaudit" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.common.PreauditAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="print" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.common.PrintAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="recmaterial" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.common.RecmaterialAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="register" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.common.RegisterAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="upload" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.common.UploadAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="work-window" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.common.WorkWindowAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="changereg" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.houseownership.ChangeregAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="correction" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.houseownership.CorrectionAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="initialreg" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.houseownership.InitialregAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="shiftreg" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.houseownership.ShiftregAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="landinitialreg" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.landuseright.LandinitialregAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="morsetup" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.mortgage.MorsetupAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="qualityinspection" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.qualityinspection.QualityinspectionAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="reissue" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.reissue.ReissueAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="spec-work-window" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.workflow.SpecWorkWindowAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="attach-report" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.reportmanage.AttachReportAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="book-report-manage" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.reportmanage.BookReportManageAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="demurrer-report" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.reportmanage.DemurrerReportAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="easement-report" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.reportmanage.EasementReportAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="mortgage-report" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.reportmanage.MortgageReportAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="preadvice-report" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.reportmanage.PreadviceReportAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="presale-report" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.reportmanage.PresaleReportAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="private-real-report" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.reportmanage.PrivateRealReportAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="property-right-report" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.reportmanage.PropertyRightReportAction" >
+			</bean>
+		</property>
+	</bean>
+	<!-- 2014-07-24 Add -->
+	<bean id="barcode-print" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.reportmanage.BarcodePrintAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="sealup" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.sealup.SealupAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="org-manage" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.sysmanage.OrgManageAction" >
+				<property name="planSupportDao" ref="planSupportDao"/>
+			</bean>
+		</property>
+	</bean>
+	<bean id="role-manage" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.sysmanage.RoleManageAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="user" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.sysmanage.UserAction" >
+			</bean>
+		</property>
+	</bean>
+	<!-- 2014-07-24 Add -->
+	<bean id="my-scanner" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.sysmanage.MyScannerAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="user-role-manage" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.sysmanage.UserRoleManageAction" >
+			</bean>
+		</property>
+	</bean>
+	<bean id="workflow" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.szhome.cq.web.workflow.WorkflowAction" >
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- 这个Bean之所以不添加事务，他通常作为公共模块嵌套在其他Bean中使用，框架中有不少地方会用到该对象. -->
+	<bean id="planSupportDao" class="com.plan.dao.PlanSupportDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+    <!-- 统一异常处理 -->
+    <bean id="exceptionHandler" class="com.plan.web.DefaultHandlerExceptionResolver">
+    	<property name="exceptionStatusMap">
+    		<map>
+    			<entry key="java.lang.Exception" value="500"/>
+    			<entry key="com.szhome.cq.exceptions.TestException0" value="500"/>
+    			<entry key="com.szhome.cq.exceptions.TestException1" value="600"/>
+    			<entry key="com.szhome.cq.exceptions.TestException2" value="700"/>
+    			<entry key="com.szhome.cq.exceptions.TestException3" value="901"/>
+    		</map>
+    	</property>
+    </bean>
+</beans> 

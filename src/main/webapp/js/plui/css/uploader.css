@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+
+.uploadify:hover .uploadify-button {}
+.uploadify-button.disabled {background-color: #D0D0D0;color: #808080;}
+
+a.btw_btn,
+a.del_btn,
+a.cancel_btn{display:inline-block; width:16px; height:16px; background:url(../images/upload/io_off.gif) no-repeat;}
+a.down_btn:hover,
+a.btw_btn:hover
+,a.del_btn:hover,
+a.cancel_btn:hover{background-image:url(../images/upload/io_on.gif);}
+a.down_btn{display:inline-block; width:16px; height:12px; background:url(../images/upload/io_off.gif) no-repeat;background-position:-16px 0px;}
+a.btw_btn{ background-position:0px 2px;}
+a.del_btn{ background-position:-32px 2px;}
+a.cancel_btn{ background-position:-48px 2px;}
+div span.progress_bar_span{
+	float: left;
+	width: 93px;
+	height: 8px;
+	background: url(../images/upload/jdbg_out.gif);
+	overflow: hidden;
+	margin-top: 7px;
+}
+
+.uploadify{
+	margin:10px 20px;
+	float: left;
+}
+
+.uploadify-queue { display:none;}
+
+.upload_btn{
+	width:52px; 
+	height:20px;
+	background:url(../images/upload/up.gif); 
+	cursor:pointer; 
+	border:none;
+	float:right;
+	margin:10px 30px;
+}
+
+.upload_speed{width:27px; padding-left:5px;overflow:hidden;}

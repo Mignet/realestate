@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>Mortgage</comment>
+  
+	
+	
+		<sql sqlId="getMortByid" author="panda" function="根据流程实例id获取抵押权登记信息"><![CDATA[
+	           select  MORT_REG_ID,MORT_TYPE,REL_ORIG_VALUE,MORT_ASSURE_RIGHT,ASSESS_PRICE,AGREED_PRICE,
+	           MORT_CON_NO,REL_ESTATE_NAME,BORROWER,CAN_MORT_DATE,ORIG_MORT_REG_NO,MORT_PORT,LOAN_USAGE,ASSUER_RANGE,MORT_SEQ,MAX_AMOUNT,SURE_AMOUNT,
+	            to_char(MORT_REG_DATE,'YYYY-MM-DD HH24:MI:SS') as MORT_REG_DATE,to_char(CREDITOR_START_DATE,'YYYY-MM-DD HH24:MI:SS') as CREDITOR_START_DATE,
+	          to_char(CREDITOR_END_DATE,'YYYY-MM-DD HH24:MI:SS') as CREDITOR_END_DATE from BUS_MORTGAGE_REG
+	           where bus_id =:id
+	            ]]>
+	</sql>
+	<sql sqlId="getMortcanByid" author="panda" function="根据流程实例id获取注销抵押权登记信息"><![CDATA[
+	           select  m.MORT_REG_ID,m.CAN_MORT_REASON,ma.REG_CODE,ma.REG_STATION,ma.PROC_NAME,ma.REG_TYPE,
+              to_char(m.CAN_MORT_DATE,'YYYY-MM-DD HH24:MI:SS') as CAN_MORT_DATE from 
+               BUS_MAIN ma  left join BUS_MORTGAGE_REG m 
+               on ma.bus_id = m.bus_id where ma.bus_id =:id
+	            ]]>
+	</sql>
+	<sql sqlId="getRegunitList" author="panda" function="根据流程实例id获取注销抵押权登记单元信息"><![CDATA[
+	           select * from BUS_REGUNITREL  where bus_id =:id
+	            ]]>
+	</sql>
+	<sql sqlId="getHouseInfo" author="panda" function="根据流程实例id获取与本次业务关联的房屋信息"><![CDATA[
+	           select p.PARCEL_CODE,p.LAND_ADDRESS,h.PRO_NAME,h.ROOMNAME,b.BUILDING_NAME,b.BUILD_NO from EST_PARCEL p,EST_BUILDING b ,EST_HOUSE h 
+               where  h.BUILDING_CODE = b.BUILDING_CODE and b.PARCEL_CODE = p.PARCEL_CODE
+               and  h.ADV_HOUSE_CODE = :code
+	            ]]>
+	</sql>
+	<sql sqlId="getLandInfo" author="panda" function="根据流程实例id获取与本次业务关联的土地信息"><![CDATA[
+	          select p.PARCEL_CODE,p.LAND_ADDRESS from EST_PARCEL p where   p.PARCEL_CODE = :code 
+              
+	            ]]>
+	</sql>
+	<sql sqlId="getBuildInfo" author="panda" function="根据流程实例id获取与本次业务关联的楼宇信息"><![CDATA[
+	           select p.PARCEL_CODE,p.LAND_ADDRESS,b.BUILDING_NAME,b.BUILD_NO from EST_PARCEL p,EST_BUILDING b 
+               where  b.PARCEL_CODE = p.PARCEL_CODE and b.BUILDING_CODE = :code
+	            ]]>
+	</sql>
+	<sql sqlId="getRegInfo" author="panda" function="根据流程实例id获取登记信息"><![CDATA[
+	           select * from bus_main where proc_id = :id
+	            ]]>
+	</sql>
+	<sql sqlId="getHolderInfo" author="panda" function="根据登记单元编码获取信息"><![CDATA[
+	           select h.*,b.REG_UNIT_CODE from BK_HOLDER h,BK_RIGHT_REL r,BK_BASEINFO b where h.RIGHT_REL_ID=r.RIGHT_REL_ID and b.book_code = r.book_code and
+               b.REG_UNIT_CODE=:code 
+	            ]]>
+	</sql>
+	<sql sqlId="getAppInfo" author="panda" function="根据业务id和权属关系，获取申请人信息"><![CDATA[
+	           select *  from BUS_APPLICANT where bus_id=:id and hol_rel =:type
+	            ]]>
+	</sql>
+		<sql sqlId="getApplicant" author="panda" function="根据业务id和权属关系，获取申请人信息"><![CDATA[
+	           select *  from BUS_APPLICANT 
+	            ]]>
+	</sql>
+	<sql sqlId="getHolder" author="panda" function="根据业务id和权属关系，获取申请人信息"><![CDATA[
+	           select *  from BK_HOLDER 
+	            ]]>
+	</sql>
+	<sql sqlId="getbkMortInfo" author="panda" function="根据业务id和登记编号，获取抵押记录"><![CDATA[
+	          select m.*,b.book_code,r.REG_UNIT_CODE  from BK_MORTGAGE m,BK_BASEINFO b,BUS_REGUNITREL r where r.REG_UNIT_CODE=b.REG_UNIT_CODE and m.book_code=b.book_code and bus_id=:id and m.REG_CODE=:code
+	            ]]>
+	</sql>
+	<sql sqlId="getMortgagerForSet" author="panda" function="获取已设立抵押权的，抵押人和抵押权人信息"><![CDATA[
+	           select h.*  from BK_RIGHT_REL r,BK_HOLDER h where r.RIGHT_REL_ID=h.RIGHT_REL_ID and  h.HOL_REL=:type  and r.REG_CODE=:code  and r.book_code=:book_code
+	            ]]>
+	</sql>
+	<sql sqlId="getMortgagerFromBk" author="panda" function="获取已设立抵押权的，抵押人和抵押权人信息"><![CDATA[
+	          select h.*,r.*,b.* from bk_holder h,BK_RIGHT_REL r,bk_baseinfo b
+	            ]]>
+	</sql>
+	<sql sqlId="getRegUnitRel" author="panda" function="根据业务id和权属关系，获取申请人信息"><![CDATA[
+	           select *  from BUS_REGUNITREL 
+	            ]]>
+	</sql>
+
+	<sql sqlId="getAllMortgageInfos" author="Sam" function="获得所有抵押权信息"><![CDATA[
+	               select tab.* from 
+	                   (select comb.*,tb1.address from 
+                       (select bmg.*,
+                       to_char(bmg.reg_date,'YYYY-MM-DD') areg_date,
+                       (select bus_name from cfig_bus_type where bus_type_id = bmg.procdef_id) bus_name ,
+                       (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bmg.mort_type ) mort_type_name,
+                       (select vbhh.r_coll_names from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063004') mortgagee,
+                       (select vbhh.r_coll_names from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063003') mortgager,
+                       (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bbi.reg_unit_type ) reg_type,
+                       bbi.reg_unit_type,bbi.reg_unit_code,bbi.reg_unit_code where_code
+                       from bk_mortgage bmg,
+                            bk_baseinfo bbi,
+                            bk_right_rel brr
+                       where bmg.book_code = bbi.book_code
+                       and bmg.book_code = brr.book_code
+                       and bmg.reg_code = brr.reg_code
+                       and bbi.reg_unit_type = '009003'
+                       and bmg.effective = '053002'  ) comb
+                       left join (select epl.land_address address,epl.parcel_code from est_parcel epl) tb1 on tb1.parcel_code = comb.reg_unit_code
+                       union 
+                        select comb.*,tb2.address from 
+                       (select bmg.*,
+                       to_char(bmg.reg_date,'YYYY-MM-DD') areg_date,
+                       (select bus_name from cfig_bus_type where bus_type_id = bmg.procdef_id) bus_name ,
+                       (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bmg.mort_type ) mort_type_name,
+                       (select vbhh.r_coll_names from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063004') mortgagee,
+                       (select vbhh.r_coll_names from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063003') mortgager,
+                       (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bbi.reg_unit_type ) reg_type,
+                       bbi.reg_unit_type,bbi.reg_unit_code,bbi.reg_unit_code where_code
+                       from bk_mortgage bmg,
+                            bk_baseinfo bbi,
+                            bk_right_rel brr
+                       where bmg.book_code = bbi.book_code
+                       and bmg.book_code = brr.book_code
+                       and bmg.reg_code = brr.reg_code
+                       and bbi.reg_unit_type = '009001'
+                       and bmg.effective = '053002'  ) comb
+                       left join (select ehe.house_location address,ehe.adv_house_code from est_house ehe) tb2 on tb2.adv_house_code = comb.reg_unit_code) tab
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getMortgageandContractInfos" author="Sam" function="获得抵押和合同信息为报表服务"><![CDATA[
+	            select tab.* from 
+	                   (select comb.*,cb2.community_name,cb2.parcel_code,
+                         (select land_address from est_parcel where parcel_code = cb2.parcel_code) land_address,
+                         (select parcel_area from est_parcel where parcel_code = cb2.parcel_code) parcel_area,
+                          cb2.building_name,cb2.build_no,cb2.roomname,cb2.build_area,
+                          bci.id, bci.con_type, bci.con_date, bci.con_area, bci.pre_sale_no,
+                          bci.con_areas, bci.con_unit_price, bci.con_pric, bci.con_price_cn, 
+                          bci.con_sign_date, bci.is_mortgage, bci.is_nota, bci.currency, 
+                          bci.exchange_rate, bci.down_payment, bci.payment_method, 
+                          bci.mortgage_years,bci.cancellation_managers,
+                          bci.cancellation_date, bci.cancellation_reason, bci.con_no
+                        from 
+                       (select bmg.*,
+                       to_char(bmg.reg_date,'YYYY-MM-DD') alias_reg_date,
+                       (select bus_name from cfig_bus_type where bus_type_id = bmg.procdef_id) bus_name ,
+                       (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bmg.mort_type ) mort_type_name,
+                       (select vbhh.r_coll_names from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063004') mortgagee,
+                       (select vbhh.r_coll_names from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063003') mortgager,
+                       (select vbhh.r_coll_cerno from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063003') mortgagerid,
+                       (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bbi.reg_unit_type ) reg_type,
+                       bbi.reg_unit_type,bbi.reg_unit_code,bbi.reg_unit_code where_code
+                       from bk_mortgage bmg,
+                            bk_baseinfo bbi,
+                            bk_right_rel brr
+                       where bmg.book_code = bbi.book_code
+                       and bmg.book_code = brr.book_code
+                       and bmg.reg_code = brr.reg_code
+                       and bbi.reg_unit_type = '009001' 
+                       and bmg.effective = '053002') comb
+                       left join (select ebg.community_name,ehe.adv_house_code,ebg.parcel_code,ebg.building_name,ebg.build_no,ehe.roomname,ehe.build_area from est_building ebg,est_house ehe where ebg.building_code = ehe.building_code) cb2 on cb2.adv_house_code = comb.reg_unit_code
+                       left join bdc_contract_info bci on comb.pre_con_no = bci.con_no
+                     union 
+                     select comb.*,cb1.community_name,case when cb1.parcel_code is null then comb.reg_unit_code else cb1.parcel_code end parcel_code ,
+                     (select land_address from est_parcel where parcel_code = case when cb1.parcel_code is null then comb.reg_unit_code else cb1.parcel_code end) land_address,
+                     (select parcel_area from est_parcel where parcel_code = case when cb1.parcel_code is null then comb.reg_unit_code else cb1.parcel_code end) parcel_area,
+                      '','' ,'',0,
+                      bci.id, bci.con_type, bci.con_date, bci.con_area, bci.pre_sale_no,
+                      bci.con_areas, bci.con_unit_price, bci.con_pric, bci.con_price_cn, 
+                      bci.con_sign_date, bci.is_mortgage, bci.is_nota, bci.currency, 
+                      bci.exchange_rate, bci.down_payment, bci.payment_method, 
+                      bci.mortgage_years,bci.cancellation_managers,
+                      bci.cancellation_date, bci.cancellation_reason, bci.con_no
+                      from 
+                       (select bmg.*,
+                       to_char(bmg.reg_date,'YYYY-MM-DD') alias_reg_date,
+                       (select bus_name from cfig_bus_type where bus_type_id = bmg.procdef_id) bus_name ,
+                       (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bmg.mort_type ) mort_type_name,
+                       (select vbhh.r_coll_names from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063004') mortgagee,
+                       (select vbhh.r_coll_names from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063003') mortgager,
+                       (select vbhh.r_coll_cerno from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063003') mortgagerid,
+                       (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bbi.reg_unit_type ) reg_type,
+                       bbi.reg_unit_type,bbi.reg_unit_code,bbi.reg_unit_code where_code
+                       from bk_mortgage bmg,
+                            bk_baseinfo bbi,
+                            bk_right_rel brr
+                       where bmg.book_code = bbi.book_code
+                       and bmg.book_code = brr.book_code
+                       and bmg.reg_code = brr.reg_code
+                       and bbi.reg_unit_type = '009003'
+                       and bmg.effective = '053002' ) comb
+                       left join (select ebg.community_name,epl.parcel_code from est_building ebg,est_parcel epl where ebg.parcel_code = epl.parcel_code) cb1 on cb1.parcel_code = comb.reg_unit_code
+                       left join bdc_contract_info bci on comb.pre_con_no = bci.con_no) tab
+	            ]]>
+	</sql>
+	
+</sqlList>

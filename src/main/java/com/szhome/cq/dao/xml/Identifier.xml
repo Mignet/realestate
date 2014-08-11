@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>Tree</comment>
+
+	<sql sqlId="sqlGetRuleSortList" author="Joyon" function=""><![CDATA[
+	            select distinct(rule_type),sort from BDC_PZSJ_BHGZPX where identifier_id=:identifier_id order by sort
+	            ]]>
+	</sql>
+	
+	
+	<sql sqlId="sqlGetRuleByRuleNameAndIdentifierId" author="Joyon" function=""><![CDATA[
+	            select * from BDC_PZSJ_BHGZ where identifier_id=(select id from BDC_PZSJ_BH where name=:name) and rule_name=:rule_name
+	            ]]>
+	</sql>
+	
+	<sql sqlId="sqlGetRuleById" author="Joyon" function=""><![CDATA[
+	            select * from bdc_pzsj_bhgz where rule_id=:rule_id
+	            ]]>
+	</sql>
+	
+	<sql sqlId="sqlCreateRuleByIdentifierId" author="Joyon" function=""><![CDATA[
+	            insert into BDC_PZSJ_BHGZ(rule_name,rule,state,identifier_id) values(:rule_name,:rule,1,:identifier_id)
+	            ]]>
+	</sql>
+	
+	<!-- 从数据库里取得 该编号 的  编号规则排序信息  -->
+	<sql sqlId="sqlGetRuleTypeList" author="Joyon" function=""><![CDATA[
+	            select rule_type from BDC_PZSJ_BHGZPX where IDENTIFIER_ID=:identifier_id
+	            ]]>
+	</sql>
+	
+	
+	
+	<!-- 获取数据库里该编号有多少个不同规则 -->
+	<sql sqlId="sqlGetRuleTypeCount" author="Joyon" function=""><![CDATA[
+	            select count(distinct(rule_type)) as num from BDC_PZSJ_BHGZPX where IDENTIFIER_ID=:identifier_id
+	            ]]>
+	</sql>
+	
+	
+	<!-- 获取数据库里该编号有多少个不同规则 -->
+	<sql sqlId="sqlInsertIdentifierRule" author="Joyon" function=""><![CDATA[
+	            select count(distinct(rule_type)) as num from BDC_PZSJ_BHGZPX where IDENTIFIER_ID=:identifier_id
+	            ]]>
+	</sql>
+	
+	<!-- 更改当前选择的排序Sort  -->
+	<sql sqlId="sqlChangeSelectedRuleSort" author="Joyon" function=""><![CDATA[
+	            update BDC_PZSJ_BHGZPX set sort=:selectedSort where rule_type=:selectedType and identifier_id=:identifier_id
+	            ]]>
+	</sql>
+	
+	<!-- 更改被更换的排序Sort  -->
+	<sql sqlId="sqlChangeOtherRuleSort" author="Joyon" function=""><![CDATA[
+	            update BDC_PZSJ_BHGZPX set sort=:otherSort where rule_type=:otherType and identifier_id=:identifier_id
+	            ]]>
+	</sql>
+	
+	<!-- sqlGetTgText -->
+	<sql sqlId="sqlGetTgText" author="Joyon" function=""><![CDATA[
+	            SELECT TEXT FROM USER_SOURCE  WHERE  TYPE='TRIGGER' and name=:table_name
+	            ]]>
+	</sql>
+	
+	<!-- sqlGetTgRule -->
+	<sql sqlId="sqlGetTgRule" author="Joyon" function=""><![CDATA[
+	            :tg_rule
+	            ]]>
+	</sql>
+	
+	
+	
+	
+	<!-- 获取表的 seq sqlGetSquenceByTableName -->
+	<sql sqlId="sqlGetSquenceByTableName" author="Joyon" function=""><![CDATA[
+	           	SELECT Sequence_name FROM All_Sequences where Sequence_name=:seqName
+	            ]]>
+	</sql>
+	
+	<!-- 获取编号规则 ByIdentifierId -->
+	<sql sqlId="sqlGetRuleListByIdentifierId" author="Joyon" function=""><![CDATA[
+	           	select * from BDC_PZSJ_BHGZ where identifier_id=:identifier_id
+	            ]]>
+	</sql>
+	
+	<!-- 获取编号规则排序ByIdentifierId -->
+	<sql sqlId="sqlGetSortListByIdentifierId" author="Joyon" function=""><![CDATA[
+	           	select * from BDC_PZSJ_BHGZPX where identifier_id=:identifier_id order by sort
+	            ]]>
+	</sql>
+	
+	
+	
+	<!-- 获取编号表数据 -->
+	<sql sqlId="getCfigCode" author="Joyon" function=""><![CDATA[
+	            select * from cfig_code
+	            ]]>
+	</sql>
+</sqlList>

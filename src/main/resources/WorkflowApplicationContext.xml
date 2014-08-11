@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  - 应用程序上下文(ApplicationContext)定义了 CE应用的业务逻辑。
+  - Contains bean references to the transaction manager and to the DAOs in
+  - dataAccessContext-local/jta.xml (see web.xml's "contextConfigLocation").
+  -->
+<beans>
+
+	<!-- 数据源定义 独立环境
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@192.168.102.11:1521:SUPLIS" />
+		<property name="username" value="huanggl" />
+		<property name="password" value="huanggl" />
+	</bean>
+-->
+
+	<!-- 数据源定义 独立环境 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@192.168.110.2:1521:oraplan" />
+		<property name="username" value="supplan" />
+		<property name="password" value="plansup" />
+	</bean>
+ 	
+	<!-- 服务器环境中使用szhome平台中的JNDI数据源 ,关于integrationConnectionProvider
+	       测试用poolmanIntegration,生产环境用wlsPoolIntegration  
+	<bean id="dataSource" class="com.szhome.process.datasource.SzhomeDataSourceFactoryBean">
+		<property name="integrationConnectionProvider" value="poolmanIntegration"/>
+		<property name="jndiName" value="oracledb"/>
+	</bean>
+ 	 -->
+
+ 	
+	<!-- 服务器环境中使用的JNDI数据源 
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="oracledb"/>
+	</bean>
+	-->
+	
+	<!-- Transaction manager for a single JDBC DataSource -->
+	<bean id="jdbcTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<!-- 普通JDBC事务 -->
+	<bean id="jdbcTransactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" abstract="true">
+		<property name="transactionManager" ref="jdbcTransactionManager"/>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="dele*">PROPAGATION_REQUIRED</prop>
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="findEntitiesForPag*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 流程事务代理 -->
+	<bean id="procTransactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" abstract="true">
+		<property name="transactionManager" ref="jdbcTransactionManager"/>
+		<property name="transactionAttributes">
+			<props>
+				<!-- 将下面配置注释掉，提供事务给业务层面控制。 -->
+				<!-- 抛出异常时，事务回滚，启动流程、完成工作项、申请、退回工作等必须在事务范畴 
+				<prop key="create*">PROPAGATION_REQUIRED,-java.lang.Exception</prop>
+				<prop key="start*">PROPAGATION_REQUIRED,-java.lang.Exception</prop>
+				<prop key="finish*">PROPAGATION_REQUIRED,-java.lang.Exception</prop>
+				<prop key="applyWorkItem*">PROPAGATION_REQUIRED,-java.lang.Exception</prop>
+				<prop key="withdrawWorkItem*">PROPAGATION_REQUIRED,-java.lang.Exception</prop>
+				 -->
+				<prop key="dummyXXX">PROPAGATION_REQUIRED,-java.lang.Exception</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 加载PlanFramework实例，它是一个容器上下文自感应的类，内核中会直接使用该类获取容器 -->
+	<bean id="planFramework" class="com.plan.PlanFramework" />
+	
+	<!-- 这个Bean之所以不添加事务，他通常作为公共模块嵌套在其他Bean中使用 -->
+	<bean id="planSupportDao" class="com.plan.dao.PlanSupportDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 工作流中不使用，先注释掉 
+	<bean id="planDao" parent="jdbcTransactionProxy">
+		<property name="target">
+			<bean class="com.plan.dao.PlanSupportDaoImpl">
+				<property name="dataSource" ref="dataSource"/>
+			</bean>
+		</property>
+	</bean>
+	-->
+	
+	<!-- Json解析器，将用于解析流程数据. -->
+	<bean id="jsonParser" class="com.plan.util.json.JsonParserJsonlibImpl"/>
+	
+	<!-- 引用EhCache配置. -->
+	<bean id="defaultCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ehcache.xml"/>
+	</bean>	
+
+	<!-- 定义EhCache工厂，并设置所使用的cache名称. -->
+	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="defaultCacheManager"/>
+		<property name="cacheName" value="ehcacheInSpring"/>
+	</bean>	
+
+	<!-- 定义缓存方法调用拦截器. -->
+	<bean id="methodCacheInterceptor" class="com.plan.cache.interceptor.MethodCacheInterceptor">
+		<property name="cache" ref="ehcache"/>
+		<property name="patterns">
+			<list>
+				<value>loadProcessdefById</value>
+				<value>getProcessInstById</value>
+			</list>
+		</property>
+	</bean>	
+
+		
+	<!-- 工作流客户端  -->
+	<bean id="workflowClient" class="com.szhome.process.client.WorkflowClientDefaultImpl" >
+	</bean>
+
+	<!-- 工作流客户端门面(facade),提供常用的流程操作接口方法  -->
+	<bean id="workflowClientFacade" class="com.szhome.process.client.WorkflowClientFacadeDefaultImpl" >
+	</bean>
+
+	<!-- 工作流客户端调用用户管理对象.  -->
+	<bean id="workflowUserManager" class="com.szhome.process.assign.WorkflowUserManagerImpl" >
+	</bean>
+
+	<!-- 工作流组织机构管理接口实现对象.  -->
+	<bean id="workflowOrganization" class="com.szhome.process.assign.WorkflowOrganizationImpl" >
+		<property name="supportDao" ref="planSupportDao"/>
+		<property name="jsonParser" ref="jsonParser"/>
+	</bean>
+	
+	<!-- 流程定义代理对象 -->
+	<bean id="commonsPlanDelegate" class="com.plan.delegate.CommonsPlanDelegate" >
+		<property name="planSupportDao" ref="planSupportDao"/>
+	</bean>
+	
+	<!-- 流程定义代理对象 -->
+	<bean id="processdefDelegate" class="com.szhome.process.delegate.ProcessdefDelegate" >
+		<property name="supportDao" ref="planSupportDao"/>
+	</bean>
+	<!-- 流程实例代理对象 -->
+	<bean id="processInstDelegate" class="com.szhome.process.delegate.ProcessInstDelegate" >
+		<property name="supportDao" ref="planSupportDao"/>
+	</bean>
+	<!-- 活动代理对象 -->
+	<bean id="activityDelegate" class="com.szhome.process.delegate.ActivityDelegate" >
+		<property name="supportDao" ref="planSupportDao"/>
+	</bean>
+	<!-- 参与者代理对象 -->
+	<bean id="participantDelegate" class="com.szhome.process.delegate.ParticipantDelegate" >
+		<property name="supportDao" ref="planSupportDao"/>
+	</bean>
+	<!-- 迁移代理对象 -->
+	<bean id="transitionDelegate" class="com.szhome.process.delegate.TransitionDelegate" >
+		<property name="supportDao" ref="planSupportDao"/>
+	</bean>
+	<!-- 工作项代理对象 -->
+	<bean id="workItemDelegate" class="com.szhome.process.delegate.WorkItemDelegate" >
+		<property name="supportDao" ref="planSupportDao"/>
+	</bean>
+	<!-- 任务查询代理对象 -->
+	<bean id="processTaskDelegate" class="com.szhome.process.delegate.ProcessTaskDelegate" >
+		<property name="supportDao" ref="planSupportDao"/>
+	</bean>
+	<!-- 状态变更代理对象 -->
+	<bean id="stateChangeDelegate" class="com.szhome.process.delegate.StateChangeDelegate" >
+		<property name="supportDao" ref="planSupportDao"/>
+	</bean>
+	<!-- 业务分类模块代理对象 -->
+	<bean id="sysModuleDelegate" class="com.szhome.process.delegate.SysModuleDelegate" >
+		<property name="supportDao" ref="planSupportDao"/>
+	</bean>
+	<!-- 公共业务过程 代理对象 -->
+	<bean id="stepInfoDelegate" class="com.szhome.process.delegate.StepInfoDelegate" >
+		<property name="supportDao" ref="planSupportDao"/>
+	</bean>
+
+
+	<!-- 流程定义解析器 -->
+	<bean id="processdefParser" class="com.szhome.process.service.processdef.ProcessdefParserImpl" />
+	
+
+	<!-- 流程定义服务目标，不应直接引用该对象，请移步processdefService -->
+	<bean id="processdefServiceTarget" class="com.szhome.process.service.processdef.ProcessdefServiceImpl" >
+		<property name="procdefDelegate" ref="processdefDelegate" />
+		<property name="processdefParser" ref="processdefParser" />
+	</bean>
+	
+	<!-- 流程定义服务 -->
+	<bean id="processdefService" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="processdefServiceTarget"/>
+		<property name="interceptorNames">
+			<list>
+				<value>methodCacheInterceptor</value>
+			</list>
+		</property>
+	</bean>	
+	
+	<!-- 流程定义部署服务 -->
+	<bean id="processdefDeployService" class="com.szhome.process.service.processdef.ProcessdefDeployServiceImpl" >
+		<property name="processdefDelegate" ref="processdefDelegate" />
+		<property name="processdefService" ref="processdefService" />
+	</bean>
+	
+	<!-- 流程实例服务目标对象、不需要对该对象进行引用. -->
+	<bean id="processInstanceServiceTarget" class="com.szhome.process.service.ProcessInstanceServiceImpl">
+		<property name="processInstDelegate" ref="processInstDelegate" />
+		<property name="processEngine" ref="processEngine"/>
+		<property name="ctrlDataService" ref="ctrlDataService" />
+		<property name="activityService" ref="activityService" />
+		<property name="stateChangeService" ref="stateChangeService" />
+	</bean>
+	<!-- 流程实例服务 实现根据ID加载流程的缓存功能.-->
+	<!-- 使用Aop代理目标bean -->
+	<bean id="processInstanceService" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="processInstanceServiceTarget"/>
+		<property name="interceptorNames">
+			<list>
+				<value>methodCacheInterceptor</value>
+			</list>
+		</property>
+	</bean>	
+	
+	<!-- 活动服务目标对象 -->
+	<bean id="activityServiceTarget" class="com.szhome.process.service.ActivityServiceImpl" >
+		<property name="activityDelegate" ref="activityDelegate" />
+		<property name="stateChangeService" ref="stateChangeService" />
+		<property name="transitionService" ref="transitionService" />
+		<property name="processdefService" ref="processdefService" />
+		<property name="workItemService" ref="workItemService" />
+	</bean>
+	<!-- 活动服务，使用AOP代理 -->
+	<bean id="activityService" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="activityServiceTarget"/>
+		<property name="interceptorNames">
+			<list>
+				<value>triggerEventInterceptor</value>
+			</list>
+		</property>
+	</bean>	
+	
+	<!-- 参与者服务 -->
+	<bean id="participantService" class="com.szhome.process.service.ParticipantServiceImpl" >
+		<property name="participantDelegate" ref="participantDelegate" />
+	</bean>
+	<!-- 工作项服务 -->
+	<bean id="workItemService" class="com.szhome.process.service.WorkItemServiceImpl" >
+		<property name="workItemDelegate" ref="workItemDelegate" />
+		<property name="processEngine" ref="processEngine"/>
+		<property name="ctrlDataService" ref="ctrlDataService"/>
+		<property name="jsonParser" ref="jsonParser"/>
+	</bean>
+	<!-- 迁移服务 -->
+	<bean id="transitionService" class="com.szhome.process.service.TransitionServiceImpl" >
+		<property name="transitionDelegate" ref="transitionDelegate" />
+	</bean>
+	<!-- 流程控制数据服务,添加同步功能. -->
+	<bean id="ctrlDataService" class="com.szhome.process.service.CtrlDataServiceImpl" >
+		<property name="processInstanceService" ref="processInstanceService"/>
+	</bean>
+	<!-- 任务列表查询服务 -->
+	<bean id="processTaskService" class="com.szhome.process.service.ProcessTaskServiceImpl" >
+		<property name="processTaskDelegate" ref="processTaskDelegate" />
+		<property name="workflowOrganization" ref="workflowOrganization" />
+	</bean>
+	<!-- 状态变更 服务 -->
+	<bean id="stateChangeService" class="com.szhome.process.service.StateChangeServiceImpl" >
+		<property name="stateChangeDelegate" ref="stateChangeDelegate" />
+	</bean>
+	<!-- 业务分类模块 服务 -->
+	<bean id="sysModuleService" class="com.szhome.process.service.SysModuleServiceImpl" >
+		<property name="sysModuleDelegate" ref="sysModuleDelegate" />
+	</bean>
+	<!-- 业务分类模块 服务 -->
+	<bean id="stepInfoService" class="com.szhome.process.service.StepInfoServiceImpl" >
+		<property name="stepInfoDelegate" ref="stepInfoDelegate" />
+		<property name="workflowClient" ref="workflowClient"/>
+	</bean>
+
+	
+	
+
+	
+	<!-- 流程定义管理对象，将使用流程定义服务加载流程定义对象等 -->
+	<!-- 使用Aop代理目标bean ,注：缓存功能移到服务实现中（Service）
+	<bean id="processdefManager" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target">
+			<bean class="com.szhome.process.service.processdef.ProcessdefManagerImpl">
+				<property name="processdefService" ref="processdefService"/>
+			</bean>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>methodCacheInterceptor</value>
+			</list>
+		</property>
+	</bean> -->	
+	<bean id="processdefManager" class="com.szhome.process.service.processdef.ProcessdefManagerImpl">
+		<property name="processdefService" ref="processdefService"/>
+	</bean>	
+	
+	<!-- 流程定义部署管理对象 -->
+	<bean id="processdefDeployManager" class="com.szhome.process.service.processdef.ProcessdefDeployManagerImpl">
+		<property name="processdefDeployService" ref="processdefDeployService"/>
+		
+	</bean> 
+
+	<!-- 流程定义部署管理对象 -->
+	<bean id="processdefDesignerManager" class="com.szhome.process.service.processdef.ProcessdefDesignerManagerImpl">
+		<property name="processdefService" ref="processdefService"/>
+		<property name="supportDao" ref="planSupportDao"/>
+		<property name="jsonParser" ref="jsonParser"/>
+	</bean> 
+	
+	<!-- 流程实例管理对象. 加载流程对象的缓存功能已经移至服务对象中. -->
+	<!-- 使用Aop代理目标bean 注：缓存功能移到服务实现中（Service）
+	<bean id="processInstanceManager" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target">
+			<bean class="com.szhome.process.service.ProcessInstanceManagerImpl">
+				<property name="processInstanceService" ref="processInstanceService" />
+				<property name="processdefManager" ref="processdefManager" />
+			</bean>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>methodCacheInterceptor</value>
+			</list>
+		</property>
+	</bean>	-->
+	<!-- 流程实例管理AOP'Target. -->
+	<bean id="processInstanceManagerTarget" class="com.szhome.process.service.ProcessInstanceManagerImpl">
+		<property name="processInstanceService" ref="processInstanceService" />
+		<property name="processdefManager" ref="processdefManager" />
+	</bean>	
+	<!-- 流程实例管理对象. -->
+	<bean id="processInstanceManager" parent="procTransactionProxy">
+		<property name="target" ref="processInstanceManagerTarget"/>
+	</bean>
+
+	<!-- 工作项管理对象的代理目标. -->
+	<bean id="workItemManagerTarget" class="com.szhome.process.service.WorkItemManagerImpl" >
+		<property name="workItemService" ref="workItemService"/>
+	</bean>
+	
+	<!-- 工作项管理对象. -->
+	<bean id="workItemManager" parent="procTransactionProxy">
+		<property name="target" ref="workItemManagerTarget"/>
+	</bean>
+	
+	<!-- 流程活动实例管理对象. -->
+	<bean id="activityInstanceManager" class="com.szhome.process.service.ActivityInstanceManagerImpl" >
+		<property name="activityService" ref="activityService"/>
+	</bean>
+
+	<!-- 流程控制数据管理对象. -->
+	<bean id="ctrlDataManager" class="com.szhome.process.service.CtrlDataManagerImpl" >
+		<property name="processInstanceManager" ref="processInstanceManager"/>
+		<property name="ctrlDataService" ref="ctrlDataService"/>
+	</bean>
+	
+	<!-- 流程任务列表管理对象. -->
+	<bean id="processTaskMgr" class="com.szhome.process.service.ProcessTaskMgrImpl" >
+		<property name="processTaskService" ref="processTaskService"/>
+	</bean>
+	
+	<!-- 业务过程管理对象. -->
+	<bean id="stepInfoManager" class="com.szhome.process.service.StepInfoManagerImpl" >
+		<property name="stepInfoService" ref="stepInfoService"/>
+	</bean>
+	
+	<!-- 自由流程管理对象. -->
+	<bean id="freeFlowManager" class="com.szhome.process.service.FreeFlowManagerImpl" >
+		<!-- TODO -->
+	</bean>
+	
+	<!-- 事件触发管理对象， 注意依赖的顺序会导致工程构建bean的异常。 -->
+	<bean id="triggerManager" class="com.szhome.process.event.TriggerManagerImpl" >
+		<property name="processdefManager" ref="processdefManager"/>
+		<property name="processInstanceManager" ref="processInstanceManager"/>
+		<property name="ctrlDataManager" ref="ctrlDataManager"/> 
+		<property name="ruleEngine" ref="ruleEngine"/>
+	</bean>
+
+	<!-- 定义事件触发方法调用拦截器. -->
+	<bean id="triggerEventInterceptor" class="com.szhome.process.event.TriggerEventInterceptor">
+		<!-- property name="cache" ref="ehcache"/ -->
+		<property name="patterns">
+			<list>
+			<!-- 操作对象：流程或活动，
+			              方法名称（要求在以下列表中是唯一的），
+			              方法类型：start,finish,suspend,resume,timeout，
+			              方法执行前B、后A或前后BA触发事件 -->
+				<value>process,updateProcessInstanceToStartState,start,BA</value>
+				<value>process,updateProcessInstanceToFinishedState,finish,BA</value>
+				<value>activity,updateActivityInstToStartState,start,BA</value>
+				<value>activity,updateActivityInstToFinishedState,finish,BA</value>
+			</list>
+		</property>
+		<property name="triggerManager" ref="triggerManager"/> 
+	</bean>	
+	
+	
+	
+	
+	<!-- 流程引擎对象 -->
+	<bean id="processEngine" class="com.szhome.process.engine.ProcessEngineImpl">
+		<property name="routeParser" ref="routeParser"/>
+		<property name="processdefManager" ref="processdefManager"/>
+		<property name="processInstanceService" ref="processInstanceService"/>
+		<property name="activityService" ref="activityService"/>
+		<property name="participantService" ref="participantService"/>
+		<property name="workItemService" ref="workItemService"/>
+		<property name="transitionService" ref="transitionService"/>
+		<property name="ctrlDataService" ref="ctrlDataService"/>
+	</bean>
+	<bean id="multiWorkItemParser" class="com.szhome.process.engine.MultiWorkItemParserImpl">
+		<property name="workflowOrganization" ref="workflowOrganization" />
+	</bean>
+	<!-- 以下是流程中各类活动处理类，bean名称不可以改变，注：不需要开始节点处理 -->
+	<bean id="manualActivityProceed" class="com.szhome.process.engine.ProceedManualActivity">
+		<property name="multiWorkItemParser" ref="multiWorkItemParser"/>
+	</bean>
+	<bean id="autoActivityProceed" class="com.szhome.process.engine.ProceedAutoActivity">
+		<property name="ruleEngine" ref="ruleEngine"/>
+	</bean>
+	<bean id="routeActivityProceed" class="com.szhome.process.engine.ProceedRouteActivity"/>
+	<bean id="subprocActivityProceed" class="com.szhome.process.engine.ProceedSubprocActivity"/>
+	<bean id="endActivityProceed" class="com.szhome.process.engine.ProceedEndActivity"/>
+	
+	<!-- 路由解析器. -->
+	<bean id="routeParser" class="com.szhome.process.engine.RouteParserImpl">
+		<property name="ruleEngine" ref="ruleEngine"/>
+		<property name="ctrlDataService" ref="ctrlDataService"/>
+	</bean>
+	<!-- 规则引擎. -->
+	<bean id="ruleEngine" class="com.szhome.process.rule.RuleEngineImpl">
+		<property name="rule" ref="rule"/>
+		
+	</bean>
+	<!-- 规则对象 -->
+	<bean id="rule" class="com.szhome.process.rule.GroovyShellRule">
+	</bean>
+
+
+</beans>
+

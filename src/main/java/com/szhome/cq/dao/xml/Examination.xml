@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>Examination</comment>
+
+	<sql sqlId="queryExamById" author="panda" function="查询审核意见"><![CDATA[
+	           select OPINION_ID,BUS_ID,CHECKER_NO,OPINION_TYPE,OPINION_CONTENT,to_char(OPINION_TIME,'YYYY-MM-DD HH24:MI:SS') as OPINION_TIME  from BUS_OPINION
+	            ]]>
+	</sql>
+	
+	
+	<sql sqlId="queryExamfById" author="panda" function="查询初步审定意见"><![CDATA[
+	           select OPINION_ID,BUS_ID,CHECKER_NO,OPINION_TYPE,OPINION_CONTENT,to_char(OPINION_TIME,'YYYY-MM-DD HH24:MI:SS') as OPINION_TIME  
+	           from BUS_OPINION  where bus_id =:bus_id  and  opinion_type ='初步审定'
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getExamineById" author="xuzz" function="查询审批意见"><![CDATA[
+	           select OPINION_ID,BUS_ID,CHECKER_NO,OPINION_TYPE,OPINION_CONTENT,to_char(OPINION_TIME,'yyyy-mm-dd hh:mm:ss') as OPINION_TIMESTR  
+	           from BUS_OPINION  
+	            ]]>
+	</sql>
+</sqlList>

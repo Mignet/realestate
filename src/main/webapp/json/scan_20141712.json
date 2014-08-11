@@ -1,0 +1,17 @@
+﻿[{  
+	DirectoryId: 'CatalogI',
+	DocumentName: '目录一',
+	BarCode: '0000010031'
+},{
+	DirectoryId: 'CatalogII',
+	DocumentName: '目录二',
+	BarCode: '0000010032'
+},{    
+	DirectoryId: 'CatalogIII',
+	DocumentName: '目录三',
+	BarCode: '0000010033'                      
+},{
+	DirectoryId: 'CatalogIV',
+	DocumentName: '目录四',
+	BarCode: '0000010034'
+}]  

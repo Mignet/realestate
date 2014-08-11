@@ -1,0 +1,10 @@
+.textboxlist{float:left;width:100%;}
+.textboxlist ul{list-style:none;padding:0;margin:0;}
+.textboxlist .boxlist{float:left;background: none repeat scroll 0 0 #DEE7F8;border:1px solid #CAD8F3;border-radius:6px 6px 6px 6px;cursor:default;height:22px;line-height:22px;margin-bottom:2px;padding:0 20px 0 10px;position:relative;white-space:nowrap;width:auto;margin-right:3px;font-size:12px;}
+.textboxlist .li-column{float:left;width:100%;}
+
+.textboxlist-close{background:url("images/close.gif") repeat scroll 0 0 transparent;cursor: pointer;display: block;font-size:1px;height:7px;position:absolute;right:6px;top:8px;width:7px;}
+.textboxlist .boxlist-item-hover {background:none repeat scroll 0 0 #BBCEF1;border:1px solid #6D95E0;}
+.textboxlist .boxlist-item-selected {background:none repeat scroll 0 0 #598BEC;border-color:#598BEC;color:#FFFFFF;}
+
+.textboxlist-close-hover, .textboxlist-item-selected .textboxlist-close{background-position:center bottom;}

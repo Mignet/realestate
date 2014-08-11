@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repor4" language="groovy" pageWidth="386" pageHeight="473" whenNoDataType="AllSectionsNoDetail" columnWidth="386" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d09cfbd8-62b5-4e06-97a6-cb7d21c5a6ab">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REG_PRICCE" class="java.lang.String"/>
+	<parameter name="EXCURSUS" class="java.lang.String"/>
+	<parameter name="proc_id" class="java.lang.String"/>
+	<parameter name="REG_CODE" class="java.lang.String"/>
+	<parameter name="BUILD_AREA" class="java.lang.String"/>
+	<parameter name="TAONEI_AREA" class="java.lang.String"/>
+	<parameter name="FLATLET_USAGE" class="java.lang.String"/>
+	<parameter name="BUILD_COMPLEION_DATE" class="java.lang.String"/>
+	<parameter name="PRO_NAME" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select b.*,h.*,to_char(b.COMPLEION_DATE,'YYYY-MM-DD') AS COMPLEION_DATE_STR from (select * from EST_BUILDING where building_id=(select building_id from EST_HOUSE where ADV_HOUSE_CODE =(select REG_UNIT_CODE from BUS_REGUNITREL where REG_CODE=$P{REG_CODE}))) b,
+(select * from EST_HOUSE where ADV_HOUSE_CODE =(select REG_UNIT_CODE from BUS_REGUNITREL where REG_CODE=$P{REG_CODE})) h]]>
+	</queryString>
+	<field name="BUILDING_ID" class="java.lang.String"/>
+	<field name="PARCEL_ID" class="java.lang.String"/>
+	<field name="B_DELETEFLAG" class="java.lang.String"/>
+	<field name="BUILDING_PRE_CODE" class="java.lang.String"/>
+	<field name="BUILDING_CODE" class="java.lang.String"/>
+	<field name="BUILDING_NAME" class="java.lang.String"/>
+	<field name="COMMUNITY_NAME" class="java.lang.String"/>
+	<field name="PARCEL_CODE" class="java.lang.String"/>
+	<field name="LAYER_COUNT" class="java.math.BigDecimal"/>
+	<field name="UP_FLOOR" class="java.math.BigDecimal"/>
+	<field name="DOWN_FLOOR" class="java.math.BigDecimal"/>
+	<field name="ATHER_FLOOR" class="java.math.BigDecimal"/>
+	<field name="BUILD_FLOOR_REMARK" class="java.lang.String"/>
+	<field name="BUILD_HEIGHT" class="java.math.BigDecimal"/>
+	<field name="ISSKIRT" class="java.lang.String"/>
+	<field name="SKIRT_COUNT" class="java.math.BigDecimal"/>
+	<field name="ISTOWER" class="java.lang.String"/>
+	<field name="TOWER_COUNT" class="java.math.BigDecimal"/>
+	<field name="BUILD_LD_AREA" class="java.math.BigDecimal"/>
+	<field name="FLOOR_AREA" class="java.math.BigDecimal"/>
+	<field name="PR_AREA" class="java.math.BigDecimal"/>
+	<field name="COMMON_AREA" class="java.math.BigDecimal"/>
+	<field name="APPORTION_COMMON_AREA" class="java.math.BigDecimal"/>
+	<field name="NOAPPORTION_COMMON_AREA" class="java.math.BigDecimal"/>
+	<field name="BUILD_POS_X" class="java.math.BigDecimal"/>
+	<field name="BUILD_POS_Y" class="java.math.BigDecimal"/>
+	<field name="JDT_NAME" class="java.lang.String"/>
+	<field name="JDT_TYPE" class="java.lang.String"/>
+	<field name="JDT_DIRECTORY" class="java.lang.String"/>
+	<field name="LMT_NAME" class="java.lang.String"/>
+	<field name="LMT_TYEP" class="java.lang.String"/>
+	<field name="LMT_DIRECTOTY" class="java.lang.String"/>
+	<field name="STATE" class="java.lang.String"/>
+	<field name="BUILD_NO" class="java.lang.String"/>
+	<field name="COMPLEION_DATE" class="java.sql.Timestamp"/>
+	<field name="HOUSE_ID" class="java.lang.String"/>
+	<field name="ADV_HOUSE_CODE" class="java.lang.String"/>
+	<field name="FLATLET_CODE" class="java.lang.String"/>
+	<field name="FLATLET_CODE2" class="java.lang.String"/>
+	<field name="FLATLETNAME" class="java.lang.String"/>
+	<field name="ROOMNAME" class="java.lang.String"/>
+	<field name="AT_FLOOR" class="java.lang.String"/>
+	<field name="BUILD_AREA" class="java.math.BigDecimal"/>
+	<field name="TAONEI_AREA" class="java.math.BigDecimal"/>
+	<field name="FENTAN_AREA" class="java.math.BigDecimal"/>
+	<field name="FLATLET_USAGE" class="java.lang.String"/>
+	<field name="FT_GLEBE_AREA" class="java.math.BigDecimal"/>
+	<field name="FT_COMMON_AREA" class="java.math.BigDecimal"/>
+	<field name="FT_BUILD_LD_AREA" class="java.math.BigDecimal"/>
+	<field name="OTHER_AREA" class="java.math.BigDecimal"/>
+	<field name="HOUSE_STRUT" class="java.lang.String"/>
+	<field name="HOUSE_TYPE" class="java.lang.String"/>
+	<field name="HOUSE_KIND" class="java.lang.String"/>
+	<field name="PRE_HOUSE_CODE" class="java.lang.String"/>
+	<field name="HOUSE_LOCATION" class="java.lang.String"/>
+	<field name="PRO_NAME" class="java.lang.String"/>
+	<field name="COMPLEION_DATE_STR" class="java.lang.String"/>
+	<pageHeader>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="384" height="46" uuid="4e27363d-7631-46da-b5f3-ad74d90c3edb"/>
+				<box>
+					<pen lineWidth="3.0"/>
+					<topPen lineWidth="3.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[建筑物及其附着物]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="426" splitType="Stretch">
+			<staticText>
+				<reportElement x="187" y="26" width="82" height="28" uuid="9af466c0-2014-4161-b85d-bf1e59c88b81"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[套内建筑面积]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="87" y="80" width="297" height="32" uuid="325feaf3-cecf-4b5a-8da6-77a755289e5d"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PRO_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="80" width="87" height="32" uuid="608a5fbd-6937-4713-9cc2-3cdf8ccd5e01"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[房地产名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="54" width="87" height="26" uuid="05a143d4-f078-4ba9-8430-f8014e849066"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[用途]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="112" width="384" height="47" uuid="1855029c-2307-46cc-aecb-0ca9f21197ac"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[他项权利摘要及附记]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="54" width="82" height="26" uuid="a9dc9a68-9730-4e97-a76e-075a00fac18e"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[竣工日期]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="269" y="54" width="115" height="26" uuid="a7dd50b3-67f7-46e9-989b-dbd1d7363030"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{BUILD_COMPLEION_DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="54" width="100" height="26" uuid="4808fb27-9698-46a1-80fe-3e99ca6155ac"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FLATLET_USAGE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="26" width="100" height="28" uuid="8a7ac003-b625-4f4d-9ec3-16f6851fea4e"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{BUILD_AREA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="26" width="87" height="28" uuid="3dd8222a-2fb1-4994-ae65-0a5deba853ff"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Proportional"/>
+				</textElement>
+				<text><![CDATA[建筑面积]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="269" y="26" width="115" height="28" uuid="1f97b01e-64e8-431d-a191-89e65231ec2b"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TAONEI_AREA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="159" width="384" height="266" uuid="73aeb6c6-afb3-4aa8-a908-b77672c012da"/>
+				<box>
+					<pen lineWidth="3.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="3.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{EXCURSUS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="0" width="297" height="26" uuid="93a7e4a4-4b72-4dc6-8fb1-680bf0c8ff0f"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REG_PRICCE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="87" height="26" uuid="8c1a339d-0cb3-4b4f-98ee-cb40a1f6944a"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[登记价]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+</jasperReport>

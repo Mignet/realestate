@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report5" language="groovy" pageWidth="386" pageHeight="430" whenNoDataType="AllSectionsNoDetail" columnWidth="386" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="51f4d647-144c-4e5f-b6cf-735060ce9eb1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CER_CODE" class="java.lang.String"/>
+	<parameter name="REG_DATE" class="java.lang.String"/>
+	<parameter name="proc_id" class="java.lang.String"/>
+	<parameter name="AREA" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Workspace\\oracleEcplise\\dxtx_re\\src\\main\\webapp\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REG_CODE" class="java.lang.String"/>
+	<parameter name="PARCEL_CODE" class="java.lang.String"/>
+	<parameter name="PARCEL_AREA" class="java.lang.String"/>
+	<parameter name="REAL_USAGE" class="java.lang.String"/>
+	<parameter name="LAND_ADDRESS" class="java.lang.String"/>
+	<parameter name="USE_PER" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select 1 from dual]]>
+	</queryString>
+	<field name="1" class="java.math.BigDecimal"/>
+	<columnHeader>
+		<band height="39">
+			<staticText>
+				<reportElement x="0" y="2" width="384" height="37" uuid="04d2f7d0-47c1-45b3-b681-6e1acf00e86a"/>
+				<box>
+					<pen lineWidth="3.0"/>
+					<topPen lineWidth="3.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[权利人]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<subreport runToBottom="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="165" height="20" uuid="bfd23416-02b5-49e8-a328-108ed9432ecb"/>
+				<subreportParameter name="SUBREPORT_DIR"/>
+				<subreportParameter name="REG_DATE"/>
+				<subreportParameter name="AREA"/>
+				<subreportParameter name="REG_CODE">
+					<subreportParameterExpression><![CDATA[$P{REG_CODE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="CER_CODE"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "\\report_cer1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="371">
+			<staticText>
+				<reportElement x="0" y="81" width="87" height="26" uuid="5fcfe607-3d9b-4a22-9a9d-219e47875b5d"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[使用年限]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="29" width="87" height="26" uuid="b1255ea4-d85a-4c54-bc1b-3ca4f32ba170"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[土地用途]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="29" width="82" height="26" uuid="def6599d-8b49-4fc3-a5d9-f685a6a69b20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[所在区]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="1" width="82" height="28" uuid="e00bafe7-b209-462f-864b-d22ec2e54b2d"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[宗地面积 ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="87" y="81" width="297" height="26" uuid="9e1333bd-3c52-4cc4-b102-d52dab986a79"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{USE_PER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="206" width="384" height="31" uuid="86c3cbb7-d09b-41ea-8db3-e40607f8dfc2"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="18" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["深房地字第 "+$P{CER_CODE}+" 号"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="237" width="384" height="25" uuid="15f4f4e0-945c-46ac-b7f2-a234fb501741"/>
+				<box>
+					<pen lineWidth="3.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(正本)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="1" width="100" height="28" uuid="f978c52a-5354-4028-b7dc-f3d6516b668b"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARCEL_CODE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="262" width="384" height="45" uuid="75d45a95-c4de-41c9-8155-7b106ebd44d7"/>
+				<box>
+					<pen lineWidth="3.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[深圳市房地产权登记中心（印章）]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="307" width="384" height="64" uuid="a49dfd26-6c27-42fe-961f-0bc58bb78374"/>
+				<box>
+					<pen lineWidth="3.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="3.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["登记日期  "+$P{REG_DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="29" width="100" height="26" uuid="e1b2de39-7359-4741-bc61-4bd6cff54606"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REAL_USAGE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="55" width="87" height="26" uuid="4bca6ed7-9f45-4f14-b0b4-2d07cae4c8ed"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[土地位置]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="87" height="28" uuid="27630bf2-146f-4888-941d-75b710e4ab1d"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Proportional"/>
+				</textElement>
+				<text><![CDATA[宗地号]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="87" y="55" width="297" height="26" uuid="0ce3ae32-c50d-4749-bf4d-5867e1cf693f"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{LAND_ADDRESS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="1" width="115" height="28" uuid="76b20886-242f-4b7d-9376-47507ceb67e3"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARCEL_AREA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="29" width="115" height="26" uuid="bfc28244-0e5e-40b8-912f-b320668240cf"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{AREA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="107" width="384" height="99" uuid="428f2d78-cb8b-49cf-8eaa-1eea89689c9f"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="3.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="3.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>

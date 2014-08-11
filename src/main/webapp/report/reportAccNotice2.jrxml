@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAccNotice2" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3265d6f5-15ce-467f-ba50-2dad9d29d743">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<columnHeader>
+		<band height="526" splitType="Stretch">
+			<staticText>
+				<reportElement x="37" y="14" width="100" height="20" uuid="dcf77f26-1218-4995-b338-5bf65363e8a5"/>
+				<textElement>
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[注意事项]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="34" width="486" height="186" uuid="d041fd41-fc70-4232-9b9b-a3f1cf9b5eca"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[1、本通知书是登记机构受理房地产权登记申请的书面凭证，非核准登记结果。房地产权利的确认以核准登记为准。请妥善保管本通知书。
+2、请联系人保持手机畅通，以便及时接收有关通知。如未接到延时通知，纳税、领证日期为自受理之日起的第五个工作日（不包括初始登记）。未在办理时限内提交缴税证明的，将按规定予以退文。
+3、根据法律、法规规定，办理房地产权登记需缴纳有关税费，并按规定缴清税费后才能领取《房地产证》。
+纳税时，申请人（转让方、受让方）需凭本通知书和身份证明到场签字确认《纳税申报表》并缴纳税费。申请人委托他人代签《纳税申报表》的，还应提供授权委托书原件（无需公证）及受托人身份证复印件。
+领证时，个人授权委托的,受托人应提交经公证的授权委托书及受托人身份证复印件。单位授权委托的，应提交有效的法人授权委托书、法定代表人证明书、法定代表人身份证明复印件、受托人身份证明复印件。如法定代表人变更、法定代表人证明过期、授权委托书过期、另行委托他人，请重新提交相应的证明文件。
+4、如遗失本通知书，请开具遗失声明（所有申请人签名或盖章）。
+5、在房地产登记机构核准登记前,申请人可以撤回申请。房地产登记机构核准登记后，申请人不能撤回申请。
+
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="220" width="485" height="75" uuid="908314fd-5673-44a0-831f-8ee13bc643dd"/>
+				<textElement>
+					<font size="10" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[受理单位工作人员工作作风投诉电话：96508888转2
+受理单位咨询电话：96508888转1     查询网址：www.szpl.gov.cn
+网上办事大厅办理进度查询及投诉：http://wsbs.sz.gov.cn/shenzhen
+办理进度查询电话：0755-83949114
+纪检监察电话：0755-22382655  0755-83788585       市监察机关网址：www.sz-jc.gov.cn]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="304" width="149" height="24" uuid="0b4ea005-9914-47ed-bf47-23b1d28c950c"/>
+				<textElement>
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[深圳市房地产权登记中心]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="333" width="483" height="36" uuid="43fd74f3-032f-49a6-ba36-aca65ed2ebf1"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[工作时间：星期一至星期五    上午9∶00－12∶00  下午2∶00－6∶00
+各登记科地址：
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="369" width="485" height="146" forecolor="#FF0033" uuid="6941f6c1-b49a-41e5-9bd3-762a0b3ccd2d"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[1.第一直属登记科：深圳市罗湖区北环大道1022号金湖文化中心
+2.第二直属登记科：宝安区九区广场大厦（宝民一路）7层
+3.宝安登记科：宝安区西乡流塘路288号（宝安日报对面）
+4.龙华登记科：龙华新区龙华街道龙环二路（东环二路）181号
+5.龙岗登记科：龙岗区吉祥路城市花园二期1栋（818路汽车总站对面）
+6.布吉登记科：布吉街道吉政路19号
+7.光明登记科：光明新区别墅路13号商会大厦一楼（西侧）
+8.坪山登记科：坪山新区坑梓街道办红岭路27号
+9.滨海登记科：大鹏新区葵涌葵政西路22号
+10.驻法院窗口服务点:福田区彩田北路6003号深圳市中级人民法院附楼B105
+]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+</jasperReport>

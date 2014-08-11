@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+    <comment>UserRole</comment>
+    
+	<sql sqlId="getAllUserRoles" author="" function=""><![CDATA[
+				select * from v_user_rolemerge_rel
+				]]>
+	</sql>
+   
+    <sql sqlId="checkUserRoles" author="" function=""><![CDATA[
+	       select tl.*, 
+	               case when 
+	                tl.roleid in(select roleid from t_Role_r_User trru where trru.userid = :userid) 
+                      then 'true' 
+                      else 'false' 
+                      end checkflag from t_Role tl
+				]]>
+	</sql>
+	
+    <sql sqlId="deleteUserRoleByUserid" author="" function=""><![CDATA[
+	            delete from t_Role_r_User where userid = :userid
+				]]>
+	</sql>
+	
+    <sql sqlId="queryUserRoleByUserid" author="" function=""><![CDATA[
+	            select * from t_Role_r_User where userid = :userid
+				]]>
+	</sql>
+	
+    <sql sqlId="searchByparam" author="Sam" function=""><![CDATA[
+	            select vurr.* from v_user_rolemerge_rel vurr 
+				]]>
+	</sql>
+</sqlList>

@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>Register</comment>
+	
+	<!-- 获取申请人 通过登记编号 reg_code -->
+	<sql sqlId="getAplPerInfoByRegId" author="Joyon" function=""><![CDATA[
+	           select * from BUS_APPLICANT where bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code)
+	            ]]>
+	</sql>
+	
+	<!-- 获取申请人 做为权利人  通过登记编号 reg_code -->
+	<sql sqlId="getAppAsHolderByRegId" author="Joyon" function=""><![CDATA[
+	           select REG_UNIT_CODE,HOL_REL, DEPART_TYPE,APP_ADDRESS as HOL_ADDRESS, APP_NAME as HOL_NAME,APP_PORT as PORTION,APP_CER_NO as HOL_CER_NO ,APP_CER_TYPE as HOL_CER_TYPE,APP_TYPE as HOL_TYPE from BUS_APPLICANT where bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code)
+	            ]]>
+	</sql>
+	
+	
+	<!-- 获取房屋信息通过登记编号 reg_code -->
+	<sql sqlId="getHouseInfoByRegId" author="Joyon" function=""><![CDATA[
+	           select * from EST_HOUSE where house_id=(select house_id from BUS_REGUNITREL where bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code))
+	            ]]>
+	</sql>
+	
+	<!-- 通过登记编号  获取登记簿预览自然信息 -->
+	<sql sqlId="getRegPreNaturalInfo" author="Joyon" function=""><![CDATA[
+	           	select zdb.*,fwb.*,to_char(zdb.START_DATE, 'YYYY-MM-DD') as start_date,to_char(zdb.END_DATE, 'YYYY-MM-DD') as end_date,build.LAYER_COUNT from est_parcel zdb,BUS_REGUNITREL glb,EST_HOUSE fwb,BUS_EST_CERTIFICATE fczb, est_building build where   build.BUILDING_ID=glb.BUILDING_ID and zdb.PARCEL_ID=glb.PARCEL_ID and fwb.HOUSE_ID=glb.HOUSE_ID and fczb.bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code) and glb.bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code)
+	            ]]>
+	</sql>
+	
+	<!-- 通过房屋id 获取自然信息 Map-->
+	<sql sqlId="getNaturalInfoMapByHouseId" author="Joyon" function=""><![CDATA[
+	   select  
+	   	  
+	   	   to_char(zdb.START_DATE, 'YYYY-MM-DD') as pa_start_date,
+	       to_char(zdb.END_DATE, 'YYYY-MM-DD') as pa_end_date,zdb.*,
+	       to_char(build.COMPLEION_DATE,'YYYY-MM-DD') as BUILD_COMPLEION_DATE,
+	       fwb.*,
+	       build.*，
+	       (select DIC_ITEM_VALUE from CFIG_DIC_ITEM where DIC_ITEM_CODE=zdb.USE_PER and DIC_TYPE_ID = (select DIC_TYPE_ID from CFIG_DIC_TYPE where DIC_TYPE_CODE='006')) as USE_PER_VALUE
+  		from (select * from est_parcel where parcel_id=(select parcel_id from EST_BUILDING where building_id=(select building_id from est_house where house_id=:house_id)))          zdb,
+       (select * from EST_HOUSE where house_id=:house_id)           fwb,
+       (select * from EST_BUILDING where building_id=(select building_id from est_house where house_id=:house_id))       build
+	            ]]>
+	</sql>
+	<!-- 通过房屋编号 获取自然信息 Map-->
+	<sql sqlId="getNaturalInfoMapByHouseRegUnitCode" author="Joyon" function=""><![CDATA[
+	   select  to_char(zdb.START_DATE, 'YYYY-MM-DD') as pa_start_date,
+	       to_char(zdb.END_DATE, 'YYYY-MM-DD') as pa_end_date,zdb.*,
+	       to_char(build.COMPLEION_DATE,'YYYY-MM-DD') as BUILD_COMPLEION_DATE,
+	       fwb.*,fwb.adv_house_code reg_unit_code,'009001' as reg_unit_type,
+	       zdb.land_address || build.building_name || build.build_no || fwb.roomname as reg_unit_name, 
+	       build.*,
+	       (select DIC_ITEM_VALUE from CFIG_DIC_ITEM where DIC_ITEM_CODE=zdb.USE_PER and DIC_TYPE_ID = (select DIC_TYPE_ID from CFIG_DIC_TYPE where DIC_TYPE_CODE='006')) as USE_PER_VALUE
+  		from (select * from est_parcel where parcel_id=(select parcel_id from EST_BUILDING where building_id=(select building_id from est_house where ADV_HOUSE_CODE=:reg_unit_code)))          zdb,
+       (select * from EST_HOUSE where ADV_HOUSE_CODE=:reg_unit_code)           fwb,
+       (select * from EST_BUILDING where building_id=(select building_id from est_house where ADV_HOUSE_CODE=:reg_unit_code))       build
+	            ]]>
+	</sql>
+	<!-- 通过宗地Id 获取自然信息 Map-->
+	<sql sqlId="getNaturalInfoMapByParcelId" author="Joyon" function=""><![CDATA[
+	     select zdb.*,
+	       to_char(zdb.START_DATE, 'YYYY-MM-DD') as pa_start_date,
+	       to_char(zdb.END_DATE, 'YYYY-MM-DD') as pa_end_date
+  		from est_parcel     zdb where parcel_id=:parcel_id    
+	            ]]>
+	</sql>
+	<!-- 通过宗地编号 获取自然信息 Map-->
+	<sql sqlId="getNaturalInfoMapByParcelRegUnitCode" author="Joyon" function=""><![CDATA[
+	     select zdb.*,zdb.parcel_code reg_unit_code,'009003' as reg_unit_type,
+	       to_char(zdb.START_DATE, 'YYYY-MM-DD') as pa_start_date,
+	       to_char(zdb.END_DATE, 'YYYY-MM-DD') as pa_end_date,
+	       zdb.land_address as reg_unit_name, 
+	        (select DIC_ITEM_VALUE from CFIG_DIC_ITEM where DIC_ITEM_CODE=zdb.USE_PER and DIC_TYPE_ID = (select DIC_TYPE_ID from CFIG_DIC_TYPE where DIC_TYPE_CODE='006')) as USE_PER_VALUE
+  		from est_parcel     zdb where PARCEL_CODE=:reg_unit_code    
+	            ]]>
+	</sql>
+	
+	<!-- 通过登记编号  获取登记登记单元关联表Map -->
+	<sql sqlId="getBusRegunitrelMapByRegCode" author="Joyon" function=""><![CDATA[
+	 select * from BUS_REGUNITREL where bus_id = (select bus_id from bus_main where reg_code=:reg_code)
+	            ]]>
+	</sql>
+	 
+	
+	<!-- 通过流程实例Id  获取登记簿查询自然信息 -->
+	<sql sqlId="getSearchNaturalInfo" author="Joyon" function=""><![CDATA[
+	           	select zdb.*,fwb.*,fczb.*,to_char(zdb.START_DATE, 'YYYY-MM-DD') as start_date,to_char(zdb.END_DATE, 'YYYY-MM-DD') as end_date,build.LAYER_COUNT from est_parcel zdb,BUS_REGUNITREL glb,EST_HOUSE fwb,BUS_EST_CERTIFICATE fczb, est_building build where   build.BUILDING_ID=glb.BUILDING_ID and zdb.PARCEL_ID=glb.PARCEL_ID and fwb.HOUSE_ID=glb.HOUSE_ID and fczb.bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code) and glb.bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code)
+	            ]]>
+	</sql>
+	
+	
+	<!-- 通过登记编号 获取房地产证信息 -->
+	<sql sqlId="getCertificateInfo" author="Joyon" function=""><![CDATA[
+	           	select * from BUS_EST_CERTIFICATE where bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code)
+	            ]]>
+	</sql>
+	
+	<!-- 通过登记编号 获取所有权信息 -->
+	<sql sqlId="getOwnershipInfoByRegId" author="Joyon" function=""><![CDATA[
+	           		select o.*,(select bus_name from cfig_bus_type where bus_type_id=( select reg_type from bus_main where  REG_CODE=:reg_code) ) as bus_name from BUS_OWNERSHIP o where o.bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code)
+	            ]]>
+	</sql>
+	
+	<!-- 通过登记编号 获取使用权信息 -->
+	<sql sqlId="getuserInfoByRegId" author="xuzz" function="通过登记编号 获取使用权信息"><![CDATA[
+	           		select o.*,(select bus_name from cfig_bus_type where bus_type_id=(select reg_type from bus_main where  REG_CODE=:reg_code) ) as bus_name from BUS_USERIGHT_REG o where o.bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code)
+	            ]]>
+	</sql>
+	
+		<!-- 通过登记编号 获取查封/解封信息 -->
+	<sql sqlId="getattachInfoByRegId" author="xuzz" function="通过登记编号 获取查封/解封信息"><![CDATA[
+	           		select o.*,(select bus_name from cfig_bus_type where bus_type_id=(select reg_type from bus_main where  REG_CODE=:reg_code) ) as bus_name from BUS_DISTRAIN_REG o where o.bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code)
+	            ]]>
+	</sql>
+	<!-- 通过登记编号 获取异议信息 -->
+	<sql sqlId="getDemurrerInfoByRegId" author="xuzz" function="通过登记编号 获取异议信息"><![CDATA[
+	           		select o.*,(select bus_name from cfig_bus_type where bus_type_id=(select reg_type from bus_main where  REG_CODE=:reg_code) ) as bus_name from BUS_DEMURRER_REG o where o.bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code)
+	            ]]>
+	</sql>
+	<!-- 通过登记编号获取抵押权过程信息 -->
+	<sql sqlId="getMortgageInfoByRegId" author="xuzz" function="通过登记编号获取抵押权过程信息"><![CDATA[
+	           		select o.*,(select bus_name from cfig_bus_type where bus_type_id=( select reg_type from bus_main where  REG_CODE=:reg_code) ) as bus_name from BUS_MORTGAGE_REG o where o.bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code)
+	            ]]>
+	</sql>
+	
+	<!-- 通过当前登记编号 获取当前业务中房屋历史的所有业务编号 -->
+	<sql sqlId="getHisBusIdByRegId" author="Joyon" function=""><![CDATA[
+	           	select bus_id,reg_code from BUS_REGUNITREL where REG_UNIT_CODE=(select REG_UNIT_CODE from BUS_REGUNITREL where REG_CODE=:reg_code)
+	            ]]>
+	</sql>
+	
+	<!-- 通过当前登记编号 获取业务类型 父级业务类型名 -->
+	<sql sqlId="getBusTypeParentNameByRegId" author="Joyon" function=""><![CDATA[
+	           	select * from CFIG_BUS_TYPE where bus_type_id=(
+				       select parent_id from CFIG_BUS_TYPE where bus_type_id=(
+				              select reg_type from bus_main where bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code)
+				       )
+				) 
+	            ]]>
+	</sql>
+	
+	<!-- 通过当前业务编号 获取业务类型 父级业务类型名 -->
+	<sql sqlId="getBusTypeParentNameByBusId" author="Joyon" function=""><![CDATA[
+	           	select bus_name from CFIG_BUS_TYPE where bus_type_id=(
+				       select parent_id from CFIG_BUS_TYPE where bus_type_id=(
+				              select reg_type from bus_main where bus_id=:bus_id
+				       )
+				) 
+	            ]]>
+	</sql>
+	
+	
+	<!-- 通过当前业务编号 获取业务类型 父级业务类型名 -->
+	<sql sqlId="getBusMainInfoMapByBusId" author="Joyon" function=""><![CDATA[
+	           	select * from bus_main where bus_id=:bus_id
+	            ]]>
+	</sql>
+	
+	<!-- 通过当前登记编号 获取当前业务的权利人 -->
+	<sql sqlId="getHolderInfoByRegId" author="Joyon" function=""><![CDATA[
+	           	select *from bk_holder  where right_rel_id=
+				(
+				 select right_rel_id from bk_right_rel where  REG_CODE=:reg_code
+				)
+			  ]]>
+	</sql>
+	
+	<!-- 通过当前登记编号 获取业务类型ID -->
+	<sql sqlId="getRegTypeByProdefId" author="xuzz" function=""><![CDATA[
+	           	select * from  BUS_MAIN where  bus_id in(  select distinct(bus_id) from BUS_REGUNITREL where reg_code =:reg_code)
+			  ]]>
+	</sql>
+	
+	
+	<!-- 通过当前登记编号 获取业务类型名-->
+	<sql sqlId="getRegTypeByRegId" author="Joyon" function=""><![CDATA[
+	           select bus_name from cfig_bus_type where bus_type_id =(
+			      select reg_type from bus_main where bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code)
+				)
+			  ]]>
+	</sql>
+	
+	
+	<!-- 通过当前登记编号 获取登记簿所有权信息-->
+	<sql sqlId="getBkOwnershipInfoByRegId" author="Joyon" function=""><![CDATA[
+	           select * from bk_ownership 
+			  ]]>
+	</sql>
+	<!-- 通过当前登记编号 获取登记簿所有权信息-->
+	<sql sqlId="getBkOwnership" author="Joyon" function=""><![CDATA[
+	           select * from bk_ownership
+			  ]]>
+	</sql>
+		<!-- 通过当前登记编号 获取登记簿使用权信息-->
+	<sql sqlId="getBkuserInfoByRegId" author="xuzz" function="通过当前登记编号获取登记簿使用权信息"><![CDATA[
+	           select * from BK_USERIGHT 
+			  ]]>
+	</sql>
+		<!-- 查询登记簿（其它部分_查封登记）部分-->
+	<sql sqlId="getBkDistrainInfoByRegId" author="xuzz" function=""><![CDATA[
+	          select * from BK_DISTRAIN 
+			  ]]>
+	</sql>
+	<!-- 查询登记簿（其它部分_异议记）部分-->
+	<sql sqlId="getBkDemurrerInfoByRegId" author="xuzz" function=""><![CDATA[
+	          select * from BK_DEMURRER 
+			  ]]>
+	</sql>
+	
+	  <!-- 通过当前登记编号获取登记簿抵押权信息 -->
+	<sql sqlId="getBkMortgageInfoByRegUnitCode" author="panda" function=""><![CDATA[
+	           select * from BK_MORTGAGE where book_code=(select book_code from bk_baseinfo where reg_unit_code=:reg_unit_code) and reg_code=:reg_code
+			  ]]>
+	</sql>
+	<!-- 通过当前登记编号 获取权证号-->
+	<sql sqlId="getRightCertificateNo" author="Joyon" function=""><![CDATA[
+	           select CERTIFICATE_CODE as CER_NO from BUS_EST_CERTIFICATE where bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code)
+			  ]]>
+	</sql>
+	<!-- 通过当前登记编号 获取权证号-->
+	<sql sqlId="getRightCertificateNoFromBkOwnership" author="Joyon" function=""><![CDATA[
+	           select  CER_NO from BK_OWNERSHIP  WHERE REG_CODE=:reg_code
+			  ]]>
+	</sql>
+	<!-- 通过当前登记编号 登记单元关联表Map-->
+	<sql sqlId="getRegUnitRelMapByRegId" author="Joyon" function=""><![CDATA[
+	           select * from BUS_REGUNITREL where REG_CODE=:reg_code
+			  ]]>
+	</sql>
+	
+	<!-- 通过当前登记编号 业务主表Map-->
+	<sql sqlId="getBusMainMapByRegId" author="Joyon" function=""><![CDATA[
+	           select * from BUS_MAIN where bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code))
+			  ]]>
+	</sql>
+	
+	<!-- 获取前一个登记编号-->
+	<sql sqlId="getPreRegCodeByRegId" author="Joyon" function=""><![CDATA[
+	          select distinct(LAST_REG_CODE) from BUS_REGUNITREL where reg_code = :reg_code
+			  ]]>
+	</sql>
+	
+	
+	<!-- 获取前一个权利人编号-->
+	<sql sqlId="getHisHolderId" author="Joyon" function=""><![CDATA[
+	          select * from (select rownum,to_number(holder_id) as holder_id from bk_holder t ORDER by holder_id desc ) where rownum=1
+			  ]]>
+	</sql>
+	
+	<!-- 查询共有登记簿部分-->
+	<sql sqlId="getShare" author="xuzz" function=""><![CDATA[
+	          select * from BK_SHARE
+			  ]]>
+	</sql>
+	<!-- 查询使用权登记簿部分-->
+	<sql sqlId="getUseright" author="xuzz" function=""><![CDATA[
+	          select * from BK_USERIGHT
+			  ]]>
+	</sql>
+	<!-- 查询所有权登记簿部分-->
+	<sql sqlId="getOwnership" author="xuzz" function=""><![CDATA[
+	          select * from BK_OWNERSHIP
+			  ]]>
+	</sql>
+	<!-- 查询登记簿（他项权力部分_抵押登记）部分-->
+	<sql sqlId="getMortgage" author="xuzz" function=""><![CDATA[
+	          select * from BK_MORTGAGE
+			  ]]>
+	</sql>
+	<!-- 查询登记簿（他项权利部分_地役权登记）部分-->
+	<sql sqlId="getEasement" author="xuzz" function=""><![CDATA[
+	          select * from BK_EASEMENT
+			  ]]>
+	</sql>
+	<!-- 查询登记簿（其它部分_预告登记）部分-->
+	<sql sqlId="getAdvnotice" author="xuzz" function=""><![CDATA[
+	          select * from BK_ADVNOTICE
+			  ]]>
+	</sql>
+	<!-- 查询登记簿（其它部分_异议登记）部分-->
+	<sql sqlId="getDemurrer" author="xuzz" function=""><![CDATA[
+	          select * from BK_DEMURRER
+			  ]]>
+	</sql>
+	<!-- 查询登记簿（其它部分_查封登记）部分-->
+	<sql sqlId="getDistrain" author="xuzz" function=""><![CDATA[
+	          select * from BK_DISTRAIN where REG_CODE=:reg_code
+			  ]]>
+	</sql>
+	<!-- 根据登记编号获取受让方信息-->
+	<sql sqlId="getTransfereeMapListByRegId" author="Joyon" function=""><![CDATA[
+	          select * from bus_applicant where app_type=:app_type and bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code)
+			  ]]>
+	</sql>
+	<!-- 查询申请人信息-->
+	<sql sqlId="getApplicaent" author="xuzz" function=""><![CDATA[
+	          select * from BUS_APPLICANT 
+			  ]]>
+	</sql>
+	
+	<!-- 查询登记簿基本信息-->
+	<sql sqlId="selectBaseInfo" author="xuzz" function=""><![CDATA[
+	          select * from BK_BASEINFO
+			  ]]>
+	</sql>
+	
+	<!-- 查询当前业务是否在途-->
+	<sql sqlId="checkBusState" author="xuzz" function="查询当前业务是否在途"><![CDATA[
+	          SELECT *
+  FROM BUS_REGUNITREL m
+ WHERE m.REG_STATE='053007' 
+			  ]]>
+	</sql>
+	<!-- 查询前一个业务ID-->
+	<sql sqlId="getBeforProcid" author="xuzz" function="查询当前业务ID"><![CDATA[
+	          SELECT *
+  FROM BUS_MAIN m
+ WHERE  M.BUS_ID IN (SELECT R.BUS_ID
+                      FROM EST_HOUSE h, BUS_REGUNITREL r
+                     WHERE H.HOUSE_ID = R.HOUSE_ID 
+			  ]]>
+	</sql>
+	
+	<!-- 查询业务表的流程定义ID-->
+	<sql sqlId="getProcid" author="xuzz" function="查询业务表的流程定义ID"><![CDATA[
+	          select * from CFIG_BUS_TYPE
+			  ]]>
+	</sql>
+		<!-- 查询业务主表的业务ID-->
+	<sql sqlId="getBusid" author="xuzz" function="查询业务主表的业务ID"><![CDATA[
+	          select * from BUS_MAIN
+			  ]]>
+	</sql>
+
+	
+	<!-- 根据登记编号获取当前在办业务  房屋的权利人as申请人数据-->
+	<sql sqlId="getCurBusHouseHolderAsAPPMapListByRegId" author="Joyon" function=""><![CDATA[
+	         select HOL_TYPE as APP_TYPE,
+       HOL_NAME as APP_NAME,
+       HOL_CER_TYPE as APP_CER_TYPE,
+       HOL_CER_NO as APP_CER_NO,
+       HOL_ADDRESS as APP_ADDRESS,
+       DEPART_TYPE as DEPART_TYPE,
+       LEGAL_NAME,
+       AGENT_NAME,
+       AGENT_CER,
+       AGENT_TEL,
+       PORTION as APP_PORT
+  from BK_HOLDER
+ where right_rel_id =
+       (select right_rel_id
+          from BK_RIGHT_REL
+         where book_code =
+               (select book_code
+                  from (select rownum, to_number(book_code) as book_code
+                          from bk_baseinfo
+                         where house_id = (select house_id
+                                             from BUS_REGUNITREL
+                                            where bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code))
+                         order by book_code desc)
+                 where rownum = '1'))
+ 
+			  ]]>
+	</sql>
+	
+	<!-- 根据登记编号获取当前在办业务  房屋的权利人-->
+	<sql sqlId="getCurBusHouseHolderMapListByRegId" author="Joyon" function=""><![CDATA[
+	          select * from BK_HOLDER where   right_rel_id=(
+				       select right_rel_id from bk_right_rel where reg_code=(
+				       		select reg_code from(
+								  select rownum,reg_code from BUS_REGUNITREL where house_id=
+								  ( 
+								  	select house_id from BUS_REGUNITREL where bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code)
+								  ) 
+								  order by regunitrel_id desc 
+							  ) where rownum='1'
+				       
+				       )
+				)
+			  ]]>
+	</sql>
+	<!-- 根据登记编号获取房地产证表信息-->
+	<sql sqlId="getCertificateMapByRegCode" author="Joyon" function=""><![CDATA[
+	          select * from BUS_EST_CERTIFICATE where bus_id=(SELECT BUS_ID FROM BUS_MAIN WHERE REG_CODE=:reg_code)
+			  ]]>
+	</sql>
+	
+	<!-- 根据登记编号获取房屋表信息-->
+	<sql sqlId="getHouseMapByRegCode" author="Joyon" function=""><![CDATA[
+	          select * from EST_HOUSE where house_id=(select house_id from BUS_REGUNITREL where bus_id = (select bus_id from bus_main where reg_code=:reg_code))
+			  ]]>
+	</sql>
+	
+	<!-- 根据房屋编号获取宗地表信息-->
+	<sql sqlId="getParcelMapByHouseId" author="Joyon" function=""><![CDATA[
+	          select * from est_parcel where parcel_id =(select parcel_id from est_building est_building where est_building.building_id=(select building_id from est_house where house_id=:house_id))
+			  ]]>
+	</sql>
+	
+	<!-- 根据流程实例ID 获取当前 业务前一次业务的权利人信息-->
+	<sql sqlId="getHistoryHolderMapListByProcId" author="Joyon" function=""><![CDATA[
+	          select *
+				  from BK_HOLDER
+				 where RIGHT_REL_ID =
+				       (select RIGHT_REL_ID
+				          from BK_RIGHT_REL
+				         where REG_CODE =
+				               (select reg_code
+				                  from bus_main
+				                 where bus_id = (select last_bus_id
+				                                   from bus_main
+				                                  where proc_id = :proc_id)))
+			  ]]>
+	</sql>
+	
+	<!-- 根据流程实例ID 获取当前 业务的权利人信息-->
+	<sql sqlId="getCurrentHolderMapListByProcId" author="Sam" function=""><![CDATA[
+	          select * from bk_holder bh,bk_right_rel brr where bh.holder_id = brr.holder_id
+	          and brr.reg_code = (select reg_code
+				                  from bus_main where proc_id = :proc_id) 
+			  ]]>
+	</sql>
+	
+	<sql sqlId="getMortByid" author="panda" function="根据流程实例id获取抵押权登记信息"><![CDATA[
+	           select  MORT_REG_ID,MORT_TYPE,REL_ORIG_VALUE,MORT_ASSURE_RIGHT,ASSESS_PRICE,AGREED_PRICE,CAN_MORT_REASON,
+	           MORT_CON_NO,REL_ESTATE_NAME,BORROWER,CAN_MORT_DATE,ORIG_MORT_REG_NO,MORT_PORT,LOAN_USAGE,ASSUER_RANGE,MORT_SEQ,MAX_AMOUNT,SURE_AMOUNT,
+	            to_char(MORT_REG_DATE,'YYYY-MM-DD HH24:MI:SS') as MORT_REG_DATE,to_char(CREDITOR_START_DATE,'YYYY-MM-DD HH24:MI:SS') as CREDITOR_START_DATE,
+	          to_char(CREDITOR_END_DATE,'YYYY-MM-DD HH24:MI:SS') as CREDITOR_END_DATE,to_char(CAN_MORT_DATE,'YYYY-MM-DD HH24:MI:SS') as CAN_MORT_DATE from BUS_MORTGAGE_REG
+	          where bus_id =:id
+	            ]]>
+	</sql>
+	<sql sqlId="getPrevRegcode" author="panda" function="根据当前登记编号，获取前一个业务的登记编号"><![CDATA[
+	           select * from BUS_MAIN where LAST_BUS_ID=(select BUS_ID from BUS_MAIN where REG_CODE=:reg_code)
+	            ]]>
+	</sql>
+	<sql sqlId="getBkOwnershipList" author="panda" function="获取当前登记编号下，登记类型为房屋的登记单元的房地产证号、登记簿编号集合"><![CDATA[
+	         select o.book_code,o.cer_no,o.reg_code from BK_BASEINFO b,BK_OWNERSHIP o where O.BOOK_CODE=B.BOOK_CODE  and B.REG_UNIT_CODE=:code
+	            ]]>
+	</sql>
+	<sql sqlId="getBkUserightList" author="panda" function="获取当前登记编号下，登记类型为宗地的登记单元的房地产证号、登记簿编号集合"><![CDATA[
+	         select o.book_code,o.cer_no,o.reg_code from BK_BASEINFO b,BK_USERIGHT o where O.BOOK_CODE=B.BOOK_CODE  and B.REG_UNIT_CODE=:code 
+	            ]]>
+	</sql>
+	
+	<!-- 通过登记编号获取业务类型名    -->
+	<sql sqlId="getBusNameMapByRegCode" author="panda" function=""><![CDATA[
+	select bus_name from cfig_bus_type where bus_type_id=( select reg_type from bus_main where  REG_CODE=:reg_code) 
+	            ]]>
+	</sql>
+	
+	
+	<!-- 获取所有字典名    -->
+	<sql sqlId="getDicCodeNameFromDicItm" author="panda" function=""><![CDATA[
+		select DIC_ITEM_VALUE from CFIG_DIC_ITEM  
+	            ]]>
+	</sql>
+	<sql sqlId="getRelByRegcode" author="panda" function=""><![CDATA[
+		   select * from BK_RIGHT_REL where REG_CODE=:reg_code 
+	            ]]>
+	</sql>
+	<sql sqlId="getRegunitList" author="panda" function="根据流程实例id获取注销抵押权登记单元信息"><![CDATA[
+	           select r.REG_UNIT_TYPE,r.REG_UNIT_CODE,b.book_code from BUS_REGUNITREL r,BK_BASEINFO b where r.REG_UNIT_CODE = b.REG_UNIT_CODE and r.bus_id =:bus_id
+	            ]]>
+	</sql>
+	<sql sqlId="checkForMort" author="panda" function="检查权利人表中是否已存在数据"><![CDATA[
+	           select * from BK_RIGHT_REL r,BK_HOLDER h where r.RIGHT_REL_ID = h.RIGHT_REL_ID and r.REG_CODE=:reg_code and h.HOL_REL=:type
+	            ]]>
+	</sql>
+	<sql sqlId="getMortgagerFormApp" author="panda" function="抵押设立中，从申请表中获取抵押人信息"><![CDATA[
+	           select * from BUS_APPLICANT where bus_id=:bus_id and HOL_REL=:type  and REG_UNIT_CODE=:code
+	            ]]>
+	</sql>
+	<sql sqlId="getMortgageeFormApp" author="panda" function="抵押设立中，从申请表中获取抵押权人信息"><![CDATA[
+	           select * from BUS_APPLICANT where bus_id=:bus_id and HOL_REL=:type
+	            ]]>
+	</sql>
+	
+	<!-- 获取所有权利人  -->
+	<sql sqlId="getHolder" author="panda" function=""><![CDATA[
+		select * from BK_HOLDER
+	            ]]>
+	</sql>
+	<!-- 通过登记单元编号和业务定义ID获取登记编号集合  -->
+	<sql sqlId="getRegCode" author="xuzz" function="通过登记单元编号和业务定义ID获取登记编号集合"><![CDATA[
+		SELECT distinct(REG_UNIT_CODE)
+		  FROM BUS_REGUNITREL r
+		 WHERE     BUS_ID IN (SELECT BUS_ID
+		                        FROM BUS_MAIN b
+		                       WHERE b.PRO_DEF_ID =:prodefid)
+		       AND r.REG_STATE = '053002'
+		       AND REG_UNIT_CODE =:reg_unit_code
+	       ]]>
+	</sql>
+		
+</sqlList>

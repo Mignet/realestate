@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>Ownership</comment>
+    <!-- 获取登记信息和房地产证信息 -->
+	<sql sqlId="queryInfoById" author="lpp" function=""><![CDATA[
+	             select z.bus_id,z.reg_type,z.reg_station,z.reg_code,z.proc_name,h.pro_name,f.excursus
+  from BUS_MAIN z left join  BUS_EST_CERTIFICATE f  on z.BUS_ID=f.BUS_ID   left join  BUS_REGUNITREL r  on
+  r.bus_id = z.bus_id left join  EST_HOUSE h  on r.REG_UNIT_CODE = h.ADV_HOUSE_CODE where r.REG_UNIT_CODE in (select REG_UNIT_CODE from BUS_REGUNITREL where bus_id=z.bus_id ) 
+                   and z.bus_id = (select bus_id from BUS_MAIN 
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getAllOwnershipInfos" author="Sam" function="获得所有产权信息"><![CDATA[
+	               select tab.* from 
+	                   (select comb.*,cb1.community_name from 
+                       (select bmg.*,
+                       to_char(bmg.reg_date,'YYYY-MM-DD') alias_reg_date,
+                       (select bus_name from cfig_bus_type where bus_type_id = bmg.procdef_id) bus_name ,
+                       (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bmg.mort_type ) mort_type_name,
+                       (select vbhh.r_coll_names from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063004') mortgagee,
+                       (select vbhh.r_coll_names from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063003') mortgager,
+                       (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bbi.reg_unit_type ) reg_type,
+                       bbi.reg_unit_type,bbi.reg_unit_code,bbi.reg_unit_code where_code
+                       from bk_mortgage bmg,
+                            bk_baseinfo bbi,
+                            bk_right_rel brr
+                       where bmg.book_code = bbi.book_code
+                       and bmg.book_code = brr.book_code
+                       and bmg.reg_code = brr.reg_code
+                       and bbi.reg_unit_type = '009003' ) comb
+                       left join (select ebg.community_name,epl.parcel_code from est_building ebg,est_parcel epl where ebg.parcel_code = epl.parcel_code) cb1 on cb1.parcel_code = comb.reg_unit_code
+                       union 
+                        select comb.*,cb2.community_name from 
+                       (select bmg.*,
+                       to_char(bmg.reg_date,'YYYY-MM-DD') alias_reg_date,
+                       (select bus_name from cfig_bus_type where bus_type_id = bmg.procdef_id) bus_name ,
+                       (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bmg.mort_type ) mort_type_name,
+                       (select vbhh.r_coll_names from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063004') mortgagee,
+                       (select vbhh.r_coll_names from v_book_holder_by_holrel vbhh where vbhh.right_rel_id = brr.right_rel_id and vbhh.hol_rel='063003') mortgager,
+                       (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bbi.reg_unit_type ) reg_type,
+                       bbi.reg_unit_type,bbi.reg_unit_code,bbi.reg_unit_code where_code
+                       from bk_mortgage bmg,
+                            bk_baseinfo bbi,
+                            bk_right_rel brr
+                       where bmg.book_code = bbi.book_code
+                       and bmg.book_code = brr.book_code
+                       and bmg.reg_code = brr.reg_code
+                       and bbi.reg_unit_type = '009001' ) comb
+                       left join (select ebg.community_name,ehe.adv_house_code from est_building ebg,est_house ehe where ebg.building_code = ehe.building_code) cb2 on cb2.adv_house_code = comb.reg_unit_code) tab
+	            ]]>
+	</sql>
+	<sql sqlId="getAllO" author="Sam" function="获得所有产权信息"><![CDATA[
+	                select tab.* from (select comb.*,epl.parcel_code,epl.glebe_area,epl.parcel_area,epl.land_address,epl.land_grade,epl.land_attribute,
+                       (select dic_item_value from CFIG_DIC_ITEM where dic_item_code =  epl.use_right_type) ause_right_type,
+                        ebg.building_name || ebg.build_no nameandno,ebg.layer_count
+                        from 
+                        (select bos.reg_code,
+                        to_char(bos.reg_date,'YYYY-MM-dd') areg_date,bos.excursus,
+                        (select bus_name from cfig_bus_type where bus_type_id = bos.procdef_id) bus_name,
+                        (select dic_item_value from CFIG_DIC_ITEM where dic_item_code =  bos.house_usage) ahouse_usage,
+                        (select dic_item_value from CFIG_DIC_ITEM where dic_item_code =  bos.get_mode) aget_mode,
+                        (select dic_item_value from CFIG_DIC_ITEM where dic_item_code =  bos.effective) aeffective,
+                        bos.cer_no,bos.reg_value,bbi.reg_unit_type,bbi.reg_unit_code,
+                        (select dic_item_value from CFIG_DIC_ITEM where dic_item_code =  bos.house_attr) ahouse_attr,
+                        (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = ehe.house_kind) ahouse_kind,
+                        '从 '||to_char(bos.start_date,'YYYY-MM-dd')||' 至 '||to_char(bos.end_date,'YYYY-MM-dd') period_str, 
+                        bos.lu_term,ehe.house_strut,ehe.house_type,ehe.ft_build_ld_area,ehe.ft_glebe_area,
+                        ehe.build_area,ehe.building_code,bos.ownership_id
+                        from bk_ownership bos,bk_baseinfo bbi,est_house ehe
+                        where bos.book_code = bbi.book_code
+                        and bbi.reg_unit_code = ehe.adv_house_code
+                        and bbi.reg_unit_type = '009001') comb
+                        left join est_building ebg on ebg.building_code = comb.building_code
+                        left join est_parcel epl on epl.parcel_code = ebg.parcel_code) tab
+	            ]]>
+	</sql>
+	
+    <sql sqlId="getHolderOwnershipLst" author="Sam" function="">
+        <![CDATA[
+                   select tab.* from (select bh.hol_name,(select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bh.hol_cer_type) hol_cer_type,
+                                           bh.hol_cer_no,bh.hol_address,bos.cer_no,bh.depart_type,bh.legal_name,bh.portion,
+                                           bos.ownership_id,brr.right_rel_id,bh.holder_id
+                            		          from bk_holder bh,bk_right_rel brr,bk_baseinfo bbi,bk_ownership bos
+                            		          where bbi.book_code = brr.book_code
+                            		          and bos.book_code = brr.book_code
+                            		          and bos.reg_code = brr.reg_code
+                            		          and bh.right_rel_id = brr.right_rel_id) tab
+        ]]>
+    </sql>
+	
+</sqlList>

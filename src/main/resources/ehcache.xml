@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="GBK"?>
+<ehcache>
+
+    <!--设置缓存文件 .data 的创建路径。
+
+         如果该路径是 Java 系统参数，当前虚拟机会重新赋值。
+
+         下面的参数这样解释：
+         user.home ? 用户主目录
+         user.dir      ? 用户当前工作目录
+         java.io.tmpdir ? 默认临时文件路径 -->
+    <diskStore path="java.io.tmpdir"/>
+
+
+    <!--缺省缓存配置。CacheManager 会把这些配置应用到程序中。
+
+        下列属性是 defaultCache 必须的：
+
+        name：缓存名称。通常为缓存对象的类名（非严格标准）。
+
+        maxElementsInMemory：设置基于内存的缓存可存放对象的最大数目。
+
+        maxElementsOnDisk：设置基于硬盘的缓存可存放对象的最大数目。
+
+        eternal：如果为true，表示对象永远不会过期，此时会忽略timeToIdleSeconds
+                 和timeToLiveSeconds属性，默认为false;
+
+        timeToIdleSeconds： 设定允许对象处于空闲状态的最长时间，以秒为单位。
+                 当对象自从最近一次被访问后，如果处于空闲状态的时间超过了timeToIdleSeconds属性值，
+                 这个对象就会过期。当对象过期，EHCache将把它从缓存中清空。只有当eternal属性为false，
+                 该属性才有效。如果该属性值为0，则表示对象可以无限期地处于空闲状态。
+
+        timeToLiveSeconds：设定对象允许存在于缓存中的最长时间，以秒为单位。
+                 当对象自从被存放到缓存中后，如果处于缓存中的时间超过了 timeToLiveSeconds属性值，
+                 这个对象就会过期。当对象过期，EHCache将把它从缓存中清除。只有当eternal属性为false，
+                 该属性才有效。如果该属性值为0，则表示对象可以无限期地存在于缓存中。
+                 timeToLiveSeconds必须大于timeToIdleSeconds属性，才有意义。
+
+        overflowToDisk：如果为true,表示当基于内存的缓存中的对象数目达到了maxElementsInMemory界限后，
+                 会把益出的对象写到基于硬盘的缓存中。
+        -->
+
+    <!-- ehcache 默认配置选项. -->
+    <defaultCache
+        maxElementsInMemory="10000"
+        eternal="false"
+        timeToIdleSeconds="120"
+        timeToLiveSeconds="120"
+        overflowToDisk="true"
+        diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120"
+        memoryStoreEvictionPolicy="LRU"
+        />
+    
+    <!-- 用于Spring中的EhCache配置. -->
+    <cache name="ehcacheInSpring"
+        maxElementsInMemory="100"
+        eternal="false"
+        timeToIdleSeconds="600"
+        timeToLiveSeconds="600"
+        overflowToDisk="true"
+        />
+        
+    <!-- 权限数据缓存.10分钟缓存 -->
+    <cache name="com.szhome.security.ext.UserInfoProvider.getPermsNodeRepository"
+        maxElementsInMemory="100"
+        eternal="false"
+        timeToIdleSeconds="600"
+        timeToLiveSeconds="600"
+        overflowToDisk="true"
+        />
+
+    <!-- 权限用户委托数据缓存.10分钟缓存 -->
+    <cache name="com.szhome.security.ext.UserInfoProvider.getUserDevloveManager"
+        maxElementsInMemory="100"
+        eternal="false"
+        timeToIdleSeconds="600"
+        timeToLiveSeconds="600"
+        overflowToDisk="true"
+        />
+
+
+</ehcache>
+

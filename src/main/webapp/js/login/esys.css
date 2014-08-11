@@ -1,0 +1,1299 @@
+@CHARSET "GBK";
+.icon-insert {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -0px!important;
+	height: 16px;
+}
+
+.icon-role {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -16px!important;
+	height: 16px;
+}
+
+.icon-human {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -32px!important;
+	height: 16px;
+}
+
+.icon1-human {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -32px!important;
+	height: 16px;
+}
+
+.icon-unit {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -48px!important;
+	height: 16px;
+}
+
+.icon-setting-advanced {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -64px!important;
+	height: 16px;
+}
+
+.icon-setting-basic {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -80px!important;
+	height: 16px;
+}
+
+.icon-workflow {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -96px!important;
+	height: 16px;
+}
+
+.icon-form {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -112px!important;
+	height: 16px;
+}
+
+.icon-pubFieldGroup,.icon-application,.icon-defdoc,.icon-group,.icon-detail {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -128px!important;
+	height: 16px;
+}
+
+.icon-field {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -144px!important;
+	height: 16px;
+}
+
+.icon-biz {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -160px!important;
+	height: 16px;
+}
+
+.icon-query {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -176px!important;
+	height: 16px;
+}
+
+.icon-stat {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -192px!important;
+	height: 16px;
+}
+
+.icon-dictionary {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -208px!important;
+	height: 16px;
+}
+
+.icon-delete {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -224px!important;
+	height: 16px;
+}
+
+.icon-table {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -240px!important;
+	height: 16px;
+}
+
+.icon-sysInfo {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -256px!important;
+	height: 16px;
+}
+
+.icon-calendar {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -272px!important;
+	height: 16px;
+}
+
+.icon-pubField {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -288px!important;
+	height: 16px;
+}
+
+.icon-group-rec {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -304px!important;
+	height: 16px;
+}
+
+.icon-group-tools {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -320px!important;
+	height: 16px;
+}
+
+.icon-list-todo,.icon-application {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -336px!important;
+	height: 16px;
+}
+
+.icon-list-done {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -352px!important;
+	height: 16px;
+}
+
+.icon-message {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -368px!important;
+	height: 16px;
+}
+
+.icon-info {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -384px!important;
+	height: 16px;
+}
+
+.icon-canton {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -400px!important;
+	height: 16px;
+}
+
+.icon-group-aux {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -416px!important;
+	height: 16px;
+}
+
+.icon-log {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -432px!important;
+	height: 16px;
+}
+
+.icon-license {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -448px!important;
+	height: 16px;
+}
+
+.icon-prePage {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -464px!important;
+	height: 16px;
+}
+
+.icon-nextPage {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -474px!important;
+	height: 16px;
+}
+
+.icon-send {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -484px!important;
+	height: 16px;
+}
+
+.icon-reply {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -500px!important;
+	height: 16px;
+}
+
+.icon-redo {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -516px!important;
+	height: 16px;
+}
+
+.icon-close {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -532px!important;
+	height: 16px;
+}
+
+.icon-data,.icon-dataview0,.icon-dataview {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -548px!important;
+	height: 16px;
+}
+
+.icon-dataview1 {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -564px!important;
+	height: 16px;
+}
+
+.icon-param {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -580px!important;
+	height: 16px;
+}
+
+.icon-changePwd {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -596px!important;
+	height: 16px;
+}
+
+.icon-humanSetting {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -612px!important;
+	height: 16px;
+}
+
+.icon-document {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -628px!important;
+	height: 16px;
+}
+
+.icon-register {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -644px!important;
+	height: 16px;
+}
+
+.icon-pizhuan {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -660px!important;
+	height: 16px;
+}
+
+.icon-shanchu {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -676px!important;
+	height: 16px;
+}
+
+.icon-process {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -692px!important;
+	height: 16px;
+}
+
+.icon-huitui {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -708px!important;
+	height: 16px;
+}
+
+.icon-approve {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -724px!important;
+	height: 16px;
+}
+
+.icon-export {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -740px!important;
+	height: 16px;
+}
+
+.icon-fieldSet {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -756px!important;
+	height: 16px;
+}
+
+.icon-folder-open {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -772px!important;
+	height: 16px;
+}
+
+.icon-receive {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -788px!important;
+	height: 16px;
+}
+
+.icon-execute {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -804px!important;
+	height: 16px;
+}
+
+.icon-mdb {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -820px!important;
+	height: 16px;
+}
+
+.icon-excel {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -836px!important;
+	height: 16px;
+}
+
+.icon-word {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -852px!important;
+	height: 16px;
+}
+
+.icon-security {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -868px!important;
+	height: 16px;
+}
+
+.icon-navigation {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -884px!important;
+	height: 16px;
+}
+
+.icon-copy {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -900px!important;
+	height: 16px;
+}
+
+.icon-paste {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -916px!important;
+	height: 16px;
+}
+
+.icon-report {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -932px!important;
+	height: 16px;
+}
+
+.icon-mapReport {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -948px!important;
+	height: 16px;
+}
+
+.icon-no-report {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -964px!important;
+	height: 16px;
+}
+
+.icon-shared-report {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -980px!important;
+	height: 16px;
+}
+
+.icon-shared-table {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -996px!important;
+	height: 16px;
+}
+
+.icon-sub-biz {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1012px!important;
+	height: 16px;
+}
+
+.icon-rename {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1028px!important;
+	height: 16px;
+}
+
+.icon-sort {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1044px!important;
+	height: 16px;
+}
+
+.icon-sort1 {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1060px!important;
+	height: 16px;
+}
+
+.icon-up {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1076px!important;
+	height: 16px;
+}
+
+.icon-down {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1092px!important;
+	height: 16px;
+}
+
+.icon-top {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1108px!important;
+	height: 16px;
+}
+
+.icon-bottom {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1124px!important;
+	height: 16px;
+}
+
+.icon-page {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1140px!important;
+	height: 16px;
+}
+
+.icon-pagegroup {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1156px!important;
+	height: 16px;
+}
+
+.icon-pagegroup-rel {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1172px!important;
+	height: 16px;
+}
+
+.icon-datagroup {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1156px!important;
+	height: 16px;
+}
+
+.icon-shared-page {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1188px!important;
+	height: 16px;
+}
+
+.icon-parameter {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1204px!important;
+	height: 16px;
+}
+
+.icon-db {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -564px!important;
+	height: 16px;
+}
+
+.icon-find {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1220px!important;
+	height: 16px;
+}
+
+.icon-upload {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1236px!important;
+	height: 16px;
+}
+
+.icon-download {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1252px!important;
+	height: 16px;
+}
+
+.icon-edit {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1268px!important;
+	height: 16px;
+}
+
+.icon-map {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1284px!important;
+	height: 16px;
+}
+
+.icon-filter {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1300px!important;
+	height: 16px;
+}
+
+.icon-disable {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1316px!important;
+	height: 16px;
+}
+
+.icon-hand {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1332px!important;
+	height: 16px;
+}
+
+.icon-application {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1348px!important;
+	height: 16px;
+}
+
+.icon-reldef {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1364px!important;
+	height: 16px;
+}
+
+.icon-lookRelRecId {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1380px!important;
+	height: 16px;
+}
+
+.icon-link {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1396px!important;
+	height: 16px;
+}
+
+.icon-import {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1412px!important;
+	height: 16px;
+}
+
+.icon-ban {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1428px!important;
+	height: 16px;
+}
+
+.icon-cancelBan {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1444px!important;
+	height: 16px;
+}
+
+.icon-list-search {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1460px!important;
+	height: 16px;
+}
+
+.icon-list {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1476px!important;
+	height: 16px;
+}
+
+.icon-connect {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1492px!important;
+	height: 16px;
+}
+
+.icon-refresh {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1508px!important;
+	height: 16px;
+}
+
+.icon-moveRightAll {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1524px!important;
+	height: 16px;
+}
+
+.icon-moveLeftAll {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1539px!important;
+	height: 16px;
+}
+
+.icon-moveRight {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1554px!important;
+	height: 16px;
+}
+
+.icon-moveLeft {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1570px!important;
+	height: 16px;
+}
+
+.icon-newwin {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1586px!important;
+	height: 16px;
+}
+
+.icon-fee {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1602px!important;
+	height: 16px;
+}
+
+.icon-shared-fee {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1618px!important;
+	height: 16px;
+}
+
+.icon-sup {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1634px!important;
+	height: 16px;
+}
+
+.icon-resup {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1650px!important;
+	height: 16px;
+}
+
+.icon-menu {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1666px!important;
+	height: 16px;
+}
+
+.icon-house {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1682px!important;
+	height: 16px;
+}
+
+.icon-finished {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1698px!important;
+	height: 16px;
+}
+
+.icon-advice {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1714px!important;
+	height: 16px;
+}
+
+.icon-batch {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1730px!important;
+	height: 16px;
+}
+
+.icon-fullscreen {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1746px!important;
+	height: 16px;
+}
+
+.icon-arrow_down {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1762px!important;
+	height: 16px;
+}
+
+.icon-arrow_up {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1778px!important;
+	height: 16px;
+}
+
+.icon-suspend {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1794px!important;
+	height: 16px;
+}
+
+.icon-resume {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1810px!important;
+	height: 16px;
+}
+
+.icon-discard {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1826px!important;
+	height: 16px;
+}
+
+.icon-undo {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1842px!important;
+	height: 16px;
+}
+
+.icon-move {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1858px!important;
+	height: 16px;
+}
+
+}
+.icon-shared-role {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1874px!important;
+	height: 16px;
+}
+
+.icon-copyAll {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1890px!important;
+	height: 16px;
+}
+
+.icon-pasteAll {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1906px!important;
+	height: 16px;
+}
+
+.icon-feeGroup {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1922px!important;
+	height: 16px;
+}
+
+.icon-rec {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -384px!important;
+	height: 16px;
+}
+
+.icon-style {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1938px!important;
+	height: 16px;
+}
+
+.icon-statChartTemplate {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1954px!important;
+	height: 16px;
+}
+
+.icon-assignPDA {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1970px!important;
+	height: 16px;
+}
+
+.icon-back-undo {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1986px!important;
+	height: 16px;
+}
+
+.icon-view {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2002px!important;
+	height: 16px;
+}
+
+.icon-valid {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2018px!important;
+	height: 16px;
+}
+
+.icon-pre {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1076px!important;
+	height: 16px;
+}
+
+.icon-next {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1092px!important;
+	height: 16px;
+}
+
+.icon-currec {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -1332px!important;
+	height: 16px;
+}
+
+.icon-mailInbox {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2034px!important;
+	height: 16px;
+}
+
+.icon-mailOutBox {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2050px!important;
+	height: 16px;
+}
+
+.icon-switch-on {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2066px!important;
+	height: 16px;
+}
+
+.icon-deploy {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2082px!important;
+	height: 16px;
+}
+
+.icon-folder-emtpy {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2098px!important;
+	height: 16px;
+}
+
+.icon-upcase {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2114px!important;
+	height: 16px;
+}
+
+.icon-smallcancel {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2130px!important;
+	height: 16px;
+}
+
+.icon-clear {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2146px!important;
+	height: 16px;
+}
+
+.icon-scanUpload {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2162px!important;
+	height: 16px;
+}
+
+.icon-scanUploadReplace {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2178px!important;
+	height: 16px;
+}
+
+.icon-openDevice {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2194px!important;
+	height: 16px;
+}
+
+.icon-closeDevice {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2210px!important;
+	height: 16px;
+}
+
+.icon-projectTrack {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2226px!important;
+	height: 16px;
+}
+/*GISœ‡πÿÕº±ÍStart*/
+.icon-widget {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2242px!important;
+	height: 16px;
+}
+
+.icon-service {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2258px!important;
+	height: 16px;
+}
+
+.icon-schema {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2274px!important;
+	height: 16px;
+}
+
+.icon-tool {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2290px!important;
+	height: 16px;
+}
+
+.icon-host {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2306px!important;
+	height: 16px;
+}
+
+.icon-layergroup {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2322px!important;
+	height: 16px;
+}
+
+.icon-layer {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2338px!important;
+	height: 16px;
+}
+
+.icon-zone {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2354px!important;
+	height: 16px;
+}
+
+.icon-no-zone {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2370px!important;
+	height: 16px;
+}
+
+.icon-ruler {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2386px!important;
+	height: 16px;
+}
+
+.icon-theme {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2402px!important;
+	height: 16px;
+}
+
+.icon-sep {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2418px!important;
+	height: 16px;
+}
+
+.icon-bookmark {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2434px!important;
+	height: 16px;
+}
+
+.icon-location {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2450px!important;
+	height: 16px;
+}
+
+.icon-addressList {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2466px!important;
+	height: 16px;
+}
+
+.icon-resource {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2482px!important;
+	height: 16px;
+}
+
+.icon-hidden {
+	background-repeat: no-repeat;
+  background-image: url('esys.png');
+  background-position: left -2498px!important;
+	height: 16px;
+}
+
+.icon-expand-up {
+	background-repeat: no-repeat;
+	background-image: url('easyui/default/images/layout_arrows.png') -16px -16px !important;
+}
+
+.icon-expand-down {
+	background-repeat: no-repeat;
+	background-image: url('easyui/default/images/layout_arrows.png') -16px 0 !important;
+}
+
+.icon-expand-left {
+	background-repeat: no-repeat;
+	background-image: url('easyui/default/images/layout_arrows.png') 0 0 !important;
+}
+
+.icon-expand-right {
+	background-repeat: no-repeat;
+	background-image: url('easyui/default/images/layout_arrows.png') 0 -16px !important;
+}
+
+.icon-close-window {
+	background-repeat: no-repeat;
+	background-image: url('easyui/default/images/tabs_icons.png') -34px center;
+}
+
+body,html {
+	margin: 0px;
+	font-size: 12px;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+/*mask*/
+.sky {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	background: white url("images/loading.gif");
+	background-position: center;
+	background-repeat: no-repeat;
+	z-index: 99999;
+	width: 100%;
+	height: 100%;
+	border: 0px;
+	zoom: 1;
+}
+/*mask end*/
+
+.loading-tip {
+	position: absolute;
+	/*bottom: 10px;
+	left: 5px;*/
+	z-index: 600000;
+}
+
+.loading-tip .b1,.loading-tip  .b2,.loading-tip  .b3,.loading-tip  .b4 {
+	font-size: 1px;
+	overflow: hidden;
+	display: block;
+}
+
+.loading-tip .b1 {
+	height: 1px;
+	background: #A9C6D6;
+	margin: 0 5px;
+}
+
+.loading-tip .b2 {
+	height: 1px;
+	background: #E3EEF4;
+	border-right: 2px solid #A9C6D6;
+	border-left: 2px solid #A9C6D6;
+	margin: 0 3px;
+}
+
+.loading-tip .b3 {
+	height: 1px;
+	background: #E3EEF4;
+	border-right: 1px solid #A9C6D6;
+	border-left: 1px solid #A9C6D6;
+	margin: 0 2px;
+}
+
+.loading-tip .b4 {
+	height: 2px;
+	background: #E3EEF4;
+	border-right: 1px solid #A9C6D6;
+	border-left: 1px solid #A9C6D6;
+	margin: 0 1px;
+}
+
+.loading-tip .tip-icon {
+	position: absolute;
+	top: 0px;
+	width: 16px;
+	height: 16px;
+	margin: 5px;
+}
+
+.loading-tip .error .tip-icon {
+	background: url('icons/error.gif');
+}
+
+.loading-tip .success .tip-icon {
+	background: url('icons/success.gif');
+}
+
+.loading-tip .loading .tip-icon {
+	background: url('icons/loading.gif');
+}
+
+.loading-tip .info .tip-icon {
+	background: url('icons/list-done.png');
+}
+
+.loading-tip .lock .tip-icon {
+	background: url('icons/unban.png');
+}
+
+.loading-tip .tip-text {
+	padding-left: 23px;
+	padding-right: 10px;
+}
+
+.loading-tip .content {
+	background: #E3EEF4;
+	border-right: 1px solid #A9C6D6;
+	border-left: 1px solid #A9C6D6;
+}
+
+.loading-tip .error .tip-text {
+	color: #E10B0B;
+}
+
+.loading-tip .success .tip-text {
+	color: #223845;
+}
+
+.loading-tip .loading .tip-text {
+	color: #444;
+}
+

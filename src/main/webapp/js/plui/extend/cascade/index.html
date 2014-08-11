@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+<title>三级联动选择</title>
+<link rel="stylesheet" type="text/css" href="../../themes/gray/plui.css">
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../plui.core.js"></script>
+<style type="text/css">
+	body {margin:0px; padding:0px;background:#c8caca;font-family:Verdana, Tahoma, Arial;background: #FFF; font-size:12px; color:#666; height:100%;}
+	.scroll,body,html{SCROLLBAR-FACE-COLOR: #d1d1d4;SCROLLBAR-HIGHLIGHT-COLOR: #f2f2f2;SCROLLBAR-SHADOW-COLOR: #f2f2f2;SCROLLBAR-3DLIGHT-COLOR:#f2f2f2;SCROLLBAR-ARROW-COLOR: #666;SCROLLBAR-TRACK-COLOR: #f2f2f2;SCROLLBAR-DARKSHADOW-COLOR: #f2f2f2;}
+	
+	.elli{float:left;overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+	.cascade_list{position:absolute;width:476px; height:246px; left:0px; top:0px; font-size:12px; overflow:hidden;}
+	.cascade_list .head_{height:23px;color:#333333;}
+	.cascade_list .head_ .left_,.cascade_list .head_ .center_,.cascade_list .head_ .right_{float:left;height:23px; background:url(../../themes/gray/images/cascadeselect.gif); border-right:1px solid #f5f5f5;padding-left:5px;}
+	.cascade_list .head_ .left_{width:184px;_font-size:17px;}
+	.cascade_list .head_ .left_ img{cursor:pointer;}
+	.cascade_list .head_ .center_{width:137px;}
+	.cascade_list .head_ .right_{width:137px;}
+	.cascade_list .head_ .center_ label,.cascade_list .head_ .right_ label{float:left;line-height:23px; font-size:12px;}
+	.cascade_list .head_ .center_ a,.cascade_list .head_ .right_ a{float:right; width:18px; height:15px; background:url(../../themes/gray/images/cascadeselect.gif) no-repeat;margin-top:3px;}
+	.cascade_list .head_ .right_ a{ background-position:-1px -24px;}
+	.cascade_list .head_ .center_ a{background-position:-20px -24px;}
+	.cascade_list .main_{height:222px; border:1px solid #9999cc; border-top:none; margin-right:1px; margin-top:-1px; overflow:hidden;}
+	.cascade_list .main_ .left_{float:left;width:188px; height:100%;border-right:1px solid #9999cc; overflow:auto;}
+	.cascade_list .main_ .center_{float:left; list-style:none; padding:0px; margin:0px;width:142px; height:100%;border-right:1px solid #9999cc; overflow:auto;background:#fff;}
+	.cascade_list .main_ .center_ li,.cascade_list .main_ .right_ li{ padding:0 5px; line-height:18px; background:#fff;}
+	.cascade_list .main_ .center_ li.select_,.cascade_list .main_ .right_  li.select_{ background:#e0f0ff;}
+	.cascade_list .main_ .center_,.cascade_list .main_ .right_{white-space:nowrap; cursor:default;-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none;-khtml-user-select:none;user-select: none;}
+	.cascade_list .main_ .right_{float:left;width:141px; height:100%;background:#fff;}
+	.cascade_list .main_ .top_{float:left;list-style:none; padding:0px; margin:0px; width:100%; height:198px; overflow:auto; border-bottom:1px dotted #566e7c;}
+	.cascade_list .main_ .bottom_{float:left; width:100%; height:24px;}
+	.cascade_list .main_ .bottom_ a{float:left;background:url(../../themes/gray/images/cascadeselect.gif) no-repeat;}
+	.cascade_list .main_ .bottom_ a.move_{width:18px; height:16px; margin:4px 0 0 5px;}
+	.cascade_list .main_ .bottom_ a.btn_{width:40px; height:20px; text-decoration:none; color:#000; text-align:center; line-height:20px; margin:2px 0 0 5px;}
+	.tree-node-hover {background:none;color: #6699cc;}
+	.tree-node-selected {background: #e0f0ff;color: #666666;}
+</style>
+</head>
+
+<body>
+<div class="cascade_list">
+	<div class="head_">
+    	<div class="left_">
+        	<img src="../../themes/gray/images/-.gif" title="全部展开" onclick="$('#selectTree').tree('expandAll');"/>
+            <img src="../../themes/gray/images/+.gif" title="全部收起" onclick="$('#selectTree').tree('collapseAll');"/>
+            <label style="line-height:23px; font-size:12px;">部门</label>
+        </div>
+        <div class="center_">
+            <label>人员列表</label><a href="javascript:selectTo('towList','threeList');" title="批量选择"></a>
+        </div>
+        <div class="right_">
+        	<label>人员列表</label><a href="javascript:selectTo('threeList','towList');" title="批量取消选择"></a>
+        </div>
+    </div>
+    <div class="main_">
+    	<div class="left_">
+        	<ul id="selectTree" class="plui-tree" data-options="url:'cascadeselect.tree.json',checkbox:true,onCheck:getChecked"></ul> 
+        </div>
+        <ul id="towList" class="center_" onselectstart="return false;"></ul>
+        <div class="right_">
+        	<ul id="threeList" class="top_" onselectstart="return false;"></ul>
+            <div class="bottom_">
+            	<a href="javascript:void(0);" onmousedown="upMove()" onmouseup="stopMove()" class="move_" style="background-position:-39px -24px;"></a>
+                <a href="javascript:void(0);" onmousedown="downMove()" onmouseup="stopMove();" class="move_" style="background-position: -58px -24px;"></a>
+                <a href="javascript:sendResult();" class="btn_" style="background-position: -39px -41px;">确定</a>
+                <a href="javascript:closeDig();" class="btn_" style="background-position:-39px -41px;">取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+	var start1={};//用于储存二级菜单当前选择记录
+	var timer=null;//三级栏目上下移动开关
+	$(function(){
+		$('#towList,#threeList').mouseup(function(){
+			start1.isdown=false;
+		});
+		window.par=window.opener||parent;
+		window.par.setCascadeConfig();
+
+	});
+	//获取选择的一级菜单下的数据，在选择一级菜单的复选框时调用
+	function getChecked(){
+		var nodes = $('#selectTree').tree('getChecked');
+		var select = [];
+		var index=0;
+		for(var i=0; i<nodes.length; i++){ 
+			index=0; 
+			getTreeIndex(nodes[i].target);//获取选择的树型菜单的级数
+			nodes[i]['index']=index;
+			nodes[i]['pid']=getTreePid(nodes[i].target);//获取选择的树型菜单的父ID
+			select.push(nodes[i]);
+			//for(var te in nodes[i]){alert(te+","+nodes[i][te])}
+		}
+		loadTowList(select);
+		function getTreeIndex(o){//获取选择的菜单是第几级的
+			if(o.parentNode.parentNode.id!='selectTree'){
+				index++;
+				getTreeIndex(o.parentNode.parentNode);
+			}
+		}
+		function getTreePid(o){//获取选择菜单的父id
+			var o=$(o.parentNode.parentNode).prev();
+			if(o)return o.attr('node-id');
+			else return null;
+		}
+	}
+	function loadTowList(nodes){//加载二级列表 单个node对象包括id,text,target,checked,index,pid属性
+		if(nodes.length>0){
+			var url="cascadeselect.towlist.json?t="+Math.random();
+			$('#towList').html('<li style="color:red;">正在加载数据....</li>');
+			$('#threeList').empty();
+			$.getJSON(url,function(list){
+				var html=[];
+				var data={};
+				for(var i=0;i<list.length;i++){
+					data[list[i].id]=list[i];
+					html.push('<li val="'+list[i].id+'">'+list[i].name+'</li>');
+				}
+				$('#threeList').data('data',data);
+				$('#towList').html(html.join(''));
+				initMenuEvent('towList','threeList');
+			});	
+		}else{
+			$('#towList').html('');
+		}
+	}
+	//初始化栏目的鼠标事件
+	function initMenuEvent(ul1,ul2){
+		$('#'+ul1+' li').dblclick(function(){//双击二级栏目时将结果移到三级栏目里去
+			$(this).removeClass('select_');
+			$('#'+ul2).append(this);
+			updateMenuEvent();
+		}).mousedown(function(){
+			var lis=$E(''+ul1).getElementsByTagName('li');
+			for(var i=0;i<lis.length;i++){
+				var o=lis[i];
+				if(this==o){//将当前选择对象置为选中
+					o.className='select_';
+					start1.o=o;
+					start1.index=i;
+				}else{
+					o.className='';
+				}
+			}
+			start1.isdown=true;
+		}).mouseover(function(){
+			if(start1.isdown){
+				var index=0;
+				var lis=$E(''+ul1).getElementsByTagName('li');
+				for(var i=0;i<lis.length;i++){
+					if(lis[i]==this)index=i;
+				}
+				for(var i=0;i<lis.length;i++){
+					if((i>=index && i<=start1.index)||(i<=index && i>=start1.index)){
+						lis[i].className='select_';
+					}else{
+						lis[i].className='';
+					}
+				}
+			}
+		});
+	}
+	//调用该方法将选择的二级栏目结果移到三级栏目，如果没有选择则全部移到三级栏目下
+	function selectTo(ul1,ul2){
+		var lis=$E(ul1).getElementsByTagName('li');
+		var list=[];
+		for(var i=0;i<lis.length;i++){
+			if(lis[i].className=='select_'){
+				list.push(lis[i]);
+			}
+		}
+		if(list.length==0 && lis.length>0){
+			if(typeof topWindow=='undefined')getTopWindow();//获取最上一级PAGE的WINDOW对象
+			topWindow.$.messager.confirm('操作提示','您确定要选择所有人员吗?',function(r){      
+				if(r){      
+					 for(var i=0;i<lis.length;i++){
+						list.push(lis[i]);
+					 } 
+					 _to();
+				}      
+			});
+		}else{
+			_to();
+		}
+		function _to(){//设置三级栏目内容
+			for(var i=0;i<list.length;i++){
+				$(list[i]).removeClass('select_').unbind();
+				$('#'+ul2).append(list[i]);	
+			}
+			updateMenuEvent();
+		}
+	}
+	//更新栏目鼠标事件
+	function updateMenuEvent(){
+		$('#towList li,#threeList li').unbind()
+		initMenuEvent('towList','threeList');
+		initMenuEvent('threeList','towList');
+	}
+	//调整三级选中栏目位置 上移
+	function upMove(){
+		var sel=$('#threeList .select_');
+		var lis=$E('threeList').getElementsByTagName('li');
+		if(sel.length>0 && lis[0] && lis[0].className==''){
+			var o=null;
+			for(var i=0;i<lis.length;i++){
+				if(lis[i+1].className=='select_'){
+					o=lis[i];
+					break;
+				}
+			}
+			if(o)sel.insertBefore(o);
+		}
+		timer=setTimeout(upMove,200);
+	}
+	//调整三级选中栏目位置 下移
+	function downMove(){
+		var sel=$('#threeList .select_');
+		var lis=$E('threeList').getElementsByTagName('li');
+		if(sel.length>0 && lis[lis.length-1] && lis[lis.length-1].className==''){
+			var o=null;
+			for(var i=lis.length-1;i>=0;i--){
+				if(lis[i-1].className=='select_'){
+					o=lis[i];
+					break;
+				}
+			}
+			if(o)sel.insertAfter(o);
+		}
+		timer=setTimeout(downMove,200);
+	}
+	//停止自动移动
+	function stopMove(){
+		if(timer)clearTimeout(timer);
+	}
+	//返回数据
+	function sendResult(){
+		var list=$('#threeList').data('data');
+		var result=[];
+		$('#threeList li').each(function(index, element) {
+           result.push(list[this.getAttribute('val')]); 
+        });
+		$('#threeList').removeData('data');
+		if(result.length==0){
+			if(typeof topWindow=='undefined')getTopWindow();//获取最上一级PAGE的WINDOW对象
+			topWindow.$.messager.alert('操作提示','您没有选择数据?');
+		}
+		try{
+			if(cfg.onSuccess)cfg.onSuccess(result);
+		}catch(e){}
+		closeDig();
+	}
+	//取消
+	function closeDig(){
+		if(window.opener){
+			window.opener.openr=null;
+			window.close();
+		}else{
+			var ifr=parent.document.getElementById('splui_cascade');
+			$(ifr).attr('src','about:blank').hide();
+		}
+	}
+</script>
+</html>

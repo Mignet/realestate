@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ownership_mortgage_selectrpt" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3a6007db-092c-453b-9d99-4db3b5baa061">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="presale.caption" class="java.lang.String"/>
+	<parameter name="presale.projectname" class="java.lang.String"/>
+	<parameter name="presale.presalepermit" class="java.lang.String"/>
+	<parameter name="presale.approve_date" class="java.lang.String"/>
+	<parameter name="presale.developer" class="java.lang.String"/>
+	<parameter name="presale.purchaser" class="java.lang.String"/>
+	<parameter name="presale.contractno" class="java.lang.String"/>
+	<parameter name="presale.con_pric" class="java.lang.String"/>
+	<parameter name="presale.presale_area" class="java.lang.String"/>
+	<parameter name="presale.isrecord" class="java.lang.String"/>
+	<parameter name="presale.recorddate" class="java.lang.String"/>
+	<parameter name="presale.recordnote" class="java.lang.String"/>
+	<parameter name="presale.finished_area" class="java.lang.String"/>
+	<parameter name="common.colon" class="java.lang.String"/>
+	<parameter name="common.centiare" class="java.lang.String"/>
+	<parameter name="building.nameandno" class="java.lang.String"/>
+	<parameter name="parcel.location" class="java.lang.String"/>
+	<parameter name="parcel.parcel_code" class="java.lang.String"/>
+	<parameter name="house.roomno" class="java.lang.String"/>
+	<parameter name="house.housetype" class="java.lang.String"/>
+	<parameter name="house.usage" class="java.lang.String"/>
+	<parameter name="house.build_area" class="java.lang.String"/>
+	<parameter name="house.taonei_area" class="java.lang.String"/>
+	<parameter name="house.fentan_area" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\dxtx_workspace\\dxtx_re\\src\\main\\webapp\\report\\source\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="common.print_date" class="java.lang.String"/>
+	<parameter name="printdatetime" class="java.lang.String"/>
+	<parameter name="register.no." class="java.lang.String"/>
+	<parameter name="register.name" class="java.lang.String"/>
+	<parameter name="register.share" class="java.lang.String"/>
+	<parameter name="register.identity_card" class="java.lang.String"/>
+	<field name="PRO_NAME" class="java.lang.String"/>
+	<field name="PRE_LIC_NO" class="java.lang.String"/>
+	<field name="PARCEL_CODE" class="java.lang.String"/>
+	<field name="LAND_ADDRESS" class="java.lang.String"/>
+	<field name="BUILDING_NAME" class="java.lang.String"/>
+	<field name="BUILD_NO" class="java.lang.String"/>
+	<field name="ROOMNAME" class="java.lang.String"/>
+	<field name="FLATLET_USAGE" class="java.lang.String"/>
+	<field name="CON_NO" class="java.lang.String"/>
+	<field name="CON_PRIC" class="java.lang.String"/>
+	<field name="YBUILD_AREA" class="java.lang.String"/>
+	<field name="YTAONEI_AREA" class="java.lang.String"/>
+	<field name="BUILD_AREA" class="java.lang.String"/>
+	<field name="TAONEI_AREA" class="java.lang.String"/>
+	<field name="FT_GLEBE_AREA" class="java.lang.String"/>
+	<field name="REC_STATE" class="java.lang.String"/>
+	<field name="AREC_DATE" class="java.lang.String"/>
+	<field name="REC_NOTE" class="java.lang.String"/>
+	<field name="HOUSE_TYPE" class="java.lang.String"/>
+	<field name="APPROVE_DATE" class="java.lang.String"/>
+	<field name="ACON_DATE" class="java.lang.String"/>
+	<field name="subdata" class="java.util.List"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="50">
+			<line>
+				<reportElement x="0" y="49" width="555" height="1" uuid="d8b28ce0-3af9-4b6a-a71e-d6dec8e7d600"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="18" width="555" height="31" uuid="5e24d1a2-d094-48b2-b9c6-d494646822e1"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="18" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{presale.caption}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="714" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="10" width="53" height="23" uuid="fcf5a9ad-11eb-486d-bc2c-7269ca4f7ae8"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{presale.projectname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="38" width="53" height="23" uuid="e7fa2d55-e879-4e77-8638-468754a5193d"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{presale.presalepermit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="329" y="38" width="53" height="23" uuid="b91ffd8f-cd79-456a-bb9c-7d50e0745bfc"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{presale.approve_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="66" width="40" height="23" uuid="893090b4-a05d-4c1b-9b05-a67921a6c94c"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{presale.developer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="10" width="8" height="23" uuid="6af25183-67c4-4733-a787-a53f4d5edf51"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="38" width="8" height="23" uuid="b2841151-22b4-4476-b602-10d79753b325"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="66" width="8" height="23" uuid="76dfc4fd-0513-4471-b98b-40f36ff52e03"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="38" width="8" height="23" uuid="3bc9ddfd-a436-4bd7-a80a-36694a1b339c"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="113" width="27" height="23" uuid="c5ab8edf-1299-49ca-8948-c39f2a17c04a"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{presale.purchaser}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="223" width="40" height="23" uuid="ac56d1d9-aac2-40d8-86d3-1a9d10ec7968"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{parcel.parcel_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="223" width="8" height="23" uuid="e162539a-78cf-465e-83e3-6c175e93feb0"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="223" width="27" height="23" uuid="d146aed8-f9db-4f83-a18c-cc73c924476d"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{parcel.location}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="227" y="223" width="8" height="23" uuid="ae31122b-9a7e-426e-af8b-ff4caaa882eb"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="252" width="80" height="23" uuid="224f5a04-55d7-4463-8cc6-5eff4ecc1b2c"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{building.nameandno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="252" width="8" height="23" uuid="4a521649-9037-4cc0-b28d-de9c68a323dc"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="37" y="280" width="8" height="23" uuid="bd6a6718-4b55-4ce9-8058-c75fe812f1ba"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="308" width="40" height="23" uuid="0fc3976d-2476-4944-916b-44e11eb23b2f"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{presale.contractno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="308" width="8" height="23" uuid="4dc60c40-2e2f-4a87-bf8b-782ed7945490"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="202" y="280" width="27" height="23" uuid="f72d14ae-0df0-4752-84cd-c0e00b6ea0f8"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{house.housetype}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="366" width="60" height="23" uuid="32d22cb0-c961-42d7-9204-4923cfa59488"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{presale.presale_area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="38" y="394" width="53" height="23" uuid="132e2228-8fec-4a3f-ae1c-555baf9347d3"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{house.build_area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="534" width="8" height="23" uuid="a6e792db-9434-4095-a229-c6b4b58e0ac4"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="534" width="53" height="23" uuid="714183f5-f3c5-4b24-ad83-0e9bc033e3ba"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{presale.recordnote}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="506" width="53" height="23" uuid="62cf8948-5e96-4c35-abdf-f2d598cffdf7"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{presale.isrecord}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="156" y="394" width="42" height="23" uuid="d5539eab-5826-4462-935f-3f7179ff4260"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.centiare}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="10" width="130" height="23" uuid="3f41a3d7-a730-4a58-a4cf-1956e148563d"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRO_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="38" width="221" height="23" uuid="e25d53c8-b066-48bc-8391-ed800d498c4e"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRE_LIC_NO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="38" width="165" height="23" uuid="9d34aad6-b8d2-4e72-a0e2-481404d66f3f"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ACON_DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="58" y="66" width="256" height="23" uuid="e57a4723-1fe5-41a6-9569-a493bae63bae"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ROOMNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="58" y="308" width="196" height="23" uuid="49b75086-f143-4604-9878-08c107a918f3"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CON_NO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="98" y="252" width="255" height="23" uuid="11099f08-94aa-45a3-9699-05a05ce46dc5"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BUILDING_NAME}==null?"":($F{BUILDING_NAME}+$F{BUILD_NO})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="234" y="223" width="256" height="23" uuid="c77b0824-dcc6-41cf-abf0-00aac16b2218"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LAND_ADDRESS}==null?"":$F{LAND_ADDRESS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="58" y="223" width="134" height="23" uuid="aaac24ee-fe7b-4e50-88d7-7a634cd891b4"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PARCEL_CODE}==null?"":$F{PARCEL_CODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="280" width="27" height="23" uuid="ef75bb9e-fd8a-4b6b-ab94-62837344cef8"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{house.roomno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="229" y="280" width="8" height="23" uuid="795f4f9a-d188-4947-9787-2798cdb36a09"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="399" y="280" width="8" height="23" uuid="63363937-144c-4e4b-b129-072c58f6a361"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="372" y="280" width="27" height="23" uuid="5f3f8859-bfc6-4c2f-be1d-fe3c6d331956"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{house.usage}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="372" y="308" width="53" height="23" uuid="c7bad154-1aec-41d7-8817-ca7c3771c182"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{presale.con_pric}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="424" y="308" width="8" height="23" uuid="36107bf0-d677-4e37-aa3c-5c74fb9abc15"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="394" width="8" height="23" uuid="102696b0-c5a2-4b1e-be63-49eb1ea2020f"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="394" width="53" height="23" uuid="276b837a-8b15-4552-9b87-62e4ba8d072e"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{house.taonei_area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="254" y="394" width="8" height="23" uuid="a765b8b5-09ae-4b57-a029-f0b308812f7e"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="319" y="394" width="42" height="23" uuid="e12b61ce-c796-4b55-a2a4-b6c0e318d1aa"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.centiare}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="440" width="60" height="23" uuid="b3310db3-7421-4811-b0a8-9f270b33c1ef"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{presale.finished_area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="254" y="467" width="8" height="23" uuid="b5d370d2-fdc3-48f5-860b-aeda85d4ab63"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="202" y="467" width="53" height="23" uuid="fdba4fab-16b0-4be1-9838-5f4b5eefc808"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{house.taonei_area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="157" y="467" width="42" height="23" uuid="9040e0d9-0d02-4a3d-8da3-1bb85d35d60e"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.centiare}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="467" width="8" height="23" uuid="40c8223b-67c2-4430-8872-d545aa51dc59"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="318" y="467" width="42" height="23" uuid="47a0a9c7-6144-4937-8a26-cf95cdc271fe"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.centiare}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="39" y="467" width="53" height="23" uuid="fd08803f-333f-4222-8a27-b7c3d5f93107"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{house.build_area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="363" y="467" width="53" height="23" uuid="9ff25aaa-9e40-49db-bd89-866710611195"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{house.fentan_area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="416" y="467" width="8" height="23" uuid="f5317176-464b-4e23-8ba2-e5e9a308fa00"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="506" width="8" height="23" uuid="d33524c4-979c-4655-93f5-ca4ba56aa25e"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="249" y="506" width="53" height="23" uuid="93daa287-0d7d-473e-bb27-f9670aefce96"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{presale.recorddate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="301" y="506" width="8" height="23" uuid="9e0b564a-f5cf-4a88-ae1a-4cf50bc4ee27"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="26" y="139" width="514" height="71" uuid="f644398c-44e6-4a7a-bf68-aec1b34b331d"/>
+				<subreportParameter name="register.share">
+					<subreportParameterExpression><![CDATA[$P{register.share}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="register.identity_card">
+					<subreportParameterExpression><![CDATA[$P{register.identity_card}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="register.name">
+					<subreportParameterExpression><![CDATA[$P{register.name}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="register.no.">
+					<subreportParameterExpression><![CDATA[$P{register.no.}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{subdata})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "\\realestate_presale_selectrpt_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="44" y="280" width="113" height="23" uuid="6cc64214-6e72-4ee2-8fca-5f9ee537f45e"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ROOMNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="236" y="280" width="113" height="23" uuid="ccb337e5-601c-4349-b254-966a416f5ae1"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HOUSE_TYPE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="406" y="280" width="113" height="23" uuid="f5d44445-da94-4a4b-a183-fb6ce1dec694"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FLATLET_USAGE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="308" width="113" height="23" uuid="f732bf02-e5c4-416a-ae5f-e67156b31eca"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CON_PRIC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="98" y="394" width="58" height="23" uuid="dbc97672-7129-4a41-bc94-ae6ca4e6f68a"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{YBUILD_AREA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="394" width="58" height="23" uuid="a6f11729-b3bc-4363-aebb-2c505f7dc527"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{YTAONEI_AREA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="467" width="58" height="23" uuid="b27189fa-41b6-4f6d-8f6b-f6b885427933"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BUILD_AREA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="467" width="58" height="23" uuid="5cb83140-aec9-4ef9-81ac-2b273e65b11d"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TAONEI_AREA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="424" y="467" width="58" height="23" uuid="cb055d4b-3e04-4433-98de-15a1b1a3cbb1"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FT_GLEBE_AREA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="482" y="467" width="42" height="23" uuid="9825ee4a-80d1-4516-bdc4-83cd0e005fd8"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.centiare}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="506" width="102" height="23" uuid="abf5d3b6-29aa-4f69-84cb-2988802a1c3a"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{REC_STATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="534" width="102" height="23" uuid="837794b6-1520-451b-a1cf-1896a0d74c6f"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{REC_NOTE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="309" y="506" width="102" height="23" uuid="506fb5a3-2444-48c9-bec6-ae0641c3f92a"/>
+				<textElement>
+					<font size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AREC_DATE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="38" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="0" width="555" height="1" uuid="90739c2f-eef0-4458-8ec2-4449e3e6ed0c"/>
+			</line>
+			<textField>
+				<reportElement x="329" y="1" width="42" height="23" uuid="f9cfb028-94a2-4797-a6d2-54c1f1aaf5c7"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.print_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="371" y="1" width="8" height="23" uuid="28daeafd-8eb4-4817-a212-cbe4f5f4f94b"/>
+				<textElement>
+					<font fontName="SansSerif" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{common.colon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="1" width="144" height="23" uuid="3b3b71a1-26be-4721-b998-22c737b693ed"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{printdatetime}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

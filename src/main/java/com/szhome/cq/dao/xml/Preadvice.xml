@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>Preadvice</comment>
+	<sql sqlId="getAllPreadviceInfos" author="Sam" function="获得所有预告登记信息"><![CDATA[
+	              select tab.* from ( select comb.*,cb2.address from (select ban.*,
+                      to_char(ban.reg_date,'YYYY-MM-DD') areg_date,
+                      (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bbi.reg_unit_type ) reg_type,
+                      (select vbhr.r_coll_names from V_BOOK_HOLDER_REL vbhr where vbhr.right_rel_id = brr.right_rel_id) holder_name,
+                      (select vbhr.r_coll_cerno from V_BOOK_HOLDER_REL vbhr where vbhr.right_rel_id = brr.right_rel_id) holder_no,
+                      bbi.reg_unit_type,bbi.reg_unit_code,bbi.reg_unit_code where_code
+                      from 
+                      bk_advnotice ban,
+                      bk_baseinfo bbi,
+                      bk_right_rel brr
+                      where ban.book_code = bbi.book_code
+                      and ban.reg_code = brr.reg_code
+                      and bbi.reg_unit_type = '009001'
+                      and ban.procdef_id = '1061') comb
+                      left join (select ehe.adv_house_code,ehe.house_location address from est_building ebg,est_house ehe where ebg.building_code = ehe.building_code) cb2 on cb2.adv_house_code = comb.reg_unit_code
+                      union
+                      select comb.*,cb1.address from (select ban.*,
+                      to_char(ban.reg_date,'YYYY-MM-DD') areg_date,
+                      (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bbi.reg_unit_type ) reg_type,
+                      (select vbhr.r_coll_names from V_BOOK_HOLDER_REL vbhr where vbhr.right_rel_id = brr.right_rel_id) holder_name,
+                      (select vbhr.r_coll_cerno from V_BOOK_HOLDER_REL vbhr where vbhr.right_rel_id = brr.right_rel_id) holder_no,
+                      bbi.reg_unit_type,bbi.reg_unit_code,bbi.reg_unit_code where_code
+                      from 
+                      bk_advnotice ban,
+                      bk_baseinfo bbi,
+                      bk_right_rel brr
+                      where ban.book_code = bbi.book_code
+                      and ban.reg_code = brr.reg_code
+                      and bbi.reg_unit_type = '009003'
+                      and ban.procdef_id = '1061') comb
+                      left join (select epl.parcel_code,epl.land_address address from est_parcel epl left join est_building ebg on ebg.parcel_code = epl.parcel_code) cb1 on cb1.parcel_code = comb.reg_unit_code) tab
+	            ]]>
+	</sql>
+	
+	<sql sqlId="getAllO" author="Sam" function="获得所有地役权信息">
+	<![CDATA[
+	   select * from bk_easement
+	  ]]>
+	</sql>
+</sqlList>

@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+    <comment>Book</comment>
+    <sql sqlId="getBookParcelBaseInfo" author="Sam" function="获得宗地自然信息">
+        <![CDATA[
+             select vopr.*,to_char(vopr.start_date, 'YYYY-MM-DD')|| ' 至  ' || to_char(vopr.end_date, 'YYYY-MM-DD') || '   ' || (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = vopr.use_per) || '年' use_per,
+		   (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = vopr.land_attribute) land_attribute_n,
+		   (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = vopr.use_right_type) useright_type
+		   from v_ownership_parcel_rel vopr
+		   where vopr.effective = '053002'
+		   and vopr.reg_unit_type = :reg_unit_type
+			 and vopr.parcel_id = :book_code
+        ]]>
+    </sql>
+    <sql sqlId="getBookHouseBaseInfo" author="Sam" function="获得房屋自然信息">
+        <![CDATA[
+           select vohr.*,
+	       to_char(vohr.zd_start_date, 'YYYY-MM-DD') || ' 至  ' || to_char(vohr.zd_end_date, 'YYYY-MM-DD') || '   ' || (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = vohr.zd_use_per) || '年' use_per,
+	      (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = vohr.get_mode) useright_type,
+          (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = vohr.FLATLET_USAGE) PLAN_USAGE,
+          (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = vohr.HOUSE_STRUT) HOUSE_STRUT_N,
+          (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = vohr.land_attribute) land_attribute_n,
+	        vohr.reg_unit_type 
+          from v_ownership_house_rel vohr   
+          where vohr.effective = '053002'
+          and vohr.house_id = :book_code
+        ]]>
+    </sql>
+<!--     <sql sqlId="getBookUserRightInfo" author="Sam" function="">
+        <![CDATA[
+              select epl.*,(select bus_name from cfig_bus_type where bus_type_id = bur.procdef_id) bus_name 
+              from est_parcel epl,bk_baseinfo bbi,bk_useright bur
+		      where epl.parcel_code = bbi.reg_unit_code 
+		      and bbi.book_code = bur.book_code 
+		      and bur.effective = '053002' 
+		      and bbi.reg_unit_type = :reg_unit_type
+	          and epl.parcel_code = :parcel_code
+        ]]>
+    </sql> -->
+    
+    <sql sqlId="getBookUserRightInfoLst" author="Sam" function="">
+        <![CDATA[
+            select vopr.*,vopr.parcel_id book_code,
+			to_char(vopr.reg_date,'YYYY-MM-DD HH:mm:ss') reg_date,vopr.reg_person,vbhr.r_coll_names,vopr.syq_excursus,
+			(select bus_name from CFIG_BUS_TYPE where bus_type_id = vopr.reg_type) bus_name,
+			vopr.parcel_code where_code
+            from v_ownership_parcel_rel vopr,v_book_holder_rel vbhr
+             where vbhr.reg_code = vopr.reg_code
+             and vopr.reg_unit_id = vbhr.reg_unit_id
+             and vopr.reg_unit_type = vbhr.reg_unit_type
+             and vopr.reg_unit_id = :book_code
+		     and vopr.reg_unit_type = :reg_unit_type
+             order by vopr.reg_date asc
+        ]]>
+    </sql>
+    
+    <sql sqlId="getBookOwnershipInfoLst" author="Sam" function="">
+        <![CDATA[
+               select vohr.*,vohr.house_id book_code,
+			   to_char(vohr.reg_date,'YYYY-MM-DD HH:mm:ss') reg_date,vohr.recorder,vbhr.r_coll_names,vohr.reg_code,
+			   (select bus_name from CFIG_BUS_TYPE where bus_type_id = vohr.reg_type) bus_name,
+		       (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = vohr.get_mode) get_mode,
+		       (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = vohr.house_kind) house_kind_n,
+		       vohr.house_code where_code
+		       from v_ownership_house_rel vohr,v_book_holder_rel vbhr
+		       where vbhr.reg_code = vohr.reg_code
+		        and vohr.reg_unit_id = vbhr.reg_unit_id
+		        and vohr.reg_unit_type = vbhr.reg_unit_type
+		        and vohr.reg_unit_id = :book_code
+				and vohr.reg_unit_type = :reg_unit_type
+		        order by vohr.reg_date asc
+        ]]>
+    </sql>
+    
+    <sql sqlId="getBookMortInfoLst" author="Sam" function="">
+        <![CDATA[
+                  select vmgr.*,vpr.parcel_code,vpr.land_address,
+                  (select bus_name from cfig_bus_type where bus_type_id = vmgr.REG_TYPE) bus_name ,
+                  (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = vmgr.MORT_TYPE ) mort_type_name,
+                  (select r_coll_names from v_book_holder_by_holrel vbhbh where vbhbh.reg_code = vbhr.reg_code and vbhbh.reg_unit_id = vbhr.reg_unit_id and vbhbh.reg_unit_type = vbhr.reg_unit_type and hol_rel='063004') mortgagee,
+                  (select r_coll_names from v_book_holder_by_holrel vbhbh where vbhbh.reg_code = vbhr.reg_code and vbhbh.reg_unit_id = vbhr.reg_unit_id and vbhbh.reg_unit_type = vbhr.reg_unit_type and hol_rel='063003') mortgager,
+      			   to_char(vmgr.reg_date,'YYYY-MM-DD HH:mm:ss') alias_reg_date,
+      			   to_char(vmgr.sure_reg_date,'YYYY-MM-DD HH:mm:ss') sure_reg_date_n,
+                   vbhr.r_coll_names,vpr.parcel_id book_code
+                   from v_parcel_rel_II vpr,v_mortgage_rel vmgr,v_book_holder_rel vbhr
+                   where vpr.parcel_id = vmgr.reg_unit_id
+                   and vpr.parcel_id = vbhr.reg_unit_id
+                   and vbhr.reg_code = vmgr.reg_code
+                   and vbhr.reg_unit_type = vmgr.reg_unit_type
+                   and vmgr.reg_unit_id = :book_code
+                   and vmgr.reg_unit_type = :reg_unit_type
+                   order by alias_reg_date asc
+        ]]>
+    </sql>
+    <sql sqlId="getBookHouseMortInfoLst" author="Sam" function="">
+        <![CDATA[
+                    select vmgr.*,vhr.house_code,vhr.LAND_ADDRESS || vhr.BUILD_NO || vhr.UNIT_NO  house_location,
+                  (select bus_name from cfig_bus_type where bus_type_id = vmgr.REG_TYPE) bus_name ,
+                  (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = vmgr.mort_type ) mort_type_name,
+                  (select r_coll_names from v_book_holder_by_holrel vbhbh where vbhbh.reg_code = vbhr.reg_code and vbhbh.reg_unit_id = vbhr.reg_unit_id and vbhbh.reg_unit_type = vbhr.reg_unit_type and hol_rel='063004') mortgagee,
+                  (select r_coll_names from v_book_holder_by_holrel vbhbh where vbhbh.reg_code = vbhr.reg_code and vbhbh.reg_unit_id = vbhr.reg_unit_id and vbhbh.reg_unit_type = vbhr.reg_unit_type and hol_rel='063003') mortgager,
+      			  to_char(vmgr.reg_date,'YYYY-MM-DD HH:mm:ss') alias_reg_date,
+      			  to_char(vmgr.sure_reg_date,'YYYY-MM-DD HH:mm:ss') sure_reg_date_n,
+      			  to_char(vmgr.mort_can_reg_date,'YYYY-MM-DD HH:mm:ss') can_reg_date_n,
+      			  vbhr.r_coll_names,vmgr.mort_can_rec can_recorder
+      			   from v_house_rel_II vhr,v_mortgage_rel vmgr,v_book_holder_rel vbhr
+      			   where vhr.HOUSE_ID = vmgr.reg_unit_id
+                   and vhr.HOUSE_ID =  vbhr.reg_unit_id
+                   and vmgr.reg_code = vbhr.reg_code
+                   and vmgr.reg_unit_type = vbhr.reg_unit_type
+                   and vmgr.reg_unit_id = :book_code
+                   and vmgr.reg_unit_type = :reg_unit_type
+                   order by alias_reg_date asc
+        ]]>
+    </sql>
+    
+    <sql sqlId="getBookAttachInfoLst" author="Sam" function="">
+        <![CDATA[
+                 select vdnr.*,to_char(vdnr.dis_date,'YYYY-MM-DD') alias_dis_date,
+                 vpr.parcel_code,vpr.land_address,
+                 (select cbt.bus_name from cfig_bus_type cbt where cbt.bus_type_id = vdnr.reg_type) bus_name,
+				 '从' || to_char(vdnr.start_date,'YYYY-MM-DD') || '到' || to_char(vdnr.end_date,'YYYY-MM-DD') attach_limit, 
+				 to_char(vdnr.reg_date,'YYYY-MM-DD') reg_date_n,
+				 to_char(vdnr.rem_dis_date,'YYYY-MM-DD') jdis_date,
+				 to_char(vdnr.rem_dis_reg_date,'YYYY-MM-DD HH:mm:ss') jalias_reg_date,vdnr.rem_dis_rec jrecorder
+				 from v_parcel_rel_II vpr,v_distrain_rel vdnr,v_book_holder_rel vbhr
+				 where vpr.PARCEL_ID = vdnr.reg_unit_id
+				 and vpr.parcel_id = vbhr.reg_unit_id
+				 and vbhr.reg_unit_type = vdnr.reg_unit_type
+				 and vbhr.reg_code = vdnr.REG_CODE
+				 and vdnr.reg_unit_id = :book_code
+				 and vdnr.reg_unit_type = :reg_unit_type
+				 order by reg_date_n desc
+        ]]>
+    </sql>
+    
+    <sql sqlId="getBookHouseAttachInfoLst" author="Sam" function="">
+        <![CDATA[
+                  select vdnr.*,to_char(vdnr.dis_date,'YYYY-MM-DD') alias_dis_date,
+                   vhr.house_code,vhr.LAND_ADDRESS || vhr.BUILD_NO || vhr.UNIT_NO house_location,
+                   (select cbt.bus_name from cfig_bus_type cbt where cbt.bus_type_id = vdnr.reg_type) bus_name,
+                   '从' || to_char(vdnr.start_date,'YYYY-MM-DD') || '到' || to_char(vdnr.end_date,'YYYY-MM-DD') attach_limit,
+                   to_char(vdnr.reg_date,'YYYY-MM-DD') reg_date_n,
+                   to_char(vdnr.rem_dis_date,'YYYY-MM-DD') jdis_date,
+                   to_char(vdnr.rem_dis_reg_date,'YYYY-MM-DD HH:mm:ss') jalias_reg_date,vdnr.rem_dis_rec jrecorder,vdnr.excursus 
+                   from v_house_rel_II vhr,v_distrain_rel vdnr,v_book_holder_rel vbhr
+                   where vhr.HOUSE_ID = vdnr.reg_unit_id
+                   and vhr.house_id = vbhr.reg_unit_id
+                   and vbhr.reg_unit_type = vdnr.reg_unit_type
+                   and vbhr.reg_code = vdnr.REG_CODE 
+                   and vdnr.reg_unit_id = :book_code
+                   and vdnr.reg_unit_type = :reg_unit_type
+                   order by reg_date_n desc
+        ]]>
+    </sql>
+    <sql sqlId="getBookEasementInfoLst" author="Sam" function="">
+        <![CDATA[
+                  select vemr.*,vpr.parcel_code,vpr.land_address, vbhr.r_coll_names ease_holder,
+                 (select bus_name from cfig_bus_type where bus_type_id = vemr.reg_type) bus_name ,
+  				 '从' || to_char(vemr.start_date,'YYYY-MM-DD') || '到' || to_char(vemr.end_date,'YYYY-MM-DD') easement_limit, 
+  				 to_char(vemr.reg_date,'YYYY-MM-DD') reg_date_n
+  				 from v_parcel_rel_II vpr,v_easement_rel vemr,v_book_holder_rel vbhr
+  				 where vpr.PARCEL_ID = vemr.reg_unit_id
+  				 and vpr.parcel_id = vbhr.reg_unit_id
+  				 and vbhr.reg_unit_type = vemr.reg_unit_type
+  				 and vbhr.reg_code = vemr.REG_CODE
+  				 and vemr.reg_unit_id = :book_code
+  				 and vemr.reg_unit_type = :reg_unit_type
+  				 order by reg_date_n desc
+        ]]>
+    </sql>
+    
+    <sql sqlId="getBookHouseEasementInfoLst" author="Sam" function="">
+        <![CDATA[
+                  select vemr.*, vbhr.r_coll_names ease_holder,
+                  (select bus_name from cfig_bus_type where bus_type_id = vemr.reg_type) bus_name ,
+                   vhr.house_code,vhr.LAND_ADDRESS || vhr.BUILD_NO || vhr.UNIT_NO house_location,
+                   '从' || to_char(vemr.start_date,'YYYY-MM-DD') || '到' || to_char(vemr.end_date,'YYYY-MM-DD') easement_limit,
+                   to_char(vemr.reg_date,'YYYY-MM-DD') reg_date_n
+                   from v_house_rel_II vhr,v_easement_rel vemr,v_book_holder_rel vbhr
+                   where vhr.HOUSE_ID = vemr.reg_unit_id
+                   and vhr.house_id = vbhr.reg_unit_id
+                   and vbhr.reg_unit_type = vemr.reg_unit_type
+                   and vbhr.reg_code = vemr.REG_CODE 
+                   and vemr.reg_unit_id = :book_code
+                   and vemr.reg_unit_type = :reg_unit_type
+                   order by reg_date_n desc
+        ]]>
+    </sql>
+    
+    <sql sqlId="getBookDissentInfoLst" author="Sam" function="">
+        <![CDATA[
+                   select vdmr.*,vpr.LAND_ADDRESS,vpr.PARCEL_CODE,
+                   to_char(vdmr.reg_date,'YYYY-MM-DD') reg_date_n,
+                   to_char(vdmr.can_diss_reg_date,'YYYY-MM-DD') can_diss_reg_date_n,
+                   (select cbt.bus_name from cfig_bus_type cbt where cbt.bus_type_id = vdmr.reg_type) bus_name,
+                   (select r_coll_names from v_book_holder_by_holrel vbhbh where vbhbh.reg_code = vbhr.reg_code and vbhbh.reg_unit_id = vbhr.reg_unit_id and vbhbh.reg_unit_type = vbhr.reg_unit_type and hol_rel='063011') diss_app,
+                    (select r_coll_cerno from v_book_holder_by_holrel vbhbh where vbhbh.reg_code = vbhr.reg_code and vbhbh.reg_unit_id = vbhr.reg_unit_id and vbhbh.reg_unit_type = vbhr.reg_unit_type and hol_rel='063011') diss_app_id
+                   from v_parcel_rel_II vpr,v_demurrer_rel vdmr,v_book_holder_rel vbhr
+                   where vpr.parcel_id = vdmr.reg_unit_id
+                   and vpr.parcel_id = vbhr.reg_unit_id
+                   and vbhr.reg_code = vdmr.reg_code
+                   and vbhr.reg_unit_type = vdmr.reg_unit_type
+                   and vdmr.reg_unit_id = :book_code
+                   and vdmr.reg_unit_type = :reg_unit_type
+                   order by reg_date_n asc
+        ]]>
+    </sql>
+    
+    <sql sqlId="getBookHouseDissentInfoLst" author="Sam" function="">
+        <![CDATA[
+              select vdmr.*,vhr.LAND_ADDRESS || vhr.BUILD_NO || vhr.UNIT_NO house_location,vhr.house_code,
+                   to_char(vdmr.reg_date,'YYYY-MM-DD') reg_date_n,
+                   to_char(vdmr.can_diss_reg_date,'YYYY-MM-DD') can_diss_reg_date_n,
+                   (select cbt.bus_name from cfig_bus_type cbt where cbt.bus_type_id = vdmr.reg_type) bus_name,
+                   (select r_coll_names from v_book_holder_by_holrel vbhbh where vbhbh.reg_code = vbhr.reg_code and vbhbh.reg_unit_id = vbhr.reg_unit_id and vbhbh.reg_unit_type = vbhr.reg_unit_type and hol_rel='063011') diss_app,
+                   (select r_coll_cerno from v_book_holder_by_holrel vbhbh where vbhbh.reg_code = vbhr.reg_code and vbhbh.reg_unit_id = vbhr.reg_unit_id and vbhbh.reg_unit_type = vbhr.reg_unit_type and hol_rel='063011') diss_app_id
+                  from v_house_rel_II vhr,v_demurrer_rel vdmr,v_book_holder_rel vbhr
+      			   where vhr.HOUSE_ID = vdmr.reg_unit_id
+                   and vhr.HOUSE_ID =  vbhr.reg_unit_id
+                   and vdmr.reg_code = vbhr.reg_code
+                   and vdmr.reg_unit_type = vbhr.reg_unit_type
+                   and vdmr.reg_unit_id = :book_code
+                   and vdmr.reg_unit_type = :reg_unit_type
+                   order by reg_date_n asc
+                  
+        ]]>
+    </sql>
+    <sql sqlId="getBookHouseAdvInfoLst" author="Sam" function="">
+        <![CDATA[
+             select vanr.*,vhr.LAND_ADDRESS || vhr.BUILD_NO || vhr.UNIT_NO house_location,vhr.house_code,
+                   to_char(vanr.reg_date,'YYYY-MM-DD') reg_date_n,
+                   to_char(vanr.can_adv_date,'YYYY-MM-DD') can_adv_date_n,
+                   (select cbt.bus_name from cfig_bus_type cbt where cbt.bus_type_id = vanr.reg_type) bus_name,
+                   (select r_coll_names from v_book_holder_by_holrel vbhbh where vbhbh.reg_code = vbhr.reg_code and vbhbh.reg_unit_id = vbhr.reg_unit_id and vbhbh.reg_unit_type = vbhr.reg_unit_type and hol_rel='063008') adv_holder,
+                   (select r_coll_cerno from v_book_holder_by_holrel vbhbh where vbhbh.reg_code = vbhr.reg_code and vbhbh.reg_unit_id = vbhr.reg_unit_id and vbhbh.reg_unit_type = vbhr.reg_unit_type and hol_rel='063008') adv_holder_id,
+                   (select r_coll_names from v_book_holder_by_holrel vbhbh where vbhbh.reg_code = vbhr.reg_code and vbhbh.reg_unit_id = vbhr.reg_unit_id and vbhbh.reg_unit_type = vbhr.reg_unit_type and hol_rel='063007') adv_vol,
+                   (select r_coll_cerno from v_book_holder_by_holrel vbhbh where vbhbh.reg_code = vbhr.reg_code and vbhbh.reg_unit_id = vbhr.reg_unit_id and vbhbh.reg_unit_type = vbhr.reg_unit_type and hol_rel='063007') adv_vol_id
+                  from v_house_rel_II vhr,v_advnotice_rel vanr,v_book_holder_rel vbhr
+      			  where vhr.HOUSE_ID = vanr.reg_unit_id
+      			   and vhr.house_id = vbhr.reg_unit_id
+      			   and vbhr.reg_unit_type = vanr.reg_unit_type
+                   and vbhr.reg_code = vanr.reg_code
+                   and vanr.reg_unit_id = :book_code
+                   and vanr.reg_unit_type = :reg_unit_type
+                   order by reg_date_n asc
+                  
+        ]]>
+    </sql>
+    
+    <sql sqlId="getBookHolderUserightLst" author="Sam" function="">
+        <![CDATA[
+                  select bh.hol_name,(select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bh.hol_cer_type) hol_cer_type,
+                  bh.hol_cer_no,
+                  (select dic_item_value from cfig_dic_item where dic_item_code = bh.depart_type) dep_t_name,
+                  bh.hol_address,vopr.reg_code
+		          from BK_HOLDER bh,BK_RIGHT_REL brr,v_ownership_parcel_rel vopr
+		          where vopr.reg_code = brr.reg_code
+		          and bh.holder_id = brr.holder_id
+                  and brr.reg_unit_id = vopr.reg_unit_id
+                  and brr.reg_unit_type = vopr.reg_unit_type
+		          and vopr.reg_unit_id = :parcel_id
+			      and vopr.reg_unit_type = :reg_unit_type
+			      and vopr.reg_code  = :reg_code
+        ]]>
+    </sql>
+    
+    <sql sqlId="getBookHolderOwnershipLst" author="Sam" function="">
+        <![CDATA[
+                  select bh.hol_name,(select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bh.hol_cer_type) hol_cer_type,bh.hol_cer_no
+		          ,bh.hol_address,vohr.reg_code
+		          from bk_holder bh,bk_right_rel brr,v_ownership_house_rel vohr
+		          where vohr.reg_code = brr.reg_code
+                  and brr.reg_unit_id = vohr.reg_unit_id
+                  and brr.reg_unit_type = vohr.reg_unit_type
+		          and bh.holder_id = brr.holder_id
+		          and vohr.reg_unit_id = :house_id
+			      and vohr.reg_unit_type = :reg_unit_type
+			      and vohr.reg_code = :reg_code
+        ]]>
+    </sql>
+    
+    <sql sqlId="getParcelsforSearch" author="sam" function="根据搜索条件查询宗地信息"><![CDATA[   
+		        select tab.* from (select vopr.parcel_id book_code, vopr.parcel_code,vopr.parcel_area,vopr.land_address,
+				(select cdi.dic_item_value from cfig_dic_item cdi where cdi.dic_item_code = bcer.cer_type) real_cer_type,
+				vbhr.r_coll_names,vopr.right_status,vopr.reg_unit_type,vopr.reg_code,vbhr.r_coll_cerno,
+				(select cdi.dic_item_value from cfig_dic_item cdi where cdi.dic_item_code = vopr.real_usage) real_real_usage,
+				bcer.cer_code,vopr.parcel_code where_code 
+				from 
+				v_ownership_parcel_rel vopr,
+				bk_certificate bcer,
+				v_book_holder_rel vbhr
+				where vopr.reg_code = bcer.reg_code
+				and vopr.reg_code = vbhr.reg_code
+		        and vopr.reg_unit_id = vbhr.reg_unit_id
+		        and vopr.reg_unit_type = vbhr.reg_unit_type) tab
+	      ]]>
+	</sql>
+	
+    <sql sqlId="getHousesforSearch" author="sam" function="根据搜索条件查询房屋信息"><![CDATA[
+	         select tab.* from (select vohr.house_id book_code,vohr.house_code,vohr.parcel_code,vohr.community_name || vohr.build_no building_name,
+				  vohr.build_no,vohr.building_code,vohr.reg_unit_type,vohr.reg_code,vbhr.r_coll_names,vbhr.r_coll_cerno,
+					(select cdi.dic_item_value from cfig_dic_item cdi where cdi.dic_item_code = bcer.cer_type) real_cer_type,
+				  vohr.unit_no,vohr.right_status,bcer.cer_code,vohr.house_code where_code
+				from 
+				v_ownership_house_rel vohr,
+				bk_certificate bcer,
+				v_book_holder_rel vbhr
+				where vohr.reg_code = bcer.reg_code
+				and vohr.reg_code = vbhr.reg_code
+		        and vohr.reg_unit_id = vbhr.reg_unit_id
+		        and vohr.reg_unit_type = vbhr.reg_unit_type) tab
+       
+	      ]]>
+	</sql>
+	
+    <sql sqlId="getAllPropRightsByParam" author="sam" function="根据搜索条件查询房屋信息"><![CDATA[
+	         select tab.* from (
+                        select comb.*,comb.reg_unit_code where_code,
+                        (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = comb.shift_mode) ashiftmode,
+                        (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = comb.reg_unit_type) areg_unit_type,
+                        cb2.pro_name,cb2.parcel_code,cb2.building_name,cb2.build_no,cb2.roomname,cb2.address
+                        from 
+                        (select bbi.*,bos.ownership_id right_id,bos.reg_code,bos.get_mode shift_mode,
+                        (select vbhr.r_coll_names from V_BOOK_HOLDER_REL vbhr where vbhr.right_rel_id = brr.right_rel_id) holder_name,
+                        (select vbhr.r_coll_cerno from V_BOOK_HOLDER_REL vbhr where vbhr.right_rel_id = brr.right_rel_id) holder_no,
+                         bos.effective
+                        from bk_ownership bos,bk_baseinfo bbi,bk_right_rel brr
+                        where bos.book_code = bbi.book_code
+                        and bos.reg_code = brr.reg_code
+                        and bbi.reg_unit_type = '009001') comb
+                        left join (select ehe.pro_name,ehe.adv_house_code,ebg.parcel_code,ebg.building_name,ebg.build_no,ehe.roomname,ehe.house_location address from est_building ebg,est_house ehe where ebg.building_code = ehe.building_code) cb2 on cb2.adv_house_code = comb.reg_unit_code
+                        union
+                          select comb.*,comb.reg_unit_code where_code,
+                        (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = comb.shift_mode) ashiftmode,
+                        (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = comb.reg_unit_type) areg_unit_type,
+                        cb1.pro_name,cb1.parcel_code,cb1.building_name,cb1.build_no,'',cb1.address
+                        from 
+                        (select bbi.*,bur.useright_id right_id,bur.reg_code,bur.useright_type shift_mode,
+                        (select vbhr.r_coll_names from V_BOOK_HOLDER_REL vbhr where vbhr.right_rel_id = brr.right_rel_id) holder_name,
+                        (select vbhr.r_coll_cerno from V_BOOK_HOLDER_REL vbhr where vbhr.right_rel_id = brr.right_rel_id) holder_no,
+                        bur.effective
+                        from bk_useright bur,bk_baseinfo bbi,bk_right_rel brr
+                        where bur.book_code = bbi.book_code
+                        and bur.reg_code = brr.reg_code
+                        and bbi.reg_unit_type = '009003') comb
+                        left join (select ebg.community_name pro_name,epl.parcel_code,ebg.building_name,ebg.build_no,epl.land_address address from est_parcel epl left join est_building ebg on ebg.parcel_code = epl.parcel_code) cb1 on cb1.parcel_code = comb.reg_unit_code) tab
+	      ]]>
+	</sql>
+    <sql sqlId="getUserightinfo" author="sam" function="根据搜索条件查询房屋信息"><![CDATA[
+            select tab.* from( select bur.book_code,bur.cer_no,epl.land_address,bur.reg_code,bos.reg_code ur_reg_code, from bk_useright bur,bk_baseinfo bbi,est_parcel epl
+                       where bur.book_code = bbi.book_code
+                       and bbi.reg_unit_code = epl.parcel_code
+                       and bur.effective = '053002') tab
+	      ]]>
+	 </sql>
+    <sql sqlId="getOwnershipinfo" author="sam" function="根据搜索条件查询房屋信息"><![CDATA[
+	     select tab.* from(  select bos.book_code, bos.cer_no,epl.land_address,bos.reg_code os_reg_code,
+                       ebg.building_name,ebg.build_no,ehe.roomname,bos.reg_code
+                       from 
+                       bk_ownership bos,bk_baseinfo bbi,est_house ehe,est_building ebg,est_parcel epl
+                       where bos.book_code = bbi.book_code
+                       and bbi.reg_unit_code = ehe.adv_house_code
+                       and ehe.building_code = ebg.building_code
+                       and ebg.parcel_code = epl.parcel_code
+                       and bos.effective = '053002') tab
+	      ]]>
+	</sql>
+    <sql sqlId="getPersonhouseright" author="sam" function="根据搜索条件查询房屋信息"><![CDATA[
+	        select tab.* from(select bbi.book_code,bh.holder_id,bh.hol_name,bh.legal_name,bh.hol_cer_type,bh.hol_cer_no,
+                     (select dic_item_value from CFIG_DIC_ITEM where dic_item_code = bh.hol_type ) ahol_type,
+                    (select count(1) from bk_ownership bos where bos.effective='053002' and  bos.book_code = bbi.book_code) houseright_count,
+                     (select count(1) from bk_advnotice ban where ban.effective='053002' and  ban.book_code = bbi.book_code) presale_count
+                     from bk_holder bh,bk_right_rel brr,bk_baseinfo bbi
+                     where bh.right_rel_id = brr.right_rel_id
+                     and bbi.book_code = brr.book_code
+                     and brr.effective = '053002'
+                     and bh.hol_rel = '063002'
+                     ) tab
+	      ]]>
+	</sql>
+</sqlList>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="GBK"?>
+<sqlList>
+
+	<comment>sqlId 不能重复</comment>
+
+	<sql sqlId="queryAPIs" author="Mignet" function="获得APISQL"><![CDATA[
+	        select 
+				sid,
+				sname,
+				category,
+				regflag,
+				info,
+				remark
+			from t_service
+	            ]]>
+	</sql>
+	
+	<sql sqlId="queryMethodsBySID" author="Mignet" function="获得Methods SQL"><![CDATA[
+	        select 
+				mid,
+				sid,
+				mname,
+				parameters,
+				returntype,
+				info,
+				inlineflag,
+				remark
+			from t_method t where t.sid=:sid
+	            ]]>
+	</sql>
+	
+</sqlList>
